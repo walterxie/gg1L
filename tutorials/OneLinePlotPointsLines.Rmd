@@ -103,7 +103,7 @@ It is also known as principal coordinates analysis (Gower, 1966).
 
 ## Line with points
 
-The basic tutorial of line with points is avaible in another tutorial [**Plot traces**](<https://cdn.rawgit.com/walterxie/ComMA/master/tutorials/OneCommandLinePlotPointsLines.html>) subsection.
+The basic tutorial of line with points is avaible in another tutorial [**Plot traces**](https://cdn.rawgit.com/walterxie/ComMA/master/tutorials/OneCommandLinePlotPointsLines.html) subsection.
 
 ### Rarefaction curves for multi-sample
 
