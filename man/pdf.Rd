@@ -31,7 +31,7 @@ grid_arrange_shared_legend(..., input.list = FALSE,
 
 \item{width, }{height Refer to \code{\link{pdf}}. Default to width=6, height=6.}
 
-\item{useDingbats}{Defaults to TRUE, which produces smaller and better output. 
+\item{useDingbats}{Defaults to TRUE, which produces smaller and better output.
 Setting this to FALSE can work around font display problems in broken PDF viewers.
 Refer to \code{\link{pdf}}.}
 
@@ -39,15 +39,15 @@ Refer to \code{\link{pdf}}.}
 
 \item{...}{The list of \code{\link{ggplot}} objects.}
 
-\item{input.list}{Default to FALSE to unwrap list(...) to 
+\item{input.list}{Default to FALSE to unwrap list(...) to
 get the actual list if the input is a list of plots}
 
-\item{legend.position}{The position of legends 
+\item{legend.position}{The position of legends
 ("none", "left", "right", "bottom", "top", or two-element numeric vector)}
 
 \item{ncol, nrow}{Specify the grid.}
 
-\item{widths}{A unit vector giving the width of each column in \code{\link{gtable}}. 
+\item{widths}{A unit vector giving the width of each column in \code{\link{gtable}}.
 \code{length(widths) == ncol}, for example, widths=c(1, 0.1, 0.1) for 3 columns.}
 
 \item{gtable}{A \code{\link{gtable}} object.}
@@ -60,31 +60,31 @@ get the actual list if the input is a list of plots}
 \code{pdf.plot} creates pdf for the list returned from \code{\link{plot}}.
 Tip: use \code{\link{"\%<a-\%"}} in \pkg{pryr} to save plots.
 
-\code{plot.gtable} \code{\link{require}(\link{grid})} 
+\code{plot.gtable} \code{\link{require}(\link{grid})}
 and plot gtable object in console.
 
-\code{unclip.ggplot} turns off clipping for a 
-\code{\link{ggplot}} object, but returns a 
-\code{\link{gtable}} object. 
+\code{unclip.ggplot} turns off clipping for a
+\code{\link{ggplot}} object, but returns a
+\code{\link{gtable}} object.
 Refer to \url{http://stackoverflow.com/questions/9690648/point-clipped-on-x-axis-in-ggplot}.
 
-\code{grid_arrange_shared_legend} shares a legend 
-between multiple plots using \code{\link{grid.arrange}}. 
+\code{grid_arrange_shared_legend} shares a legend
+between multiple plots using \code{\link{grid.arrange}}.
 Return a \code{\link{gtable}} object.
 
-Modified from  
+Modified from
 \url{http://rpubs.com/sjackman/grid_arrange_shared_legend}.
 }
 \examples{
-pdf.ggplot(gg.plot, fig.path="fig.pdf", width=8, height=8)  
+pdf.ggplot(gg.plot, fig.path="fig.pdf", width=8, height=8)
 
-pdf.gtable(g.table, fig.path="fig.pdf", width=8, height=8)  
+pdf.gtable(g.table, fig.path="fig.pdf", width=8, height=8)
 
-pdf.plot(plot, fig.path="fig.pdf", width=8, height=8)  
+pdf.plot(plot, fig.path="fig.pdf", width=8, height=8)
 
-plot(g.table)  
+plot(g.table)
 
-gt <- unclip.ggplot(gg.plot)  
+gt <- unclip.ggplot(gg.plot)
 
 library(ggplot2); library(grid); library(gridExtra)
 dsamp <- diamonds[sample(nrow(diamonds), 1000), ]

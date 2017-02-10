@@ -20,9 +20,9 @@ Extract legend in \pkg{ggplot2}
 }
 \examples{
 library(ggplot2); library(grid)
-my_hist<-ggplot(diamonds, aes(clarity, fill=cut)) + geom_bar() 
-legend <- gLegend(my_hist) 
-grid.draw(legend) 
+my_hist<-ggplot(diamonds, aes(clarity, fill=cut)) + geom_bar()
+legend <- gLegend(my_hist)
+grid.draw(legend)
 }
 \keyword{graph}
 

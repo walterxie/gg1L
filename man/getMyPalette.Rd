@@ -18,7 +18,7 @@ The customised palette with about 70 colours.
 Customised palette with about 70 colours.
 }
 \examples{
-myPalette <- getMyPalette() 
+myPalette <- getMyPalette()
 }
 \keyword{graph}
 

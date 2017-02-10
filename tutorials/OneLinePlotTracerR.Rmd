@@ -10,9 +10,6 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Introduction
-
-One of the feature of [**gg1L**](http://github.com/walterxie/gg1L) package is to simplify [ggplot2](http://docs.ggplot2.org/current/) codes into one-line functions, and also to provide some other useful utility functions.
 
 ```{r library, warning=FALSE}
 library(gg1L)
@@ -21,10 +18,12 @@ library(gg1L)
 
 ## Load a MCMC log
 
-Load a MCMC log from *../data-raw/star.beast.log*, the default to move the 1st data column into *row.names*, but using <code>row.names=NULL</code> to automatically generate row names and keep the 1st column in the data object:
+Load a MCMC log from <https://cdn.rawgit.com/walterxie/ComMA/master/data-raw/star.beast.log>, the default to move the 1st data column into *row.names*, but using <code>row.names=NULL</code> to automatically generate row names and keep the 1st column in the data object:
 
-```{r mcmc.log}
-mcmc.log <- readMCMCLog("../data-raw/star.beast.log")
+<!--- replace ComMA to TracerR --->
+```{r mcmc.log, warning=FALSE}
+library(ComMA)
+mcmc.log <- ComMA::readMCMCLog("https://cdn.rawgit.com/walterxie/ComMA/master/data-raw/star.beast.log")
 names(mcmc.log)
 ```
 

@@ -11,8 +11,8 @@ ggPercentageBarChart(df.to.melt, melt.id, title = "Percentage Bar Chart",
 }
 \arguments{
 \item{df.to.melt}{A data frame required to \code{\link{melt}} before making a percent bar chart,
-where Phyla have to be in row.names, otherwise it will be melted into values in y-axis to cause 
-"Error: Discrete value supplied to continuous scale". 
+where Phyla have to be in row.names, otherwise it will be melted into values in y-axis to cause
+"Error: Discrete value supplied to continuous scale".
 For example, \url{https://github.com/walterxie/ComMA/blob/master/data-raw/reads.phyla.txt}.}
 
 \item{melt.id}{A column name to \code{\link{melt}} and used to assign the colours.}
@@ -23,12 +23,12 @@ For example, \url{https://github.com/walterxie/ComMA/blob/master/data-raw/reads.
 
 \item{x.levels}{The level to order x axis.}
 
-\item{autoWidth}{If TRUE, then use number of bars and legend columns 
+\item{autoWidth}{If TRUE, then use number of bars and legend columns
 to estimate pdf width automatically. Default to TRUE.}
 
 \item{...}{Other arguments passed to \code{\link{ggBarChart}}.}
 
-\item{low, }{high Refer to \pkg{ggplot2} \code{\link{scale_fill_gradient}}. 
+\item{low, }{high Refer to \pkg{ggplot2} \code{\link{scale_fill_gradient}}.
 Default to low="white", high="steelblue".}
 }
 \description{

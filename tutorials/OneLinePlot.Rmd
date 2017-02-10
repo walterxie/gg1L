@@ -18,9 +18,10 @@ library(gg1L)
 
 ## Box Whiskers plot
 
-Load the example data *model.test*, and display the first 3 rows:
+Load the example data *model.test* from [ComMA](https://github.com/walterxie/ComMA) package (We only use the example data, *gg1L* doesn't depend it), and display the first 3 rows:
 
-```{r model.test}
+```{r model.test, warning=FALSE}
+library(ComMA)
 data(model.test)
 model.test[1:3,]
 ```

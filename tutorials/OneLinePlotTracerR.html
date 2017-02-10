@@ -124,18 +124,16 @@ $(document).ready(function () {
 </div>
 
 
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p>One of the feature of <a href="http://github.com/walterxie/ComMA"><strong>ComMA</strong></a> package is to simplify <a href="http://docs.ggplot2.org/current/">ggplot2</a> codes into one-line functions, and also to provide some other useful utility functions.</p>
-<pre class="r"><code>library(ComMA)
+<pre class="r"><code>library(gg1L)
 #getwd()</code></pre>
-</div>
 <div id="load-a-mcmc-log" class="section level2">
 <h2>Load a MCMC log</h2>
-<p>Load a MCMC log from <em>../data-raw/star.beast.log</em>, the default to move the 1st data column into <em>row.names</em>, but using <code>row.names=NULL</code> to automatically generate row names and keep the 1st column in the data object:</p>
-<pre class="r"><code>mcmc.log &lt;- readMCMCLog(&quot;../data-raw/star.beast.log&quot;)</code></pre>
+<p>Load a MCMC log from <a href="https://cdn.rawgit.com/walterxie/ComMA/master/data-raw/star.beast.log" class="uri">https://cdn.rawgit.com/walterxie/ComMA/master/data-raw/star.beast.log</a>, the default to move the 1st data column into <em>row.names</em>, but using <code>row.names=NULL</code> to automatically generate row names and keep the 1st column in the data object:</p>
+<!--- replace ComMA to TracerR --->
+<pre class="r"><code>library(ComMA)
+mcmc.log &lt;- ComMA::readMCMCLog(&quot;https://cdn.rawgit.com/walterxie/ComMA/master/data-raw/star.beast.log&quot;)</code></pre>
 <pre><code>## 
-## Upload MCMC log : 18 parameters excluding row names from column 1, 2001 samples excluding column names from row 1, from file ../data-raw/star.beast.log</code></pre>
+## Upload MCMC log : 18 parameters excluding row names from column 1, 2001 samples excluding column names from row 1, from file https://cdn.rawgit.com/walterxie/ComMA/master/data-raw/star.beast.log</code></pre>
 <pre class="r"><code>names(mcmc.log)</code></pre>
 <pre><code>##  [1] &quot;posterior&quot;                 &quot;likelihood&quot;               
 ##  [3] &quot;prior&quot;                     &quot;speciescoalescent&quot;        

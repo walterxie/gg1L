@@ -12,7 +12,7 @@ get_breaks_positive_values(max.v, start = c(0.1, 1))
 \item{start}{The vector of values before 10. Default to c(0.1, 1).}
 }
 \value{
-The vector of multiples of 10 used for breaks. 
+The vector of multiples of 10 used for breaks.
 Mostly used with \code{\link{scientific_10}} together.
 }
 \description{
@@ -22,8 +22,8 @@ Breaks of multiples of 10 for positive values.
 get_breaks_positive_values(68759)
 [1] 1e-01 1e+00 1e+01 1e+02 1e+03 1e+04 1e+05
 
-scale_y_continuous(trans = "log", labels = ComMA::scientific_10, 
-breaks = ComMA::get_breaks_positive_values(max(df, start=c(0))))
+scale_y_continuous(trans = "log", labels = gg1L::scientific_10,
+breaks = gg1L::get_breaks_positive_values(max(df, start=c(0))))
 }
 \keyword{graph}
 

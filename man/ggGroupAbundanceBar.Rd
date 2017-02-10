@@ -12,42 +12,42 @@ ggGroupAbundanceBar(df.to.melt, melt.id, colour.id = NULL, prop.thre = 0,
 }
 \arguments{
 \item{df.to.melt}{A data frame required to \code{\link{melt}} before making the chart,
-where Phyla have to be in row.names, otherwise it will be melted into values in y-axis to cause 
-"Error: Discrete value supplied to continuous scale". But it  
+where Phyla have to be in row.names, otherwise it will be melted into values in y-axis to cause
+"Error: Discrete value supplied to continuous scale". But it
 For example, \url{https://github.com/walterxie/ComMA/blob/master/data-raw/reads.phyla.txt}.}
 
 \item{melt.id}{A column name to \code{\link{melt}} and used to label axis.}
 
-\item{colour.id}{The column name to give colours, and it will join 
+\item{colour.id}{The column name to give colours, and it will join
 \code{melt.id} as id to \code{\link{melt}}. Default to NULL.}
 
-\item{prop.thre}{Make "Others" for any row total abundence < 
-proportion threshold of the total of matrix abundence. 
+\item{prop.thre}{Make "Others" for any row total abundence <
+proportion threshold of the total of matrix abundence.
 Recommend 0.001 (0.1\%) if too many rows. Default to 0.}
 
-\item{melt.levels, colour.levels}{The \code{\link{levels}} encode 
-\code{\link{factor}} on melt.id and colour.id, which make data frame 
+\item{melt.levels, colour.levels}{The \code{\link{levels}} encode
+\code{\link{factor}} on melt.id and colour.id, which make data frame
 grouped for plotting. The default is a function to \code{\link{sort}}.
-It can also use \code{\link{unique}} only for no sorting. 
-Note: do not use \code{sort(,decreasing = T)}, it will ruin \code{factor}. 
+It can also use \code{\link{unique}} only for no sorting.
+Note: do not use \code{sort(,decreasing = T)}, it will ruin \code{factor}.
 Use \code{\link{rev}} instead.}
 
 \item{title}{Graph title}
 
 \item{x.lab, y.lab}{The label of x-axis or y-axis, such as plot names.}
 
-\item{autoSize}{If TRUE, then use number of bars and legend columns 
+\item{autoSize}{If TRUE, then use number of bars and legend columns
 to estimate pdf width and height automatically. Default to TRUE.}
 
 \item{...}{Other arguments passed to \code{\link{ggBarChart}}.}
 }
 \description{
-Group abundance bar chart for mulit-sample or mulit-dataset and coloured by groups, 
+Group abundance bar chart for mulit-sample or mulit-dataset and coloured by groups,
 which is extended from \code{\link{ggBarChart}}.
 }
 \details{
-\strong{Note:} the coordinate is flipped in this chart. 
-please make sure you recognise which is x or y,  
+\strong{Note:} the coordinate is flipped in this chart.
+please make sure you recognise which is x or y,
 when defining the related arguments.
 }
 \examples{
