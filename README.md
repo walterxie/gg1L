@@ -26,7 +26,7 @@ library("gg1L")
 
 ##Tutorials
 
-1. [Bar chart] (https://cdn.rawgit.com/walterxie/ComMA/master/tutorials/OneLinePlotBarChart.html)
+1. [Bar chart] (<https://cdn.rawgit.com/walterxie/ComMA/master/tutorials/OneLinePlotBarChart.html>)
 
 2. [Line with points] (https://cdn.rawgit.com/walterxie/ComMA/master/tutorials/OneLinePlotPointsLines.html)
 
