@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r library, warning=FALSE}
-library(ComMA)
+library(gg1L)
 #getwd()
 ```
 

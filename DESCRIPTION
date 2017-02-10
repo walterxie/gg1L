@@ -21,6 +21,8 @@ Imports:
     reshape2,
     scales,
     vegan (>= 2.4.0)
+Suggests:    
+    ComMA
 RoxygenNote: 5.0.1
 
 

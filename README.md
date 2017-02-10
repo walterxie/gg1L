@@ -21,7 +21,7 @@ You can use the **devtools** *install\_github()* function to install the lastest
 ```R
 library("devtools")
 devtools::install_github("walterxie/gg1L")
-library("ComMA")
+library("gg1L")
 ```
 
 ##Tutorials

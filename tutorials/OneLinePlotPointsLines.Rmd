@@ -12,10 +12,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-One of the feature of [**ComMA**](http://github.com/walterxie/ComMA) package is to simplify [ggplot2](http://docs.ggplot2.org/current/) codes into one-line functions, and also to provide some other useful utility functions.
+One of the feature of [**gg1L**](http://github.com/walterxie/gg1L) package is to simplify [ggplot2](http://docs.ggplot2.org/current/) codes into one-line functions, and also to provide some other useful utility functions.
 
 ```{r library, warning=FALSE}
-library(ComMA)
+library(gg1L)
 #getwd()
 ```
 
