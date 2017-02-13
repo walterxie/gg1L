@@ -296,13 +296,13 @@ gtPCAPlot <- function(df.comm, attr.df, x.i=1, y.i=2,
                       verbose=TRUE, ...) {
 
   if (! missing(attr.df)) {
-    if (! all(rownames(as.matrix(comm)) %in% rownames(attr.df)) )
-      stop("Invalid attr.df,", paste(rownames(as.matrix(comm)), collapse = ","),
+    if (! all(rownames(as.matrix(df.comm)) %in% rownames(attr.df)) )
+      stop("Invalid attr.df,", paste(rownames(as.matrix(df.comm)), collapse = ","),
            "should match", paste(rownames(attr.df), collapse = ","), "!\n")
   }
 
   # Run prcomp, get points
-  pca <- prcomp(comm, scale. = scale.pca)
+  pca <- prcomp(df.comm, scale. = scale.pca)
   df.points <- as.data.frame(pca$rotation)
   df.points <- df.points[order(rownames(df.points)),]
 
