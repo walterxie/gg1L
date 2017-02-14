@@ -128,7 +128,7 @@ plot(pca)
 
 ## Line with points
 
-The basic tutorial of line with points is avaible in another tutorial [**Plot traces**](https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotPointsLines.html) subsection.
+The basic tutorial of line with points is avaible in another tutorial [**Plot traces**](https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotTracerR.html) subsection.
 
 ### Rarefaction curves for multi-sample
 
