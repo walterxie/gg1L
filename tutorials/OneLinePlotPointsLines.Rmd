@@ -29,7 +29,7 @@ df.clusters[1:3,]
 
 Scatter plots may have overlaps between data points and axises. <code>unclip.ggplot</code> can turns off clipping, but it returns a *gtable* object, so that either <code>pdf.gtplot</code> or <code>plot.gtable</code> will be used to handle the plot.
 
-```{r ScatterPlot1, warning=FALSE}
+```{r ScatterPlot, warning=FALSE}
 gg.plot <- ggScatterPlot(df.clusters, x.id="x", y.id="y", colour.id="group", shape.id="group", 
                          title="Clusters", palette="Set1", verbose=F)
 # turns off clipping
@@ -38,6 +38,13 @@ plot(g.table)
 ```
 
 ### Some tricks
+
+Add <code>expand_limits</code> after ggplot object to expend x and y axes:
+
+```{r ScatterPlot1, warning=FALSE, message=FALSE}
+gg.plot + expand_limits(x = c(-1, 6), y=c(-1, 10))
+```
+
 
 <code>ellipsed.id="group"</code> creates ellipses by groups, <code>text.id="labels"</code> defines the column for labels, <code>xintercept=0 and yintercept=0</code> sets the coordinate axes, and <code>text.data=subset(df.clusters, x > 3 & y > 6)</code> selectively labels the points at x > 3 and y > 6:
 
@@ -83,22 +90,41 @@ Load the example data *reads.phyla*, where *x* is one of genetic marks, and the 
 
 ```{r reads.phyla, warning=FALSE}
 data(reads.phyla)
-#reads.phyla[1:2,]
+reads.phyla[1:2,]
 ```
 
 Because the functions to compute NMDS *metaMDS*, PCoA *cmdscale*, and PCA *prcomp* take different input data, please make sure you give a valid input for different NMDS plots.
 
 ### NMDS using *metaMDS* 
 
-It is also known as principal coordinates analysis (Gower, 1966).
+The following Nonmetric Multidimensional Scaling (NMDS) plot illustrates how the phyla are different in term of their reads abundances in 6 markers, and the data frame <code>reads.phyla[,7, drop=F]</code> provides the groups used for colouring texts. 
+
+```{r NMDS1, warning=FALSE, message=FALSE}
+nmds <- gtNMDSPlot(reads.phyla[,1:6], reads.phyla[,7, drop=F], colour.id="TaxaGroup", 
+                   text.or.point=2, verbose=F)
+plot(nmds)
+```
 
 ### PCoA using *cmdscale* 
 
+It is a classical MDS and also known as principal coordinates analysis (Gower, 1966).
+
+```{r PCoA1, warning=FALSE, message=FALSE}
+require(vegan)
+dist.cm <- vegdist(reads.phyla[,1:6], method="jaccard", binary=TRUE)
+cmds <- gtClassicalMDSPlot(dist.cm, reads.phyla[,7, drop=F], colour.id="TaxaGroup", 
+                   text.or.point=1, text.avoid.overlap=T, verbose=F)
+plot(cmds)
+```
 
 ### PCA using *prcomp* 
 
+<code>prcomp</code> rotates the input to analyse on columns, so that we have the plot of 6 markers whose differences are in term of the abundances of phyla, 
 
-
+```{r PCA1, warning=FALSE, message=FALSE}
+pca <- gtPCAPlot(reads.phyla[,1:6], text.or.point=3, text.size=5, text.repel=T, verbose=F)
+plot(pca)
+```
 
 ## Line with points
 
@@ -106,6 +132,6 @@ The basic tutorial of line with points is avaible in another tutorial [**Plot tr
 
 ### Rarefaction curves for multi-sample
 
-
+Coming soon.
 
 
