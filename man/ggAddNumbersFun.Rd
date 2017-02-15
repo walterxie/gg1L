@@ -40,4 +40,3 @@ Refer to \code{\link{stat_summary}}.
 bar.chart + ggAddNumbers(fun.y.lab=mean, y.adj=0.9)
 }
 \keyword{graph}
-

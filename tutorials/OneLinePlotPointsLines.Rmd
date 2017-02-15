@@ -107,12 +107,12 @@ plot(nmds)
 
 ### PCoA using *cmdscale* 
 
-It is a classical MDS and also known as principal coordinates analysis (Gower, 1966).
+It is a classical MDS and also known as principal coordinates analysis PCoA (Gower, 1966).
 
 ```{r PCoA1, warning=FALSE, message=FALSE}
 require(vegan)
 dist.cm <- vegdist(reads.phyla[,1:6], method="jaccard", binary=TRUE)
-cmds <- gtClassicalMDSPlot(dist.cm, reads.phyla[,7, drop=F], colour.id="TaxaGroup", 
+cmds <- gtPCoAPlot(dist.cm, reads.phyla[,7, drop=F], colour.id="TaxaGroup", 
                    text.or.point=1, text.avoid.overlap=T, verbose=F)
 plot(cmds)
 ```

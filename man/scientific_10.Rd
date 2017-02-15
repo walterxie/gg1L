@@ -20,4 +20,3 @@ Scientific notation
 scientific_10(10000)
 }
 \keyword{graph}
-

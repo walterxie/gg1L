@@ -1,7 +1,7 @@
 ---
 title: "One Command Line Plot - Tracer R"
 author: "Walter Xie"
-date: "10/02/2017"
+date: "16/02/2017"
 output:
   html_document: default
 ---
@@ -18,16 +18,18 @@ library(gg1L)
 
 ## Load a MCMC log
 
-Load a MCMC log from <https://cdn.rawgit.com/walterxie/ComMA/master/data-raw/star.beast.log>, the default to move the 1st data column into *row.names*, but using <code>row.names=NULL</code> to automatically generate row names and keep the 1st column in the data object:
+Use <code>readMCMCLog()</code> to load a MCMC log from <https://cdn.rawgit.com/walterxie/ComMA/master/data-raw/star.beast.log>, which  moves the 1st data column into *row.names* as default, but will automatically generate row names and keep the 1st column in the data object if using <code>row.names=NULL</code>:
 
 <!--- replace ComMA to TracerR --->
 ```{r mcmc.log, warning=FALSE}
 library(ComMA)
+#mcmc.log <- ComMA::readMCMCLog("../../ComMA/data-raw/star.beast.log")
 mcmc.log <- ComMA::readMCMCLog("https://cdn.rawgit.com/walterxie/ComMA/master/data-raw/star.beast.log")
-names(mcmc.log)
+summary(mcmc.log)
 ```
 
 ```{r mcmc.log2}
+# move states from rownames into a column
 mcmc.log$state <- as.double(rownames(mcmc.log))
 # remove burnin 10% 
 burnin <- nrow(mcmc.log) * 0.1
@@ -106,4 +108,23 @@ Percentage scale:
 ggDensityEstimate(df.TreeHeight, x.id="value", fill.id="parameters", density.pos="fill", density.alpha=1, verbose=F)        
 ```                  
                   
-                
+## Joint frequency 
+
+Unfortunately some special symbols, such as ":", cannot be parsed properly, so that we replace all ":" in the column names to ".":
+
+```{r rename, warning=FALSE}
+colnames(mcmc.log) <- gsub(':', '.', colnames(mcmc.log))
+```
+
+The joint frequency between "YuleModel.t.Species" and "TreeHeight.Species":
+
+```{r JointFrequency1, warning=FALSE}
+ggScatterPlot(mcmc.log[, c("YuleModel.t.Species", "TreeHeight.Species")], x.id="YuleModel.t.Species", y.id="TreeHeight.Species", title="", point.size=1, point.alpha=0.5, verbose=F)
+```
+
+
+
+
+
+
+

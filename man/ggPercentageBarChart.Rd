@@ -40,4 +40,3 @@ bar.chart <- ggPercentageBarChart(reads.phyla, melt.id="TaxaGroup")
 bar.chart$gg.plot
 }
 \keyword{graph}
-

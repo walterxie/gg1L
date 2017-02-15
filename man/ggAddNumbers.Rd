@@ -32,4 +32,3 @@ p <- ggBarChart(myData, x.id="model", y.id="mean", fill.id="OS", y.lab="performa
 p <- p + ggAddNumbers(fun.y.lab=length, y.adj=1.02)
 }
 \keyword{graph}
-

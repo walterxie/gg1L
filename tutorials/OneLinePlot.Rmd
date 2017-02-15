@@ -99,6 +99,10 @@ ggHeatmap(hm.df, melt.id="phylum", y.levels=y.rev, log.scale.colour=T, add.label
 ```
 
 
+## Utils
+
+
+
 
 
 

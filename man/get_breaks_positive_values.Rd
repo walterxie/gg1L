@@ -26,4 +26,3 @@ scale_y_continuous(trans = "log", labels = gg1L::scientific_10,
 breaks = gg1L::get_breaks_positive_values(max(df, start=c(0))))
 }
 \keyword{graph}
-

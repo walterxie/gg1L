@@ -40,4 +40,3 @@ bar.chart <- bar.chart + ggAddErrorBars(lower=lower, upper=upper)
 bar.chart
 }
 \keyword{graph}
-

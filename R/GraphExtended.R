@@ -1,6 +1,6 @@
 # Extended Graph
 # Author: Walter Xie
-# Accessed on 15 May 2016
+# Accessed on 15 Feb 2017
 
 validateAttr <- function(attr.df, colour.id=NULL, shape.id=NULL, link.id=NULL,
                          text.id=NULL, text.size.id=NULL) {
@@ -37,21 +37,32 @@ validateAttr <- function(attr.df, colour.id=NULL, shape.id=NULL, link.id=NULL,
 #' @title The Graphs Extended From \code{\link{ggScatterPlot}}
 #'
 #' @description
+#' The entended graphs from scatter plot inlcude NMDS, PCoA, and PCA. 
+#' 
 #' The difference between principal components analysis (PCA)
 #' and multidimensional scaling (MDS) is discussed in
 #' \url{http://stats.stackexchange.com/questions/14002/
 #' whats-the-difference-between-principal-components-analysis-and-multidimensional}.
 #'
-#' A classical MDS is also known as principal coordinates analysis (Gower, 1966).
+#' Principal coordinates analysis (PCoA) is a classical MDS 
+#' introduced by (Gower, 1966).
 #'
 #' @note Because functions of computing NMDS \code{\link{metaMDS}},
 #' PCoA \code{\link{cmdscale}}, and PCA \code{\link{prcomp}}
 #' take different input data, please make sure you give a valid input to plot.
 #'
 #' @return
-#' A \code{\link{gtable}} object, which turns off clipping.
-#' It needs to use \code{\link{pdf.gtplot}} to create pdf,
-#' or \code{\link{plot.gtable}} to plot in console.
+#' If the function returns a \code{\link{ggplot}} object, 
+#' then its name starts with "gg". 
+#' It needs to use \code{\link{pdf.ggplot}} to create pdf. 
+#' It also keeps the expandability using '+'.  
+#' 
+#' If the function returns a \code{\link{gtable}} object, then its name starts with "gt".
+#' This kind of functions use \code{\link{unclip.ggplot}} to turns off clipping for a 
+#' \code{\link{ggplot}} object, but returns a \code{\link{gtable}} object.
+#' It needs to use \code{\link{pdf.gtplot}} to create pdf. 
+#' And also \code{\link{plot.gtable}} 
+#' simplifies the code to plot gtable object in console.
 #'
 #' @param attr.df A data frame of meta data to define
 #' how the plot is coloured, shaped, or linked.
@@ -68,14 +79,15 @@ validateAttr <- function(attr.df, colour.id=NULL, shape.id=NULL, link.id=NULL,
 #' @param k The number of dimensions in \code{\link{metaMDS}},
 #' or maximum dimension of the space in \code{\link{cmdscale}}. Default to 2.
 #' @param ... Other arguments passed to \code{\link{ggScatterPlot}}.
-
+#' 
 #' @note
 #' Set \code{text.repel=T} to use \code{\link{geom_text_repel}}, if too much text labels.
 #'
 #' If the points are overlapped to the edge box, then use \code{\link{expand_limits}},
 #' such as \code{gg???(...) + expand_limits(x = c(?, ?), y=c(?, ?))},
 #' to expand the x y axis limits.
-#' 
+
+ 
 #' @details
 #' NMDS plot \code{ggNMDSPlot} and \code{gtNMDSPlot} uses \code{\link{metaMDS}}
 #' in \code{\link{vegan}} to create Nonmetric Multidimensional Scaling (NMDS) plot.
@@ -93,8 +105,8 @@ validateAttr <- function(attr.df, colour.id=NULL, shape.id=NULL, link.id=NULL,
 #' @keywords graph
 #' @export
 #' @examples
-#' # display text only and use ggrepel, also expand the x y axis limits
-#' nmds.plot <- ggNMDSPlot(correlations, text.or.point=1, text.repel=T) + expand_limits(x = c(-1, 1), y=c(-1, 1))
+#' The tutorial is avaiable at 
+#' \url{https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotPointsLines.html}
 #' @rdname extScatterPlot
 ggNMDSPlot <- function(comm, attr.df, colour.id=NULL, shape.id=NULL, link.id=NULL,
                        text.id=NULL, text.or.point=3, text.size.id=NULL, text.size=3,
@@ -172,22 +184,16 @@ ggNMDSPlot <- function(comm, attr.df, colour.id=NULL, shape.id=NULL, link.id=NUL
 
 #' @keywords graph
 #' @export
-#' @examples
-#' # turns off clipping
-#' nmds.plot <- gtNMDSPlot(comm, env, colour.id="FishSpecies", shape.id="FeedingPattern", text.or.point=2)
-#' plot(nmds.plot)
-#'
 #' @rdname extScatterPlot
-gtNMDSPlot <- function(comm, attr.df, ...) {
-  gg.plot <- ggNMDSPlot(comm, attr.df, ...)
+gtNMDSPlot <- function(...) {
+  gg.plot <- ggNMDSPlot(...)
   # turns off clipping
   gt <- gg1L::unclip.ggplot(gg.plot)
   return(gt)
 }
 
-
 #' @details
-#' Classical MDS \code{gtClassicalMDSPlot} uses \code{\link{cmdscale}} to
+#' Classical MDS \code{ggPCoAPlot} uses \code{\link{cmdscale}} to
 #' create a classical (metric) multidimensional scaling plot of a data matrix.
 #' Also known as principal coordinates analysis (Gower, 1966).
 #'
@@ -201,12 +207,8 @@ gtNMDSPlot <- function(comm, attr.df, ...) {
 #' such that the modified dissimilarities are Euclidean. Default to FALSE.
 #' @keywords graph
 #' @export
-#' @examples
-#' cmds.plot <- gtClassicalMDSPlot(dist.comm, env, colour.id="FishSpecies", shape.id="FeedingPattern")
-#' plot(cmds.plot)
-#'
 #' @rdname extScatterPlot
-gtClassicalMDSPlot <- function(dist.comm, attr.df,
+ggPCoAPlot <- function(dist.comm, attr.df,
                                colour.id=NULL, shape.id=NULL, link.id=NULL,
                                text.id=NULL, text.or.point=3,
                                text.size.id=NULL, text.size=3,
@@ -262,13 +264,18 @@ gtClassicalMDSPlot <- function(dist.comm, attr.df,
                                   text.id=text.id, text.or.point=text.or.point,
                                   text.size=text.size, title=title,
                                   verbose=verbose, ...)
-  # turns off clipping
-  gt <- gg1L::unclip.ggplot(gg.plot)
-
-  return(gt)
+  return(gg.plot)
 }
 
-
+#' @keywords graph
+#' @export
+#' @rdname extScatterPlot
+gtPCoAPlot <- function(...) {
+  gg.plot <- ggPCoAPlot(...)
+  # turns off clipping
+  gt <- gg1L::unclip.ggplot(gg.plot)
+  return(gt)
+}
 
 #' @details
 #' PCA plot \code{gtPCAPlot} uses \code{\link{prcomp}} to create
@@ -285,12 +292,8 @@ gtClassicalMDSPlot <- function(dist.comm, attr.df,
 #' before the analysis takes place. Default to TURE.
 #' @keywords graph
 #' @export
-#' @examples
-#' pca.plot <- gtPCAPlot(df.comm, env, colour.id="FishSpecies", shape.id="FeedingPattern")
-#' plot(pca.plot)
-#'
 #' @rdname extScatterPlot
-gtPCAPlot <- function(df.comm, attr.df, x.i=1, y.i=2,
+ggPCAPlot <- function(df.comm, attr.df, x.i=1, y.i=2,
                       colour.id=NULL, shape.id=NULL, link.id=NULL,
                       text.id=NULL, text.or.point=3, text.data=NULL,
                       scale.pca=TRUE, title="PCA",
@@ -337,11 +340,19 @@ gtPCAPlot <- function(df.comm, attr.df, x.i=1, y.i=2,
                                   text.id=text.id, text.or.point=text.or.point,
                                   text.data=text.data, title=title,
                                   verbose=verbose, ...)
+  return(gg.plot)
+}
+
+#' @keywords graph
+#' @export
+#' @rdname extScatterPlot
+gtPCAPlot <- function(...) {
+  gg.plot <- ggPCAPlot(...)
   # turns off clipping
   gt <- gg1L::unclip.ggplot(gg.plot)
-
   return(gt)
 }
+
 
 #' Rarefaction curves for multi-sample, which is extended from \code{\link{gtLine}}.
 #'

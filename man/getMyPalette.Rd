@@ -21,4 +21,3 @@ Customised palette with about 70 colours.
 myPalette <- getMyPalette()
 }
 \keyword{graph}
-

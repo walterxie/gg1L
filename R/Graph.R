@@ -20,14 +20,16 @@
 #' Both refer to \url{http://dx.doi.org/10.1186/s13742-015-0086-1}.
 #'
 #' @return 
-#' If the function returns a \code{\link{ggplot}} object, then its name starts with "gg". 
+#' If the function returns a \code{\link{ggplot}} object, 
+#' then its name starts with "gg". 
 #' It needs to use \code{\link{pdf.ggplot}} to create pdf. 
 #' It also keeps the expandability using '+'.  
 #' 
 #' If the function returns a \code{\link{gtable}} object, then its name starts with "gt".
 #' This kind of functions use \code{\link{unclip.ggplot}} to turns off clipping for a 
 #' \code{\link{ggplot}} object, but returns a \code{\link{gtable}} object.
-#' It needs to use \code{\link{pdf.gtplot}} to create pdf. And also \code{\link{plot.gtable}} 
+#' It needs to use \code{\link{pdf.gtplot}} to create pdf. 
+#' And also \code{\link{plot.gtable}} 
 #' simplifies the code to plot gtable object in console.
 #' @note 
 #' All basic charts are designed to return a \code{\link{ggplot}} object for easy 

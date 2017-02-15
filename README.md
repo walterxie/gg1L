@@ -4,9 +4,10 @@ In development.
 
 ##Use my time to save your time
 
-This package wraps ggplot2’s code into one-line functions, which are easy to use. 
-It also includes some tips and smart code collected from Internet to improve plotting, 
-and few visualisation methods derived from my previous or current works.
+This package wraps ggplot2’s code into one-line functions making plot easy. 
+It also includes some tips and smart code collected from the Internet 
+to improve plotting, 
+and few visualisation methods derived from my previous and current works.
 
 To see all exported functions:
 ```R
