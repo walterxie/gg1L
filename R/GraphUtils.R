@@ -107,7 +107,6 @@ unclip.ggplot <- function(gg.plot) {
 #' @keywords graph
 #' @export
 #' @examples
-#' library(ggplot2); library(grid); library(gridExtra)
 #' dsamp <- diamonds[sample(nrow(diamonds), 1000), ]
 #' p1 <- qplot(carat, price, data=dsamp, colour=clarity)
 #' p2 <- qplot(cut, price, data=dsamp, colour=clarity)
@@ -120,9 +119,16 @@ unclip.ggplot <- function(gg.plot) {
 #' @rdname pdf
 grid_arrange_shared_legend <- function(..., input.list=FALSE, legend.position="bottom",
                                        ncol=2, nrow=2, widths=c(1, 0.1), unclip.ggplot=TRUE) {
-  plots <- unwrapInputList(..., input.list=input.list)
-  cat("Grid arrange", length(plots), "plots.\n")
-
+  plots <- list(...)
+  if (!input.list && is(plots[[1]], "list")) 
+    stop("Invaild input: find a list of plots, please set input.list=T !")
+  if (input.list && is(plots, "list"))
+    plots <- plots[[1]]
+  # validation
+  if (! (is(plots, "list") && length(plots) > 0) )
+    stop("Invaild input: either not a list, please set input.list=F, or empty input, length = ", length(plots), " !")
+  
+  cat("The grid allocates", length(plots), "plots in", ncol, "columns", nrow, "rows.\n")
   if ( !(length(plots) != ncol*nrow || length(plots) != ncol*nrow-1) )
     stop("Incorrect grid ", ncol, " * ", nrow, " for total ", length(plots), " plots !")
 
@@ -139,6 +145,7 @@ grid_arrange_shared_legend <- function(..., input.list=FALSE, legend.position="b
     do.call(arrangeGrob, args.list),
     legend, ncol=ncol, widths=widths)
 }
+
 
 #' Defining the scale change.
 #' It is mostly used to force bars to start from a lower value than 0 in \pkg{ggplot2} \code{\link{geom_bar}} in R

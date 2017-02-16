@@ -23,18 +23,16 @@
 #' If the function returns a \code{\link{ggplot}} object, 
 #' then its name starts with "gg". 
 #' It needs to use \code{\link{pdf.ggplot}} to create pdf. 
-#' It also keeps the expandability using '+'.  
+#' It also can be concatenated using '+'.  
 #' 
-#' If the function returns a \code{\link{gtable}} object, then its name starts with "gt".
-#' This kind of functions use \code{\link{unclip.ggplot}} to turns off clipping for a 
-#' \code{\link{ggplot}} object, but returns a \code{\link{gtable}} object.
-#' It needs to use \code{\link{pdf.gtplot}} to create pdf. 
-#' And also \code{\link{plot.gtable}} 
-#' simplifies the code to plot gtable object in console.
+#' If the function returns a \code{\link{gtable}} object, 
+#' then its name starts with "gt".
+#' It needs to use \code{\link{pdf.gtplot}} to create pdf, 
+#' or \code{\link{plot.gtable}} to plot to console.
 #' @note 
-#' All basic charts are designed to return a \code{\link{ggplot}} object for easy 
-#' extension, you may need to turn off clipping after call, such as 
-#' \code{ggScatterPlot} and \code{ggLineWithPoints}.
+#' All basic charts are designed to return a \code{\link{ggplot}} 
+#' object for easy to extend, you may need to turn off clipping using  
+#' \code{unclip.ggplot} if there are overlaps between points/labels and axes.
 #' 
 #' @param df A data frame used for plot. 
 #' @param df.to.melt A data frame required to \code{\link{melt}} 
@@ -471,9 +469,10 @@ ggScatterPlot <- function(df, x.id, y.id, colour.id=NULL, text.colour.id=NULL,
 #' 
 #' @rdname ggPlot
 ggLineWithPoints <- function(df, x.id, y.id, group.id=NULL, colour.id=NULL, 
-                             shape.id=NULL, shapes=NULL, text.id=NULL,  
-                             line.or.point=3, line.size=0.5, line.type = 1, line.alpha=1, 
-                             text.or.point=2, point.size=3, point.alpha=1, point.data=NULL, 
+                             shape.id=NULL, shapes=NULL, text.id=NULL, line.or.point=3, 
+                             line.size=0.5, line.type = 1, line.alpha=1, 
+                             point.size=3, point.alpha=1, point.data=NULL,
+                             dodge.width=0, text.or.point=2, 
                              text.data = NULL, text.size = 3, text.alpha = 0.5, 
                              text.hjust=-0.1, text.vjust = -0.2, text.avoid.overlap = FALSE,
                              text.repel = FALSE, box.padding = unit(0.25, "lines"), 
@@ -492,8 +491,11 @@ ggLineWithPoints <- function(df, x.id, y.id, group.id=NULL, colour.id=NULL,
   p <- ggInit(df=df, x.id=x.id, y.id=y.id, group.id=group.id, colour.id=colour.id, verbose=verbose)
   col.names <- colnames(df)
   
+  lp.position=position_dodge(width=dodge.width)
+  
   if (line.or.point != 2)
-    p <- p + geom_line(size=line.size, linetype=line.type, alpha=line.alpha) 
+    p <- p + geom_line(size=line.size, linetype=line.type, alpha=line.alpha,
+                       position=lp.position) 
   
   if (line.or.point > 1) {
     if (! is.null(shape.id) && is.null(shapes)) {
@@ -502,7 +504,8 @@ ggLineWithPoints <- function(df, x.id, y.id, group.id=NULL, colour.id=NULL,
       shapes <- seq(1, (1 + n_shape-1))
     }
     p <- ggOptPointAndShape(p, col.names, shape.id=shape.id, data=point.data, 
-                            shapes=shapes, point.size=point.size, point.alpha=point.alpha)
+                            shapes=shapes, point.size=point.size, point.alpha=point.alpha,
+                            position=lp.position)
   }
   
   if (auto.scale.x) {

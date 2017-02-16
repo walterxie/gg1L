@@ -123,8 +123,17 @@ ggScatterPlot(mcmc.log[, c("YuleModel.t.Species", "TreeHeight.Species")], x.id="
 ```
 
 
+## Multiple parameters and logs
 
+The 95% confidence interval of 3 parameters having the "TreeHeight" keyword (100 samples):
 
+```{r errorbar1, warning=FALSE, message=FALSE}
+summ <- summarySE(df.TreeHeight, measurevar="value", groupvars=c("parameters"))
+
+ggLineWithPoints(summ, x.id="parameters", y.id="value", line.or.point=3, x.scale="discrete", verbose=F) + 
+  ggAddErrorBars(lower="value-se", upper="value+se", verbose=F)
+```
+<!--- different to Tracer !? --->
 
 
 

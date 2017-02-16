@@ -64,25 +64,18 @@ colnames(myData) <- c("model", "OS", "performance", "sd", "n", "se")
 myData[1:3,]
 ```
 
-Or <code>summarySE</code> copied from [Cookbook for R](http://www.cookbook-r.com/Manipulating_data/Summarizing_data/):
+Or use <code>summarySE</code> in this package which is copied from [Cookbook for R](http://www.cookbook-r.com/Manipulating_data/Summarizing_data/):
 
 ```{r summary2, warning=FALSE, message=F}
 myData <- summarySE(model.test, measurevar="performance", groupvars=c("model", "OS"))
 myData[1:3,]
 ```
 
-Calculate the lower and upper of error bars, where *performance* column is the mean.
-
-```{r meanerr, warning=FALSE}
-lower=myData$performance - myData$se
-upper=myData$performance + myData$se
-```
-
-Add the error bars to the bar chart using <code>+</code>:
+Add the error bars to the bar chart using <code>+</code>, where *performance* column is the mean:
 
 ```{r errbar1, warning=FALSE}
 bc <- ggBarChart(myData, x.id="model", y.id="performance", fill.id="OS", y.lab="performance", title="", verbose=F) 
-bc + ggAddErrorBars(lower=lower, upper=upper)
+bc + ggAddErrorBars(lower="performance-se", upper="performance+se", verbose=F)
 ```
 
 ### Add values

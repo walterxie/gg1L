@@ -61,11 +61,12 @@ ggScatterPlot(df, x.id, y.id, colour.id = NULL, text.colour.id = NULL,
 
 ggLineWithPoints(df, x.id, y.id, group.id = NULL, colour.id = NULL,
   shape.id = NULL, shapes = NULL, text.id = NULL, line.or.point = 3,
-  line.size = 0.5, line.type = 1, line.alpha = 1, text.or.point = 2,
-  point.size = 3, point.alpha = 1, point.data = NULL, text.data = NULL,
-  text.size = 3, text.alpha = 0.5, text.hjust = -0.1, text.vjust = -0.2,
-  text.avoid.overlap = FALSE, text.repel = FALSE, box.padding = unit(0.25,
-  "lines"), point.padding = unit(1e-06, "lines"), arrow = NULL, force = 1,
+  line.size = 0.5, line.type = 1, line.alpha = 1, point.size = 3,
+  point.alpha = 1, point.data = NULL, dodge.width = 0,
+  text.or.point = 2, text.data = NULL, text.size = 3, text.alpha = 0.5,
+  text.hjust = -0.1, text.vjust = -0.2, text.avoid.overlap = FALSE,
+  text.repel = FALSE, box.padding = unit(0.25, "lines"),
+  point.padding = unit(1e-06, "lines"), arrow = NULL, force = 1,
   x.facet.id = NULL, y.facet.id = NULL, facet.scales = "fixed",
   facet.space = "fixed", facet.shrink = TRUE, facet.drop = TRUE,
   x.trans = "identity", x.scale = "continuous", auto.scale.x = FALSE,
@@ -242,6 +243,11 @@ The data to be displayed as points in \code{\link{geom_point}}, which can be
 the subset of points to draw the line. 
 If NULL, the default, the data is inherited from the plot data as specified in the call.}
 
+\item{dodge.width}{Dodging width, when different to the width of 
+the individual elements in box Whiskers plot. 
+This is useful when you want to align narrow geoms with wider geoms. 
+Refer to \code{\link{position_dodge}}.}
+
 \item{df.to.melt}{A data frame required to \code{\link{melt}} 
 before making a \pkg{ggplot} object, such as input of \code{ggHeatmap}. 
 At least one column should be \code{melt.id}, and the other columns should be values, 
@@ -294,11 +300,6 @@ but if y.levels is NA, there is no sorting applied.}
 used for \code{outlier.colour} in \code{\link{geom_boxplot}}. 
 Default to alpha("black", 0.3).}
 
-\item{dodge.width}{Dodging width, when different to the width of 
-the individual elements in box Whiskers plot. 
-This is useful when you want to align narrow geoms with wider geoms. 
-Refer to \code{\link{position_dodge}}.}
-
 \item{lwd}{change the line thinkness.}
 
 \item{fatten}{make the median line thinner relative to the other lines.}
@@ -321,14 +322,12 @@ Assume x values are discrete for each bar. Default to 0 to do nothing.}
 If the function returns a \code{\link{ggplot}} object, 
 then its name starts with "gg". 
 It needs to use \code{\link{pdf.ggplot}} to create pdf. 
-It also keeps the expandability using '+'.  
+It also can be concatenated using '+'.  
 
-If the function returns a \code{\link{gtable}} object, then its name starts with "gt".
-This kind of functions use \code{\link{unclip.ggplot}} to turns off clipping for a 
-\code{\link{ggplot}} object, but returns a \code{\link{gtable}} object.
-It needs to use \code{\link{pdf.gtplot}} to create pdf. 
-And also \code{\link{plot.gtable}} 
-simplifies the code to plot gtable object in console.
+If the function returns a \code{\link{gtable}} object, 
+then its name starts with "gt".
+It needs to use \code{\link{pdf.gtplot}} to create pdf, 
+or \code{\link{plot.gtable}} to plot to console.
 }
 \description{
 Simplify \pkg{ggplot} graphic coding into one-line functions that provides frequently 
@@ -375,9 +374,9 @@ which counts (density * n) variable instead of the default density.
 Refer to \code{\link{geom_density}}.
 }
 \note{
-All basic charts are designed to return a \code{\link{ggplot}} object for easy 
-extension, you may need to turn off clipping after call, such as 
-\code{ggScatterPlot} and \code{ggLineWithPoints}.
+All basic charts are designed to return a \code{\link{ggplot}} 
+object for easy to extend, you may need to turn off clipping using  
+\code{unclip.ggplot} if there are overlaps between points/labels and axes.
 }
 \examples{
 data(model.test)

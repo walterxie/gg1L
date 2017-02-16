@@ -110,9 +110,6 @@ ggAddNumbersFun <- function(fun.y.lab=mean, fun.y.pos=median, y.adj=0.98, digits
 #' @keywords graph
 #' @export
 #' @examples 
-#' # lower = mean - standard error of mean, upper = mean + standard error of mean
-#' p <- p + ggAddErrorBars(lower, upper)
-#' 
 #' # Replicate of http://www.r-bloggers.com/building-barplots-with-error-bars/
 #' data(model.test)
 #' myData <- aggregate(model.test$performance, by = list(model = model.test$model, OS = model.test$OS),
@@ -123,10 +120,19 @@ ggAddNumbersFun <- function(fun.y.lab=mean, fun.y.pos=median, y.adj=0.98, digits
 #' bar.chart <- ggBarChart(myData, x.id="model", y.id="mean", fill.id="OS", y.lab="performance")
 #' lower=myData$mean - myData$se
 #' upper=myData$mean + myData$se
-#' bar.chart <- bar.chart + ggAddErrorBars(lower=lower, upper=upper)
+#' bar.chart <- bar.chart + ggAddErrorBars(lower="mean-se", upper="mean+se")
 #' bar.chart
-ggAddErrorBars <- function(lower, upper, dodge.width=0.9, err.bar.width=0.25, ...) {
-  geom_errorbar(aes(ymin = lower, ymax = upper), 
-                position = position_dodge(width=dodge.width), 
-                width = err.bar.width, ...)
+ggAddErrorBars <- function(lower, upper, dodge.width=0.9, err.bar.width=0.25, 
+                           verbose=TRUE, ...) {
+  aes.string <- paste0("geom_errorbar(aes(ymin=", lower, ", ymax=", upper, "),")
+  aes.string <- paste0(aes.string, "position = position_dodge(width=", dodge.width, "),")
+  aes.string <- paste0(aes.string, "width =", err.bar.width)
+  aes.string <- paste0(aes.string, paste(..., collapse = ","))
+  aes.string <- paste0(aes.string, ")")
+  if (verbose)
+    cat("error bar : ", aes.string, "\n")
+  return(eval(parse(text = aes.string)))
+  # geom_errorbar(aes(ymin = lower, ymax = upper), 
+  #               position = position_dodge(width=dodge.width), 
+  #               width = err.bar.width, ...)
 }

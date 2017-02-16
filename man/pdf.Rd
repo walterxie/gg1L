@@ -86,7 +86,6 @@ plot(g.table)
 
 gt <- unclip.ggplot(gg.plot)
 
-library(ggplot2); library(grid); library(gridExtra)
 dsamp <- diamonds[sample(nrow(diamonds), 1000), ]
 p1 <- qplot(carat, price, data=dsamp, colour=clarity)
 p2 <- qplot(cut, price, data=dsamp, colour=clarity)

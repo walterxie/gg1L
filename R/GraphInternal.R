@@ -71,17 +71,19 @@ ggOptFacetGrid <- function(p, col.names, x.facet.id=NULL, y.facet.id=NULL,
 # if shape.id not NULL, no shape for points
 # If NULL, the default, the data is inherited from the plot data.
 ggOptPointAndShape <- function(p, col.names, shape.id=NULL, data=NULL, shapes=NULL,
-                               point.alpha=1, point.size=3) {
+                               point.alpha=1, point.size=3, 
+                               position = position_dodge(width=0)) {
   if (! is.null(shape.id)) {
     if (!is.element(tolower(shape.id), tolower(col.names)))
       stop("Data frame do NOT have column name \"", shape.id, "\" !")
 
     p <- p + geom_point(data=data, aes_string(shape=shape.id),
-                        size = point.size, alpha=point.alpha)
+                        size=point.size, alpha=point.alpha, position=position)
     if (! is.null(shapes))
       p <- p + scale_shape_manual(values=shapes)
   } else {
-    p <- p + geom_point(data=data, size = point.size, alpha=point.alpha)
+    p <- p + geom_point(data=data, size = point.size, alpha=point.alpha,
+                        position=position)
   }
   return(p)
 }
