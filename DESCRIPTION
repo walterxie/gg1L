@@ -15,6 +15,7 @@ Imports:
     ggrepel (>= 0.6.0),
     grid,
     gridExtra,
+    plyr,
     reshape2,
     scales,
     vegan (>= 2.4.0)

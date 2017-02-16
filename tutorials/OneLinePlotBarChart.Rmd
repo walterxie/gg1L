@@ -1,7 +1,7 @@
 ---
 title: "One Line Plot - Bar Chart"
 author: "Walter Xie"
-date: "09/02/2017"
+date: "16/02/2017"
 output:
   html_document: default
 ---
@@ -53,23 +53,35 @@ ggBarChart(model.test.mac, x.id="test", y.id="performance", fill.id="model", x.t
 
 ### Add error bars
 
-Prepare the lower and upper of error bars:
+ using <code>aggregate</code> modified from [the code] (http://www.r-bloggers.com/building-barplots-with-error-bars/) in R Bloggers:
 
-```{r meanerr, warning=FALSE}
+```{r summary1, warning=FALSE}
 myData <- aggregate(model.test$performance, by=list(model=model.test$model,OS=model.test$OS), 
                     FUN=function(x) c(mean=mean(x), sd=sd(x), n=length(x)))
 myData <- do.call(data.frame, myData)
 myData$se <- myData$x.sd / sqrt(myData$x.n)
-colnames(myData) <- c("model", "OS", "mean", "sd", "n", "se")
-lower=myData$mean - myData$se
-upper=myData$mean + myData$se
+colnames(myData) <- c("model", "OS", "performance", "sd", "n", "se")
 myData[1:3,]
+```
+
+Or <code>summarySE</code> copied from [Cookbook for R](http://www.cookbook-r.com/Manipulating_data/Summarizing_data/):
+
+```{r summary2, warning=FALSE, message=F}
+myData <- summarySE(model.test, measurevar="performance", groupvars=c("model", "OS"))
+myData[1:3,]
+```
+
+Calculate the lower and upper of error bars, where *performance* column is the mean.
+
+```{r meanerr, warning=FALSE}
+lower=myData$performance - myData$se
+upper=myData$performance + myData$se
 ```
 
 Add the error bars to the bar chart using <code>+</code>:
 
 ```{r errbar1, warning=FALSE}
-bc <- ggBarChart(myData, x.id="model", y.id="mean", fill.id="OS", y.lab="performance", title="", verbose=F) 
+bc <- ggBarChart(myData, x.id="model", y.id="performance", fill.id="OS", y.lab="performance", title="", verbose=F) 
 bc + ggAddErrorBars(lower=lower, upper=upper)
 ```
 
@@ -78,13 +90,13 @@ bc + ggAddErrorBars(lower=lower, upper=upper)
 Add their values (in the column "n") to the bars:
 
 ```{r barnum1, warning=FALSE}
-bc + ggAddNumbers(label.id="n", hjust=0.5, vjust=2)
+bc + ggAddNumbers(label.id="N", hjust=0.5, vjust=2)
 ```
 
 Add the calculation result to the bars, such as the mean of y values:
 
 ```{r barnum2, warning=FALSE}
-bc + ggAddNumbersFun(fun.y.lab=mean, y.adj=0.9)
+bc + ggAddNumbersFun(fun.y.lab=performance, y.adj=0.9)
 ```
 
 ### Add lines
