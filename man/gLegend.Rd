@@ -25,3 +25,4 @@ legend <- gLegend(my_hist)
 grid.draw(legend)
 }
 \keyword{graph}
+

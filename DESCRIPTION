@@ -1,11 +1,15 @@
 Package: gg1L
 Type: Package
-Title: R Plot Using One-line Function Derived From ggplot2 
+Title: R Plot Using One-line Function Derived From ggplot2
 Version: 0.1.0
 Author: Walter Xie
 Maintainer: Walter Xie <walter@cs.auckland.ac.nz>
-Description: This package wraps ggplot2’s code into one-line functions, which are easy to use. It also includes some tips and smart code collected from Internet to improve plotting, and few visualisation methods derived from my previous or current works.
-Depends: R (>= 3.3.1)
+Description: This package wraps ggplot2’s code into one-line functions, which
+    are easy to use. It also includes some tips and smart code collected from
+    Internet to improve plotting, and few visualisation methods derived from my
+    previous or current works.
+Depends:
+    R (>= 3.3.1)
 License: MIT
 Encoding: UTF-8
 LazyData: true
@@ -19,6 +23,6 @@ Imports:
     reshape2,
     scales,
     vegan (>= 2.4.0)
-Suggests: 
+Suggests:
     ComMA
-RoxygenNote: 6.0.1
+RoxygenNote: 5.0.1

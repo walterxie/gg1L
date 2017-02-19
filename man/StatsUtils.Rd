@@ -38,3 +38,4 @@ summarySE(data, measurevar="change", groupvars=c("sex", "condition"), na.rm=TRUE
 
 }
 \keyword{statistics}
+

@@ -3,11 +3,11 @@
 \name{extScatterPlot}
 \alias{extScatterPlot}
 \alias{ggNMDSPlot}
-\alias{gtNMDSPlot}
-\alias{ggPCoAPlot}
-\alias{gtPCoAPlot}
 \alias{ggPCAPlot}
+\alias{ggPCoAPlot}
+\alias{gtNMDSPlot}
 \alias{gtPCAPlot}
+\alias{gtPCoAPlot}
 \title{The Graphs Extended From \code{\link{ggScatterPlot}}}
 \usage{
 ggNMDSPlot(comm, attr.df, colour.id = NULL, shape.id = NULL,
@@ -139,3 +139,4 @@ The tutorial is avaiable at
 \\url{https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotPointsLines.html}
 }
 \keyword{graph}
+

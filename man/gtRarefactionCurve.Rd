@@ -50,3 +50,4 @@ rare.curv <- gtRarefactionCurve(df.size, attr.df, group.id="Samples", colour.id=
 plot(rare.curv)
 }
 \keyword{graph}
+

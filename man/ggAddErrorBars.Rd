@@ -38,3 +38,4 @@ bar.chart <- bar.chart + ggAddErrorBars(lower="mean-se", upper="mean+se")
 bar.chart
 }
 \keyword{graph}
+

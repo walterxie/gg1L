@@ -27,3 +27,4 @@ p <- p + ggAddLine(linetype = 2, yintercept = 1)
 p <- p + ggAddLine(smooth.method = "lm")
 }
 \keyword{graph}
+
