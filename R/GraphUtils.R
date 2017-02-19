@@ -89,7 +89,7 @@ unclip.ggplot <- function(gg.plot) {
 }
 
 
-#' @details \code{grid_arrange_shared_legend} shares a legend
+#' \code{grid_arrange_shared_legend} shares a legend
 #' between multiple plots using \code{\link{grid.arrange}}.
 #' Return a \code{\link{gtable}} object.
 #'
@@ -115,19 +115,17 @@ unclip.ggplot <- function(gg.plot) {
 #' grid_arrange_shared_legend(p1, p2, p3, p4)
 #'
 #' grid_arrange_shared_legend(list(p1, p2, p3, p4), input.list=T)
-#'
-#' @rdname pdf
 grid_arrange_shared_legend <- function(..., input.list=FALSE, legend.position="bottom",
                                        ncol=2, nrow=2, widths=c(1, 0.1), unclip.ggplot=TRUE) {
   plots <- list(...)
-  if (!input.list && is(plots[[1]], "list")) 
+  if (!input.list && is(plots[[1]], "list"))
     stop("Invaild input: find a list of plots, please set input.list=T !")
   if (input.list && is(plots, "list"))
     plots <- plots[[1]]
   # validation
   if (! (is(plots, "list") && length(plots) > 0) )
     stop("Invaild input: either not a list, please set input.list=F, or empty input, length = ", length(plots), " !")
-  
+
   cat("The grid allocates", length(plots), "plots in", ncol, "columns", nrow, "rows.\n")
   if ( !(length(plots) != ncol*nrow || length(plots) != ncol*nrow-1) )
     stop("Incorrect grid ", ncol, " * ", nrow, " for total ", length(plots), " plots !")
