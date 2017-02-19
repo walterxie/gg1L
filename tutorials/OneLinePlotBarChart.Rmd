@@ -136,7 +136,7 @@ ab$gg.plot
 #pdf.ggplot(ab$gg.plot, fig.path="abundance-bar.pdf", width=ab$pdf.width, height=ab$pdf.height)
 ```
 
-<!--- mv to CMUtils.R because ggYAcrossXBar depends on ComMA::cmYAcrossX
+
 ### Y across X bar chart
 
 This bar chart introduced in the supplymentary data of <https://doi.org/10.1186/s13742-015-0086-1> shows both of the total value of *y* (the number of reads) and the frequency of *y* (the number of phyla) appeared and only appeared in the given number of columns (datasets) listed in x-axis.  
@@ -145,7 +145,7 @@ This bar chart introduced in the supplymentary data of <https://doi.org/10.1186/
 ggYAcrossXBar(reads.phyla[,1:6], terms=c("phyla", "datasets", "reads"), title="", 
               x.lab="Number of markers crossed", y.lab="Number of phyla/reads", verbose=F)
 ```
---->
+
 
 
 
