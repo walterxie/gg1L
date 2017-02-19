@@ -49,5 +49,6 @@ rare.curv <- gtRarefactionCurve(df.size, attr.df, group.id="Samples", colour.id=
                        shape.id="GutSegment",point.size=2, x.trans="log", auto.scale.x=T)
 plot(rare.curv)
 }
-\keyword{graph}
+\keyword{line}
+\keyword{points}
 

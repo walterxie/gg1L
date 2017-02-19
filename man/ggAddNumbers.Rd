@@ -8,13 +8,13 @@ ggAddNumbers(label.id = NULL, hjust = 0, vjust = 0, dodge.width = 0.9,
   text.size = 4, text.colour = "black", ...)
 }
 \arguments{
-\item{label.id}{A string of a data mapping (column name) provides labels. 
-If NULL, the default, then use \code{\link{stat_summary}} by given \code{fun.y.lab}. 
+\item{label.id}{A string of a data mapping (column name) provides labels.
+If NULL, the default, then use \code{\link{stat_summary}} by given \code{fun.y.lab}.
 Othewise, use \code{\link{geom_text}} by given \code{label.id}.}
 
 \item{hjust, vjust}{The adjustment of label positions. Only activated if label.id is not NULL.}
 
-\item{dodge.width}{Dodging width, when different to the width of the individual elements. 
+\item{dodge.width}{Dodging width, when different to the width of the individual elements.
 Default to 0.8. Refer to \code{\link{position_dodge}}.}
 
 \item{text.size}{The text size of labels. Default to 3.}
@@ -24,12 +24,13 @@ Default to 0.8. Refer to \code{\link{position_dodge}}.}
 \item{...}{Other arguments passed to \code{\link{geom_text}} or \code{\link{stat_summary}}.}
 }
 \description{
-Add numbers as text in a \code{\link{ggplot}} object, such as mean of box plot. 
+Add numbers as text in a \code{\link{ggplot}} object, such as mean of box plot.
 Refer to \code{\link{stat_summary}}.
 }
 \examples{
 p <- ggBarChart(myData, x.id="model", y.id="mean", fill.id="OS", y.lab="performance")
 p <- p + ggAddNumbers(fun.y.lab=length, y.adj=1.02)
 }
-\keyword{graph}
+\keyword{add}
+\keyword{numbers}
 

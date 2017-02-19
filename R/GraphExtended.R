@@ -37,14 +37,14 @@ validateAttr <- function(attr.df, colour.id=NULL, shape.id=NULL, link.id=NULL,
 #' @title The Graphs Extended From \code{\link{ggScatterPlot}}
 #'
 #' @description
-#' The entended graphs from scatter plot inlcude NMDS, PCoA, and PCA. 
-#' 
+#' The entended graphs from scatter plot inlcude NMDS, PCoA, and PCA.
+#'
 #' The difference between principal components analysis (PCA)
 #' and multidimensional scaling (MDS) is discussed in
 #' \url{http://stats.stackexchange.com/questions/14002/
 #' whats-the-difference-between-principal-components-analysis-and-multidimensional}.
 #'
-#' Principal coordinates analysis (PCoA) is a classical MDS 
+#' Principal coordinates analysis (PCoA) is a classical MDS
 #' introduced by (Gower, 1966).
 #'
 #' @note Because functions of computing NMDS \code{\link{metaMDS}},
@@ -52,16 +52,16 @@ validateAttr <- function(attr.df, colour.id=NULL, shape.id=NULL, link.id=NULL,
 #' take different input data, please make sure you give a valid input to plot.
 #'
 #' @return
-#' If the function returns a \code{\link{ggplot}} object, 
-#' then its name starts with "gg". 
-#' It needs to use \code{\link{pdf.ggplot}} to create pdf. 
-#' It also keeps the expandability using '+'.  
-#' 
+#' If the function returns a \code{\link{ggplot}} object,
+#' then its name starts with "gg".
+#' It needs to use \code{\link{pdf.ggplot}} to create pdf.
+#' It also keeps the expandability using '+'.
+#'
 #' If the function returns a \code{\link{gtable}} object, then its name starts with "gt".
-#' This kind of functions use \code{\link{unclip.ggplot}} to turns off clipping for a 
+#' This kind of functions use \code{\link{unclip.ggplot}} to turns off clipping for a
 #' \code{\link{ggplot}} object, but returns a \code{\link{gtable}} object.
-#' It needs to use \code{\link{pdf.gtplot}} to create pdf. 
-#' And also \code{\link{plot.gtable}} 
+#' It needs to use \code{\link{pdf.gtplot}} to create pdf.
+#' And also \code{\link{plot.gtable}}
 #' simplifies the code to plot gtable object in console.
 #'
 #' @param attr.df A data frame of meta data to define
@@ -79,7 +79,7 @@ validateAttr <- function(attr.df, colour.id=NULL, shape.id=NULL, link.id=NULL,
 #' @param k The number of dimensions in \code{\link{metaMDS}},
 #' or maximum dimension of the space in \code{\link{cmdscale}}. Default to 2.
 #' @param ... Other arguments passed to \code{\link{ggScatterPlot}}.
-#' 
+#'
 #' @note
 #' Set \code{text.repel=T} to use \code{\link{geom_text_repel}}, if too much text labels.
 #'
@@ -87,7 +87,7 @@ validateAttr <- function(attr.df, colour.id=NULL, shape.id=NULL, link.id=NULL,
 #' such as \code{gg???(...) + expand_limits(x = c(?, ?), y=c(?, ?))},
 #' to expand the x y axis limits.
 
- 
+
 #' @details
 #' NMDS plot \code{ggNMDSPlot} and \code{gtNMDSPlot} uses \code{\link{metaMDS}}
 #' in \code{\link{vegan}} to create Nonmetric Multidimensional Scaling (NMDS) plot.
@@ -102,10 +102,10 @@ validateAttr <- function(attr.df, colour.id=NULL, shape.id=NULL, link.id=NULL,
 #' Default to "bray".
 #' @param title.add.stress If TRUE, the default, then add stress from
 #' \code{\link{metaMDS}} to the title.
-#' @keywords graph
+#' @keywords scatter plot
 #' @export
 #' @examples
-#' The tutorial is avaiable at 
+#' The tutorial is avaiable at
 #' \url{https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotPointsLines.html}
 #' @rdname extScatterPlot
 ggNMDSPlot <- function(comm, attr.df, colour.id=NULL, shape.id=NULL, link.id=NULL,
@@ -182,7 +182,7 @@ ggNMDSPlot <- function(comm, attr.df, colour.id=NULL, shape.id=NULL, link.id=NUL
   return(gg.plot)
 }
 
-#' @keywords graph
+#' @keywords scatter plot
 #' @export
 #' @rdname extScatterPlot
 gtNMDSPlot <- function(...) {
@@ -205,7 +205,7 @@ gtNMDSPlot <- function(...) {
 #' @param add.const Logical indicating in \code{\link{cmdscale}} if an additive
 #' constant c* should be computed, and added to the non-diagonal dissimilarities
 #' such that the modified dissimilarities are Euclidean. Default to FALSE.
-#' @keywords graph
+#' @keywords scatter plot
 #' @export
 #' @rdname extScatterPlot
 ggPCoAPlot <- function(dist.comm, attr.df,
@@ -267,7 +267,7 @@ ggPCoAPlot <- function(dist.comm, attr.df,
   return(gg.plot)
 }
 
-#' @keywords graph
+#' @keywords scatter plot
 #' @export
 #' @rdname extScatterPlot
 gtPCoAPlot <- function(...) {
@@ -290,7 +290,7 @@ gtPCoAPlot <- function(...) {
 #' @param scale.pca Logical indicating in \code{\link{prcomp}}
 #' whether the variables should be scaled to have unit variance
 #' before the analysis takes place. Default to TURE.
-#' @keywords graph
+#' @keywords scatter plot
 #' @export
 #' @rdname extScatterPlot
 ggPCAPlot <- function(df.comm, attr.df, x.i=1, y.i=2,
@@ -343,7 +343,7 @@ ggPCAPlot <- function(df.comm, attr.df, x.i=1, y.i=2,
   return(gg.plot)
 }
 
-#' @keywords graph
+#' @keywords scatter plot
 #' @export
 #' @rdname extScatterPlot
 gtPCAPlot <- function(...) {
@@ -379,7 +379,7 @@ gtPCAPlot <- function(...) {
 #' @param x.prefix The regular expression to remove prefix from column names in
 #' \code{df.to.melt} (e.g. size.100). Default to "^.*?\\\\.".
 #' @param ... Other arguments passed to \code{\link{gtLine}}.
-#' @keywords graph
+#' @keywords line points
 #' @export
 #' @examples
 #' rare.curv <- gtRarefactionCurve(df.size, attr.df, group.id="Samples", colour.id="Species",

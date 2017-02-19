@@ -8,11 +8,11 @@ ggAddErrorBars(lower, upper, dodge.width = 0.9, err.bar.width = 0.25,
   verbose = TRUE, ...)
 }
 \arguments{
-\item{lower, upper}{The vector of lower or upper plotted in error bars. May use formula 
-\code{lower = mean - standard error of mean}, \code{upper = mean + standard error of mean} 
+\item{lower, upper}{The vector of lower or upper plotted in error bars. May use formula
+\code{lower = mean - standard error of mean}, \code{upper = mean + standard error of mean}
 to calculate. \code{standard error of mean = sd(x) / sqrt(length(x))}.}
 
-\item{dodge.width}{Dodging width, when different to the width of the individual elements. 
+\item{dodge.width}{Dodging width, when different to the width of the individual elements.
 Default to 0.9. Refer to \code{\link{position_dodge}}.}
 
 \item{err.bar.width}{The width input for \code{\link{geom_errorbar}}.}
@@ -20,7 +20,7 @@ Default to 0.9. Refer to \code{\link{position_dodge}}.}
 \item{...}{Other arguments passed to \code{\link{geom_errorbar}}.}
 }
 \description{
-Add error bars to a \code{\link{ggplot}} object, mostly points \code{\link{geom_point}}. 
+Add error bars to a \code{\link{ggplot}} object, mostly points \code{\link{geom_point}}.
 Refer to \code{\link{geom_errorbar}}.
 }
 \examples{
@@ -37,5 +37,7 @@ upper=myData$mean + myData$se
 bar.chart <- bar.chart + ggAddErrorBars(lower="mean-se", upper="mean+se")
 bar.chart
 }
-\keyword{graph}
+\keyword{add}
+\keyword{bar}
+\keyword{error}
 

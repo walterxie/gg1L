@@ -89,27 +89,27 @@ whether the variables should be scaled to have unit variance
 before the analysis takes place. Default to TURE.}
 }
 \value{
-If the function returns a \code{\link{ggplot}} object, 
-then its name starts with "gg". 
-It needs to use \code{\link{pdf.ggplot}} to create pdf. 
-It also keeps the expandability using '+'.  
+If the function returns a \code{\link{ggplot}} object,
+then its name starts with "gg".
+It needs to use \code{\link{pdf.ggplot}} to create pdf.
+It also keeps the expandability using '+'.
 
 If the function returns a \code{\link{gtable}} object, then its name starts with "gt".
-This kind of functions use \code{\link{unclip.ggplot}} to turns off clipping for a 
+This kind of functions use \code{\link{unclip.ggplot}} to turns off clipping for a
 \code{\link{ggplot}} object, but returns a \code{\link{gtable}} object.
-It needs to use \code{\link{pdf.gtplot}} to create pdf. 
-And also \code{\link{plot.gtable}} 
+It needs to use \code{\link{pdf.gtplot}} to create pdf.
+And also \code{\link{plot.gtable}}
 simplifies the code to plot gtable object in console.
 }
 \description{
-The entended graphs from scatter plot inlcude NMDS, PCoA, and PCA. 
+The entended graphs from scatter plot inlcude NMDS, PCoA, and PCA.
 
 The difference between principal components analysis (PCA)
 and multidimensional scaling (MDS) is discussed in
 \url{http://stats.stackexchange.com/questions/14002/
 whats-the-difference-between-principal-components-analysis-and-multidimensional}.
 
-Principal coordinates analysis (PCoA) is a classical MDS 
+Principal coordinates analysis (PCoA) is a classical MDS
 introduced by (Gower, 1966).
 }
 \details{
@@ -135,8 +135,9 @@ such as \code{gg???(...) + expand_limits(x = c(?, ?), y=c(?, ?))},
 to expand the x y axis limits.
 }
 \examples{
-The tutorial is avaiable at 
+The tutorial is avaiable at
 \\url{https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotPointsLines.html}
 }
-\keyword{graph}
+\keyword{plot}
+\keyword{scatter}
 

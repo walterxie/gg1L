@@ -2,39 +2,57 @@
 % Please edit documentation in R/StatsUtils.R
 \name{StatsUtils}
 \alias{StatsUtils}
+\alias{cmYAcrossX}
 \alias{summarySE}
 \title{Data and Statistics Utils}
 \usage{
 summarySE(data = NULL, measurevar, groupvars = NULL, na.rm = FALSE,
   conf.interval = 0.95, .drop = TRUE)
+
+cmYAcrossX(community.matrix, terms = c("OTUs", "samples", "reads"))
 }
 \arguments{
 \item{data}{A data frame.}
 
-\item{measurevar}{the name of a column that contains the variable 
+\item{measurevar}{the name of a column that contains the variable
 to be summariezed.}
 
-\item{groupvars}{a vector containing names of columns that 
+\item{groupvars}{a vector containing names of columns that
 contain grouping variables.}
 
 \item{na.rm}{a boolean that indicates whether to ignore NA's.}
 
 \item{conf.interval}{the percent range of the confidence interval,
 such as .95 as default.}
+
+\item{terms}{The terms to be used in names of the data frame,
+which will be shown in the graph if using \code{\link{ggBarYAcrossX}}.
+Default to c("OTUs", "samples", "reads").
+Please be careful of the order if any change.}
 }
 \description{
 Useful functions to summarizse data.
 }
 \details{
-\code{summarySE} gives count, mean, standard deviation, 
+\code{summarySE} gives count, mean, standard deviation,
 standard error of the mean, and confidence interval (default 95%).
-The code is copied from 
+The code is copied from
 \url{http://www.cookbook-r.com/Manipulating_data/Summarizing_data/}.
+
+\code{cmYAcrossX} aggregates a community matrix to another abundance matrix
+to show the number of OTUs (y-axis) simultaneously appeared at the number of samples (x-axis).
+The 'samples' is the number of samlpes listed in sequence,
+the 'OTUs' is the number of OTUs simultaneously appeared only in that number of samlpes,
+and the 'reads' is the number of reads assigned to those OTUs.
 }
 \examples{
 summarySE(model.test, measurevar="performance", groupvars=c("model", "OS"))
 # With a data set with NA's, use na.rm=TRUE
 summarySE(data, measurevar="change", groupvars=c("sex", "condition"), na.rm=TRUE)
+
+community.matrix <- getCommunityMatrix("16S", isPlot=TRUE, minAbund=1)
+cm.aggre <- cmYAcrossX(community.matrix)
+print(cm.aggre, row.names = FALSE)
 
 }
 \keyword{statistics}

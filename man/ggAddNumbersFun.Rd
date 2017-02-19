@@ -9,21 +9,21 @@ ggAddNumbersFun(fun.y.lab = mean, fun.y.pos = median, y.adj = 0.98,
   ...)
 }
 \arguments{
-\item{fun.y.lab}{A function to calculate numbers displayed in the figure. 
-Only activated if label.id is NULL. Default to function \code{\link{mean}}. 
+\item{fun.y.lab}{A function to calculate numbers displayed in the figure.
+Only activated if label.id is NULL. Default to function \code{\link{mean}}.
 Ues \code{\link{length}} to show number of observations.}
 
-\item{fun.y.pos}{A function to calculate the initial position of text on y-value. 
+\item{fun.y.pos}{A function to calculate the initial position of text on y-value.
 Only activated if label.id is NULL. Default to \code{\link{median}}.}
 
-\item{y.adj}{The propotion of the initial position of text on y-value. 
+\item{y.adj}{The propotion of the initial position of text on y-value.
 Only activated if label.id is NULL.
 > 1 will raises the text, and < 1 will sinks the text. Default to 0.98.}
 
 \item{digits}{Integer indicating the number of decimal places for \code{\link{round}}.
 Only activated if label.id is NULL.}
 
-\item{dodge.width}{Dodging width, when different to the width of the individual elements. 
+\item{dodge.width}{Dodging width, when different to the width of the individual elements.
 Default to 0.8. Refer to \code{\link{position_dodge}}.}
 
 \item{text.size}{The text size of labels. Default to 3.}
@@ -33,11 +33,12 @@ Default to 0.8. Refer to \code{\link{position_dodge}}.}
 \item{...}{Other arguments passed to \code{\link{geom_text}} or \code{\link{stat_summary}}.}
 }
 \description{
-Add numbers as text in a \code{\link{ggplot}} object, such as mean of box plot. 
+Add numbers as text in a \code{\link{ggplot}} object, such as mean of box plot.
 Refer to \code{\link{stat_summary}}.
 }
 \examples{
 bar.chart + ggAddNumbers(fun.y.lab=mean, y.adj=0.9)
 }
-\keyword{graph}
+\keyword{add}
+\keyword{numbers}
 

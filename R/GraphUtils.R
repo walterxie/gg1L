@@ -153,7 +153,7 @@ grid_arrange_shared_legend <- function(..., input.list=FALSE, legend.position="b
 #' @param from The value to start from. Default to 0.
 #' @return
 #' The scale.
-#' @keywords graph
+#' @keywords utils
 #' @export
 #' @examples
 #' # starts from 1e-2
@@ -192,7 +192,7 @@ scientific_10 <- function(x) {
 #' @return
 #' The vector of multiples of 10 used for breaks.
 #' Mostly used with \code{\link{scientific_10}} together.
-#' @keywords graph
+#' @keywords utils
 #' @export
 #' @examples
 #' get_breaks_positive_values(68759)
@@ -227,7 +227,7 @@ get_breaks_positive_values <- function(max.v, start=c(0.1, 1)) {
 #' @param a.gplot The \code{\link{ggplot}} object.
 #' @return
 #' The legend.
-#' @keywords graph
+#' @keywords utils
 #' @export
 #' @examples
 #' library(ggplot2); library(grid)
@@ -248,7 +248,7 @@ gLegend<-function(a.gplot){
 #' @param n The number of colors (>= 1) to be in the palette. If missing, then return the whole palette.
 #' @return
 #' The customised palette with about 70 colours.
-#' @keywords graph
+#' @keywords utils
 #' @export
 #' @examples
 #' myPalette <- getMyPalette()

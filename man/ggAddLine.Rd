@@ -8,12 +8,12 @@ ggAddLine(linetype = 1, xintercept, yintercept, intercept, slope,
   smooth.method, ...)
 }
 \arguments{
-\item{linetype}{Refer to \code{\link{linetype}}: 
-0 = blank, 1 = solid, 2 = dashed, 3 = dotted, 
+\item{linetype}{Refer to \code{\link{linetype}}:
+0 = blank, 1 = solid, 2 = dashed, 3 = dotted,
 4 = dotdash, 5 = longdash, 6 = twodash.}
 
-\item{xintercept, yintercept, intercept, slope, smooth.method}{Refer to \code{\link{geom_vline}}, \code{\link{geom_hline}}, 
-\code{\link{geom_abline}}, \code{\link{geom_smooth}}. 
+\item{xintercept, yintercept, intercept, slope, smooth.method}{Refer to \code{\link{geom_vline}}, \code{\link{geom_hline}},
+\code{\link{geom_abline}}, \code{\link{geom_smooth}}.
 They cannot be used at the same time.}
 
 \item{...}{Other arguments passed to \code{\link{layer}}.}
@@ -26,5 +26,6 @@ p <- ggHeatmap(ranks.by.group, melt.id="plot")
 p <- p + ggAddLine(linetype = 2, yintercept = 1)
 p <- p + ggAddLine(smooth.method = "lm")
 }
-\keyword{graph}
+\keyword{add}
+\keyword{line}
 

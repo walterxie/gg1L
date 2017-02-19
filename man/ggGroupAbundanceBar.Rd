@@ -56,5 +56,6 @@ reads.phyla$phylum <- rownames(reads.phyla)
 bar.chart <- ggGroupAbundanceBar(reads.phyla, melt.id="phylum", colour.id="TaxaGroup", legend.row=1)
 bar.chart$gg.plot
 }
-\keyword{graph}
+\keyword{bar}
+\keyword{chart}
 
