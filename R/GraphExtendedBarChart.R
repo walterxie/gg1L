@@ -268,7 +268,7 @@ ggGroupAbundanceBar <- function(df.to.melt, melt.id, colour.id=NULL, prop.thre=0
 #'
 #' The bar chart shows the number of OTUs/reads in the bar,
 #' which simultaneously appeared at the number of samples in the value of x-axis.
-#' Given a data matrix whose structure is same as community matrix defined in \code{\link{ComMA}},
+#' Given a data matrix whose structure is same as community matrix defined in \pkg{ComMA},
 #' this function uses \code{\link{cmYAcrossX}} to aggregate it into another abundance matrix,
 #' and uses \code{\link{ggBarChart}} to plot.
 #'
@@ -293,8 +293,8 @@ ggGroupAbundanceBar <- function(df.to.melt, melt.id, colour.id=NULL, prop.thre=0
 #' @keywords bar chart
 #' @export
 #' @examples
-#' community.matrix <- getCommunityMatrix("16S", isPlot=TRUE, minAbund=1)
-#' bar.yx <- ggYAcrossXBar(community.matrix)
+#' ggYAcrossXBar(reads.phyla[,1:6], terms=c("phyla", "datasets", "reads"), title="", x.lab="Number of markers crossed", y.lab="Number of phyla/reads")
+#'
 ggYAcrossXBar <- function(community.matrix, is.aggregated=FALSE, terms=c("OTUs", "samples", "reads"),
                           title="The number of OTUs/reads across the number of samples",
                           x.lab="Number of samples crossed", y.lab="Number of OTUs/reads",

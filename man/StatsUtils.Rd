@@ -25,6 +25,17 @@ contain grouping variables.}
 \item{conf.interval}{the percent range of the confidence interval,
 such as .95 as default.}
 
+\item{community.matrix}{\strong{Community matrix} in \pkg{ComMA} is a matrix or data.frame,
+where rows are OTUs (therefore this matrix is called \emph{OTU table}) or individual species
+and columns are sites or samples.
+Matrix elements are abundance data or proportion (e.g. counts, percentage). For example,
+\tabular{rrrr}{
+  OTU_id \tab plot01 \tab plot02\tab ...\cr
+  OTU_1 \tab 1 \tab 0 \tab ...\cr
+  OTU_2 \tab 100 \tab 200 \tab ...\cr
+  OTU_3 \tab 56 \tab 3 \tab ...
+}}
+
 \item{terms}{The terms to be used in names of the data frame,
 which will be shown in the graph if using \code{\link{ggBarYAcrossX}}.
 Default to c("OTUs", "samples", "reads").
@@ -50,9 +61,8 @@ summarySE(model.test, measurevar="performance", groupvars=c("model", "OS"))
 # With a data set with NA's, use na.rm=TRUE
 summarySE(data, measurevar="change", groupvars=c("sex", "condition"), na.rm=TRUE)
 
-community.matrix <- getCommunityMatrix("16S", isPlot=TRUE, minAbund=1)
-cm.aggre <- cmYAcrossX(community.matrix)
-print(cm.aggre, row.names = FALSE)
+cm.aggre <- cmYAcrossX(reads.phyla[,1:6])
+cm.aggre
 
 }
 \keyword{statistics}

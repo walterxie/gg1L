@@ -196,7 +196,7 @@ scientific_10 <- function(x) {
 #' @export
 #' @examples
 #' get_breaks_positive_values(68759)
-#' [1] 1e-01 1e+00 1e+01 1e+02 1e+03 1e+04 1e+05
+#' # [1] 1e-01 1e+00 1e+01 1e+02 1e+03 1e+04 1e+05
 #'
 #' scale_y_continuous(trans = "log", labels = gg1L::scientific_10,
 #' breaks = gg1L::get_breaks_positive_values(max(df, start=c(0))))

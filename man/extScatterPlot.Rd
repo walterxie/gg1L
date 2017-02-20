@@ -106,8 +106,7 @@ The entended graphs from scatter plot inlcude NMDS, PCoA, and PCA.
 
 The difference between principal components analysis (PCA)
 and multidimensional scaling (MDS) is discussed in
-\url{http://stats.stackexchange.com/questions/14002/
-whats-the-difference-between-principal-components-analysis-and-multidimensional}.
+\url{http://stats.stackexchange.com/questions/14002/whats-the-difference-between-principal-components-analysis-and-multidimensional}.
 
 Principal coordinates analysis (PCoA) is a classical MDS
 introduced by (Gower, 1966).
@@ -134,9 +133,9 @@ If the points are overlapped to the edge box, then use \code{\link{expand_limits
 such as \code{gg???(...) + expand_limits(x = c(?, ?), y=c(?, ?))},
 to expand the x y axis limits.
 }
-\examples{
+\references{
 The tutorial is avaiable at
-\\url{https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotPointsLines.html}
+\url{https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotPointsLines.html}
 }
 \keyword{plot}
 \keyword{scatter}

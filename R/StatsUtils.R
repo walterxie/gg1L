@@ -70,6 +70,17 @@ summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
 #' the 'OTUs' is the number of OTUs simultaneously appeared only in that number of samlpes,
 #' and the 'reads' is the number of reads assigned to those OTUs.
 #'
+#' @param community.matrix
+#' \strong{Community matrix} in \pkg{ComMA} is a matrix or data.frame,
+#' where rows are OTUs (therefore this matrix is called \emph{OTU table}) or individual species
+#' and columns are sites or samples.
+#' Matrix elements are abundance data or proportion (e.g. counts, percentage). For example,
+#' \tabular{rrrr}{
+#'   OTU_id \tab plot01 \tab plot02\tab ...\cr
+#'   OTU_1 \tab 1 \tab 0 \tab ...\cr
+#'   OTU_2 \tab 100 \tab 200 \tab ...\cr
+#'   OTU_3 \tab 56 \tab 3 \tab ...
+#' }
 #' @param terms The terms to be used in names of the data frame,
 #' which will be shown in the graph if using \code{\link{ggBarYAcrossX}}.
 #' Default to c("OTUs", "samples", "reads").
@@ -77,13 +88,12 @@ summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
 #' @keywords statistics
 #' @export
 #' @examples
-#' community.matrix <- getCommunityMatrix("16S", isPlot=TRUE, minAbund=1)
-#' cm.aggre <- cmYAcrossX(community.matrix)
-#' print(cm.aggre, row.names = FALSE)
+#' cm.aggre <- cmYAcrossX(reads.phyla[,1:6])
+#' cm.aggre
 #'
 #' @rdname StatsUtils
 cmYAcrossX <- function(community.matrix, terms=c("OTUs", "samples", "reads")) {
-  suppressMessages(suppressWarnings(require(Matrix)))
+  require(Matrix)
   row.count.sum <- data.frame(row.names = rownames(community.matrix))
   row.count.sum[, terms[2]] <- apply(community.matrix, MARGIN=1, function(x) sum(x>0))
   row.count.sum$reads <- apply(community.matrix, MARGIN=1, sum)

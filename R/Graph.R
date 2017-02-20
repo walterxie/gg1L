@@ -8,13 +8,14 @@
 #' @description
 #' Simplify \pkg{ggplot} graphic coding into one-line functions that provides frequently
 #' used graphies in a convenient way. They are very basic charts here, and can be used or
-#' extended into various common charts,
-#' such as percentage bar chart \code{\link{ggPercentageBarChart}},
+#' extended into various common charts.
+#'
+#' @seealso Percentage bar chart \code{\link{ggPercentageBarChart}},
 #' nonmetric multidimensional scaling plot \code{\link{gtNMDSPlot}},
 #' PCA plot \code{\link{gtPCAPlot}},
 #' rarefaction curves \code{\link{gtRarefactionCurve}}.
 #'
-#' And also some useful charts that we derived from our publications,
+#' In addition, some useful charts that we derived from our publications,
 #' such as group abundance bar chart \code{\link{ggGroupAbundanceBar}},
 #' and Y across X bar chart \code{\link{ggGroupAbundanceBar}}.
 #' Both refer to \url{http://dx.doi.org/10.1186/s13742-015-0086-1}.
@@ -33,7 +34,10 @@
 #' All basic charts are designed to return a \code{\link{ggplot}}
 #' object for easy to extend, you may need to turn off clipping using
 #' \code{unclip.ggplot} if there are overlaps between points/labels and axes.
-#'
+#' @references
+#' More details and tutorials are available at
+#' \url{https://github.com/walterxie/gg1L}
+
 #' @param df A data frame used for plot.
 #' @param df.to.melt A data frame required to \code{\link{melt}}
 #' before making a \pkg{ggplot} object, such as input of \code{ggHeatmap}.
@@ -104,6 +108,7 @@
 #' @param no.panel.border Add panel border or not. Default to FALSE.
 
 
+#' @section Bar chart
 #' @details
 #' \code{ggBarChart} is an one-line function to plot many types of bar chart,
 #' such as normal bars, log-scaled bars, percentage bars, and also grouping.
@@ -191,6 +196,7 @@ ggBarChart <- function(df, x.id, y.id, fill.id=NULL,
   return(p)
 }
 
+#' @section Histogram
 #' @details
 #' \code{ggHistogram} is an one-line function to plot a 1d distribution by dividing
 #' into bins and counting the number of observations in each bin.

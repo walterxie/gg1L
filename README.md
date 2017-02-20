@@ -9,6 +9,11 @@ It also includes some tips and smart code collected from the Internet
 to improve plotting, 
 and few visualisation methods derived from my previous and current works.
 
+read introduction:
+```R
+package?gg1L
+```
+
 To see all exported functions:
 ```R
 help(package = "gg1L")

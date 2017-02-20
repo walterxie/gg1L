@@ -41,13 +41,13 @@ to estimate pdf width automatically. Default to TRUE.}
 \description{
 The bar chart shows the number of OTUs/reads in the bar,
 which simultaneously appeared at the number of samples in the value of x-axis.
-Given a data matrix whose structure is same as community matrix defined in \code{\link{ComMA}},
+Given a data matrix whose structure is same as community matrix defined in \pkg{ComMA},
 this function uses \code{\link{cmYAcrossX}} to aggregate it into another abundance matrix,
 and uses \code{\link{ggBarChart}} to plot.
 }
 \examples{
-community.matrix <- getCommunityMatrix("16S", isPlot=TRUE, minAbund=1)
-bar.yx <- ggYAcrossXBar(community.matrix)
+ggYAcrossXBar(reads.phyla[,1:6], terms=c("phyla", "datasets", "reads"), title="", x.lab="Number of markers crossed", y.lab="Number of phyla/reads")
+
 }
 \keyword{bar}
 \keyword{chart}

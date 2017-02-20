@@ -10,7 +10,7 @@ ggInit <- function(df, x.id, y.id=NULL, fill.id=NULL, group.id=NULL, colour.id=N
   if (!is.element(tolower(x.id), tolower(col.names)))
     stop("Data frame do NOT have column name \"", x.id, "\" !")
 
-  suppressMessages(suppressWarnings(require(ggplot2)))
+  require(ggplot2)
   aes.string <- paste0("aes(x=", x.id)
   if (! is.null(y.id)) {
     if (substring(y.id, 0, 2) != ".." && !is.element(tolower(y.id), tolower(col.names)))
@@ -71,19 +71,17 @@ ggOptFacetGrid <- function(p, col.names, x.facet.id=NULL, y.facet.id=NULL,
 # if shape.id not NULL, no shape for points
 # If NULL, the default, the data is inherited from the plot data.
 ggOptPointAndShape <- function(p, col.names, shape.id=NULL, data=NULL, shapes=NULL,
-                               point.alpha=1, point.size=3, 
-                               position = position_dodge(width=0)) {
+                               point.alpha=1, point.size=3) {
   if (! is.null(shape.id)) {
     if (!is.element(tolower(shape.id), tolower(col.names)))
       stop("Data frame do NOT have column name \"", shape.id, "\" !")
 
     p <- p + geom_point(data=data, aes_string(shape=shape.id),
-                        size=point.size, alpha=point.alpha, position=position)
+                        size = point.size, alpha=point.alpha)
     if (! is.null(shapes))
       p <- p + scale_shape_manual(values=shapes)
   } else {
-    p <- p + geom_point(data=data, size = point.size, alpha=point.alpha,
-                        position=position)
+    p <- p + geom_point(data=data, size = point.size, alpha=point.alpha)
   }
   return(p)
 }
@@ -202,7 +200,7 @@ ggOptScaleAxis <- function(p, axis="y", scale="continuous", trans="identity",
     scale.string <- paste0(scale.string, ", labels=gg1L::scientific_10)")
   } else {
     if (trans=="per") {
-      suppressMessages(suppressWarnings(require(scales)))
+      require(scales)
       trans="identity"
       scale.string <- paste0(scale.string, ", labels=percent_format())")
     } else {
@@ -351,4 +349,34 @@ ggThemeAxis <- function(p, title.size=10) {
   return(p)
 }
 
-
+# validation
+validateAttr <- function(attr.df, colour.id=NULL, shape.id=NULL, link.id=NULL,
+                         text.id=NULL, text.size.id=NULL) {
+  attr.v <- c()
+  if (! is.null(colour.id)) {
+    if (! colour.id %in% colnames(attr.df))
+      stop("Invalid colour.id,", colour.id,  "not exsit in meta data column names !\n")
+    attr.v <- c(attr.v, colour.id)
+  }
+  if (! is.null(link.id)) {
+    if (! link.id %in% colnames(attr.df) )
+      stop("Invalid link.id,", link.id,  "not exsit in meta data column names !\n")
+    attr.v <- c(attr.v, link.id)
+  }
+  if (! is.null(shape.id)) {
+    if (! shape.id %in% colnames(attr.df) )
+      stop("Invalid shape.id,", shape.id,  "not exsit in meta data column names !\n")
+    attr.v <- c(attr.v, shape.id)
+  }
+  if (! is.null(text.id)) {
+    if (! text.id %in% colnames(attr.df) )
+      stop("Invalid shape.id,", text.id,  "not exsit in meta data column names !\n")
+    attr.v <- c(attr.v, text.id)
+  }
+  if (! is.null(text.size.id)) {
+    if (! text.size.id %in% colnames(attr.df) )
+      stop("Invalid text.size.id,", text.size.id,  "not exsit in meta data column names !\n")
+    attr.v <- c(attr.v, text.size.id)
+  }
+  return(attr.v)
+}

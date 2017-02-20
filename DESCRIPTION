@@ -14,15 +14,16 @@ License: MIT
 Encoding: UTF-8
 LazyData: true
 Imports:
-    colorspace,
+    colorspace, grDevices,
     ggplot2 (>= 2.2.0),
     ggrepel (>= 0.6.0),
-    grid,
-    gridExtra,
+    grid, gridExtra,
     plyr,
-    reshape2,
-    scales,
-    vegan (>= 2.4.0)
+    reshape2, scales,
+    stats, 
+    vegan (>= 2.4.0) 
 Suggests:
-    ComMA
+    ComMA,
+    pryr,
+    testthat
 RoxygenNote: 5.0.1
