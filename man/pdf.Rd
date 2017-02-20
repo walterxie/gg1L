@@ -13,7 +13,7 @@ pdf.ggplot(gg.plot, fig.path, width = 6, height = 6, useDingbats = TRUE)
 
 pdf.gtable(g.table, fig.path, width = 6, height = 6, useDingbats = TRUE)
 
-\method{plot}{gtable}(g.table)
+plot.gtable(g.table)
 
 unclip.ggplot(gg.plot)
 
@@ -34,6 +34,9 @@ Refer to \code{\link{pdf}}.}
 
 \item{gtable}{A \code{\link{gtable}} object.}
 }
+\description{
+The extended methods for producing PDF graphics.
+}
 \details{
 \code{pdf.ggplot} creates pdf for ggplot object.
 
@@ -48,7 +51,7 @@ and plot gtable object in console.
 Refer to \url{http://stackoverflow.com/questions/9690648/point-clipped-on-x-axis-in-ggplot}.
 
 \code{pdf.plot} creates pdf for the list returned from \code{\link{plot}}.
-Tip: use \code{\link{"\%<a-\%"}} in \pkg{pryr} to save plots.
+Tip: use "\%<a-\%" in \pkg{pryr} to save plots.
 }
 \examples{
 data(model.test)

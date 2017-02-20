@@ -276,8 +276,7 @@ unless they are fill.id, group.id, colour.id, etc.
 If row.names is going to be \code{melt.id},
 then it can be inserted into the data frame before the plot.
 
-The data example
-\url{https://github.com/walterxie/ComMA/blob/master/data-raw/reads.phyla.txt}:
+The data example \code{data(reads.phyla)}:
 \tabular{rrrrr}{
   Phyla \tab 16s \tab 18s \tab ITS \tab TaxaGroup\cr
   Actinobacteria \tab 958 \tab 1 \tab 3 \tab Bacteria\cr
@@ -326,7 +325,7 @@ It also can be concatenated using '+'.
 
 If the function returns a \code{\link{gtable}} object,
 then its name starts with "gt".
-It needs to use \code{\link{pdf.gtplot}} to create pdf,
+It needs to use \code{\link{pdf.gtable}} to create pdf,
 or \code{\link{plot.gtable}} to plot to console.
 }
 \description{
@@ -368,13 +367,6 @@ from the code
 All basic charts are designed to return a \code{\link{ggplot}}
 object for easy to extend, you may need to turn off clipping using
 \code{unclip.ggplot} if there are overlaps between points/labels and axes.
-}
-\section{Bar chart}{
-
-}
-
-\section{Histogram}{
-
 }
 \examples{
 data(model.test)

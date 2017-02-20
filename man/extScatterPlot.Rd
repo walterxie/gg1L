@@ -34,10 +34,8 @@ gtPCAPlot(...)
 }
 \arguments{
 \item{comm}{Community data for NMDS plot.
-It is dissimilarities either as a \code{\link{dist}} structure
-or as a community data defined by \code{\link{vegan}} which is
-a transposed matrix of community matrix in \code{\link{ComMA}}.
-Use \code{\link{transposeDF}} to rotate the data frame.
+It can also be a \code{\link{dist}} object to show the dissimilarity
+between pairwised samples in the community data.
 Detail to \code{\link{metaMDS}}.}
 
 \item{attr.df}{A data frame of meta data to define
@@ -80,9 +78,10 @@ such that the modified dissimilarities are Euclidean. Default to FALSE.}
 \item{df.comm}{A numeric or complex matrix (or data frame),
 which provides the data for the principal components analysis
 \code{\link{prcomp}}.
-For example, a community data defined by \code{\link{vegan}} which is
-a transposed matrix of community matrix in \code{\link{ComMA}}.
-Use \code{\link{transposeDF}} to rotate the data frame.}
+For example, a community data defined by \code{\link{vegan}}
+which is a transposed matrix of community matrix in \pkg{ComMA}.
+Use either \code{transposeDF} in \pkg{ComMA}
+or \code{\link{t}} to rotate the data frame.}
 
 \item{scale.pca}{Logical indicating in \code{\link{prcomp}}
 whether the variables should be scaled to have unit variance
@@ -97,7 +96,7 @@ It also keeps the expandability using '+'.
 If the function returns a \code{\link{gtable}} object, then its name starts with "gt".
 This kind of functions use \code{\link{unclip.ggplot}} to turns off clipping for a
 \code{\link{ggplot}} object, but returns a \code{\link{gtable}} object.
-It needs to use \code{\link{pdf.gtplot}} to create pdf.
+It needs to use \code{\link{pdf.gtable}} to create pdf.
 And also \code{\link{plot.gtable}}
 simplifies the code to plot gtable object in console.
 }

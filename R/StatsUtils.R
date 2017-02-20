@@ -20,6 +20,7 @@
 #' @param na.rm a boolean that indicates whether to ignore NA's.
 #' @param conf.interval the percent range of the confidence interval,
 #' such as .95 as default.
+#' @import plyr
 #' @keywords statistics
 #' @export
 #' @examples
@@ -85,9 +86,10 @@ summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
 #'   OTU_3 \tab 56 \tab 3 \tab ...
 #' }
 #' @param terms The terms to be used in names of the data frame,
-#' which will be shown in the graph if using \code{\link{ggBarYAcrossX}}.
+#' which will be shown in the graph if using \code{\link{ggYAcrossXBar}}.
 #' Default to c("OTUs", "samples", "reads").
 #' Please be careful of the order if any change.
+#' @import stats
 #' @keywords statistics
 #' @export
 #' @examples

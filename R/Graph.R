@@ -28,7 +28,7 @@
 #'
 #' If the function returns a \code{\link{gtable}} object,
 #' then its name starts with "gt".
-#' It needs to use \code{\link{pdf.gtplot}} to create pdf,
+#' It needs to use \code{\link{pdf.gtable}} to create pdf,
 #' or \code{\link{plot.gtable}} to plot to console.
 #' @note
 #' All basic charts are designed to return a \code{\link{ggplot}}
@@ -37,7 +37,14 @@
 #' @references
 #' More details and tutorials are available at
 #' \url{https://github.com/walterxie/gg1L}
-
+#' @import colorspace
+#' @import ggplot2
+#' @import ggrepel
+#' @import reshape2
+#' @import scales
+#' @import stats
+#' @import vegan
+#'
 #' @param df A data frame used for plot.
 #' @param df.to.melt A data frame required to \code{\link{melt}}
 #' before making a \pkg{ggplot} object, such as input of \code{ggHeatmap}.
@@ -48,8 +55,7 @@
 #' If row.names is going to be \code{melt.id},
 #' then it can be inserted into the data frame before the plot.
 #'
-#' The data example
-#' \url{https://github.com/walterxie/ComMA/blob/master/data-raw/reads.phyla.txt}:
+#' The data example \code{data(reads.phyla)}:
 #' \tabular{rrrrr}{
 #'   Phyla \tab 16s \tab 18s \tab ITS \tab TaxaGroup\cr
 #'   Actinobacteria \tab 958 \tab 1 \tab 3 \tab Bacteria\cr
@@ -107,8 +113,6 @@
 #' Default to TRUE.
 #' @param no.panel.border Add panel border or not. Default to FALSE.
 
-
-#' @section Bar chart
 #' @details
 #' \code{ggBarChart} is an one-line function to plot many types of bar chart,
 #' such as normal bars, log-scaled bars, percentage bars, and also grouping.
@@ -196,7 +200,6 @@ ggBarChart <- function(df, x.id, y.id, fill.id=NULL,
   return(p)
 }
 
-#' @section Histogram
 #' @details
 #' \code{ggHistogram} is an one-line function to plot a 1d distribution by dividing
 #' into bins and counting the number of observations in each bin.

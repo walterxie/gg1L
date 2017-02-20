@@ -12,7 +12,7 @@ URL: http://github.com/walterxie/gg1L
 BugReports: http://github.com/walterxie/gg1L/issues
 Depends:
     R (>= 3.3.1)
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
@@ -20,6 +20,7 @@ Imports:
     ggplot2 (>= 2.2.0),
     ggrepel (>= 0.6.0),
     grid, gridExtra,
+    methods,
     plyr,
     reshape2, scales,
     stats, 

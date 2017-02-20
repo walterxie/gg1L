@@ -19,9 +19,10 @@ The legend.
 Extract legend in \pkg{ggplot2}
 }
 \examples{
-library(ggplot2); library(grid)
+library(ggplot2)
 my_hist<-ggplot(diamonds, aes(clarity, fill=cut)) + geom_bar()
 legend <- gLegend(my_hist)
+library(grid)
 grid.draw(legend)
 }
 \keyword{utils}

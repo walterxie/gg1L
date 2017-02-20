@@ -4,6 +4,8 @@
 
 #' @name pdf
 #' @title Create pdf
+#' @description
+#' The extended methods for producing PDF graphics.
 #'
 #' @details \code{pdf.ggplot} creates pdf for ggplot object.
 #'
@@ -13,6 +15,9 @@
 #' @param useDingbats Defaults to TRUE, which produces smaller and better output.
 #' Setting this to FALSE can work around font display problems in broken PDF viewers.
 #' Refer to \code{\link{pdf}}.
+#' @import grid
+#' @import gridExtra
+#' @import grDevices
 #' @keywords graph
 #' @export
 #' @examples
@@ -75,7 +80,7 @@ unclip.ggplot <- function(gg.plot) {
 }
 
 #' @details \code{pdf.plot} creates pdf for the list returned from \code{\link{plot}}.
-#' Tip: use \code{\link{"\%<a-\%"}} in \pkg{pryr} to save plots.
+#' Tip: use "\%<a-\%" in \pkg{pryr} to save plots.
 #'
 #' @param plot The list returned from \code{\link{plot}}.
 #' @keywords graph
@@ -231,14 +236,15 @@ get_breaks_positive_values <- function(max.v, start=c(0.1, 1)) {
 #' @source \url{http://stackoverflow.com/questions/12041042/how-to-plot-just-the-legends-in-ggplot2}
 #'
 #' @param a.gplot The \code{\link{ggplot}} object.
-#' @return
-#' The legend.
+#' @return The legend.
+#' @import ggplot2
 #' @keywords utils
 #' @export
 #' @examples
-#' library(ggplot2); library(grid)
+#' library(ggplot2)
 #' my_hist<-ggplot(diamonds, aes(clarity, fill=cut)) + geom_bar()
 #' legend <- gLegend(my_hist)
+#' library(grid)
 #' grid.draw(legend)
 gLegend<-function(a.gplot){
   require(ggplot2)
