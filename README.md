@@ -21,12 +21,17 @@ help(package = "gg1L")
 
 ##Installation
 
-You can use the **devtools** *install\_github()* function to install the lastest development version directly from the GitHub.
+```R
+install.packages(gg1L)
+library(gg1L)
+```
+
+You can also use the **devtools** *install\_github()* function to install the lastest development version directly from the GitHub.
 
 ```R
-library("devtools")
+library(devtools)
 devtools::install_github("walterxie/gg1L")
-library("gg1L")
+library(gg1L)
 ```
 
 ##Tutorials
