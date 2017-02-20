@@ -12,8 +12,7 @@ ggPercentageBarChart(df.to.melt, melt.id, title = "Percentage Bar Chart",
 \arguments{
 \item{df.to.melt}{A data frame required to \code{\link{melt}} before making a percent bar chart,
 where Phyla have to be in row.names, otherwise it will be melted into values in y-axis to cause
-"Error: Discrete value supplied to continuous scale".
-For example, \url{https://github.com/walterxie/ComMA/blob/master/data-raw/reads.phyla.txt}.}
+"Error: Discrete value supplied to continuous scale".}
 
 \item{melt.id}{A column name to \code{\link{melt}} and used to assign the colours.}
 

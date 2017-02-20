@@ -388,7 +388,7 @@ ggHistogram(model.test[model.test$performance<3,], x.id="performance", fill.id="
 ggBoxWhiskersPlot(model.test, x.id="test", y.id="performance", colour.id="OS", x.text.angle=90)
 
 # plot 2 clusters
-df.clusters <- ComMA::random2Clusters()
+df.clusters <- random2Clusters()
 df.clusters$labels <- rownames(df.clusters)
 df.clusters
 gg.plot <- ggScatterPlot(df.clusters, x.id="x", y.id="y", colour.id="group", shape.id="group",

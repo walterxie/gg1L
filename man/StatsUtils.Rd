@@ -3,6 +3,7 @@
 \name{StatsUtils}
 \alias{StatsUtils}
 \alias{cmYAcrossX}
+\alias{random2Clusters}
 \alias{summarySE}
 \title{Data and Statistics Utils}
 \usage{
@@ -10,6 +11,8 @@ summarySE(data = NULL, measurevar, groupvars = NULL, na.rm = FALSE,
   conf.interval = 0.95, .drop = TRUE)
 
 cmYAcrossX(community.matrix, terms = c("OTUs", "samples", "reads"))
+
+random2Clusters(n = 100, seed = 101)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -40,6 +43,10 @@ Matrix elements are abundance data or proportion (e.g. counts, percentage). For 
 which will be shown in the graph if using \code{\link{ggBarYAcrossX}}.
 Default to c("OTUs", "samples", "reads").
 Please be careful of the order if any change.}
+
+\item{n}{The number of points. Default to 100.}
+
+\item{seed}{An integer seed for \code{\link{set.seed}}. Default to 101.}
 }
 \description{
 Useful functions to summarizse data.
@@ -55,6 +62,9 @@ to show the number of OTUs (y-axis) simultaneously appeared at the number of sam
 The 'samples' is the number of samlpes listed in sequence,
 the 'OTUs' is the number of OTUs simultaneously appeared only in that number of samlpes,
 and the 'reads' is the number of reads assigned to those OTUs.
+
+\code{random2Clusters} generates coordinates for 2 clusters.
+\url{http://stackoverflow.com/questions/2397097/how-can-a-data-ellipse-be-superimposed-on-a-ggplot2-scatterplot}.
 }
 \examples{
 data(model.test)
@@ -68,6 +78,9 @@ data(reads.phyla)
 cm.aggre <- cmYAcrossX(reads.phyla[,1:6])
 cm.aggre
 
+df.clusters <- random2Clusters()
+
 }
 \keyword{statistics}
+\keyword{utils}
 

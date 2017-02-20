@@ -18,11 +18,10 @@ library(gg1L)
 
 ## Scatter plot
 
-Create random coordinates for 2 clusters using [ComMA](https://github.com/walterxie/ComMA) package (We only use it to create data, *gg1L* doesn't depend it):
+Create random coordinates for 2 clusters:
 
 ```{r random2Clusters, warning=FALSE}
-library(ComMA)
-df.clusters <- ComMA::random2Clusters()
+df.clusters <- random2Clusters()
 df.clusters$labels <- rownames(df.clusters)
 df.clusters[1:3,]
 ```

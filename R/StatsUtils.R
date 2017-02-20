@@ -110,3 +110,25 @@ cmYAcrossX <- function(community.matrix, terms=c("OTUs", "samples", "reads")) {
   return(cm.aggre)
 }
 
+#' @details \code{random2Clusters} generates coordinates for 2 clusters.
+#' \url{http://stackoverflow.com/questions/2397097/how-can-a-data-ellipse-be-superimposed-on-a-ggplot2-scatterplot}.
+#'
+#' @param n The number of points. Default to 100.
+#' @param seed An integer seed for \code{\link{set.seed}}. Default to 101.
+#' @keywords utils
+#' @export
+#' @examples
+#' df.clusters <- random2Clusters()
+#'
+#' @rdname StatsUtils
+random2Clusters <- function(n=100, seed=101) {
+  #bootstrap
+  set.seed(seed)
+  x <- rnorm(n, mean=2)
+  y <- 1.5 + 0.4*x + rnorm(n)
+  df <- data.frame(x=x, y=y, group="A")
+  x <- rnorm(n, mean=2)
+  y <- 1.5*x + 0.4 + rnorm(n)
+  df <- rbind(df, data.frame(x=x, y=y, group="B"))
+}
+

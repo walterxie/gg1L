@@ -385,7 +385,7 @@ ggBoxWhiskersPlot <- function(df, x.id, y.id, fill.id=NULL, colour.id=NULL,
 #' @export
 #' @examples
 #' # plot 2 clusters
-#' df.clusters <- ComMA::random2Clusters()
+#' df.clusters <- random2Clusters()
 #' df.clusters$labels <- rownames(df.clusters)
 #' df.clusters
 #' gg.plot <- ggScatterPlot(df.clusters, x.id="x", y.id="y", colour.id="group", shape.id="group",
