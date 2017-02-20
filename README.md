@@ -1,6 +1,6 @@
 # R Plot Using One-line Function Derived From ggplot2 
 
-Version 0.1.0
+Author: [Dong Xie](https://www.cs.auckland.ac.nz/~walter/)
 
 ##Use my time to save your time
 
