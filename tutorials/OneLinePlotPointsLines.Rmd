@@ -18,7 +18,7 @@ library(gg1L)
 
 ## Scatter plot
 
-Create random coordinates for 2 clusters:
+Create random coordinates for 2 clusters using [ComMA](https://github.com/walterxie/ComMA) package (We only use it to create data, *gg1L* doesn't depend it):
 
 ```{r random2Clusters, warning=FALSE}
 library(ComMA)

@@ -18,10 +18,9 @@ library(gg1L)
 
 ## Bar chart
 
-Load the example data *model.test* from [ComMA](https://github.com/walterxie/ComMA) package (We only use the example data, *gg1L* doesn't depend it), select "Mac" only in *OS* column, and display the first 3 rows:
+Load the example data *model.test*, select "Mac" only in *OS* column, and display the first 3 rows:
 
 ```{r model.test, warning=FALSE}
-library(ComMA)
 data(model.test)
 model.test.mac <- model.test[model.test$OS=="Mac",]
 model.test.mac[1:3,]

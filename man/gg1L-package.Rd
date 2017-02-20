@@ -18,8 +18,6 @@ See all exported functions:
 \command{help(package = "gg1L")}
 
 More details and tutorials are available at \url{https://github.com/walterxie/gg1L}.
-
-Install all depdent packages: \code{\link{installAllPackages()}}
 }
 \author{
 Dong Xie, \email{walter@cs.auckland.ac.nz}

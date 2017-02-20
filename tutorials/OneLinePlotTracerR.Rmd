@@ -18,13 +18,12 @@ library(gg1L)
 
 ## Load a MCMC log
 
-Use <code>readMCMCLog()</code> to load a MCMC log from <https://cdn.rawgit.com/walterxie/ComMA/master/data-raw/star.beast.log>, which  moves the 1st data column into *row.names* as default, but will automatically generate row names and keep the 1st column in the data object if using <code>row.names=NULL</code>:
+Load the example data *mcmc.log*, which is a MCMC log from the [*BEAST](mbe.oxfordjournals.org/content/27/3/570.full) model, whose row names are the states, column names are the parameters:
 
 <!--- replace ComMA to TracerR --->
 ```{r mcmc.log, warning=FALSE}
-library(ComMA)
-#mcmc.log <- ComMA::readMCMCLog("../../ComMA/data-raw/star.beast.log")
-mcmc.log <- ComMA::readMCMCLog("https://cdn.rawgit.com/walterxie/ComMA/master/data-raw/star.beast.log")
+data(mcmc.log)
+nrow(mcmc.log); ncol(mcmc.log)
 summary(mcmc.log)
 ```
 

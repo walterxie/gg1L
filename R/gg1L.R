@@ -16,8 +16,6 @@
 #'
 #' More details and tutorials are available at \url{https://github.com/walterxie/gg1L}.
 #'
-#' Install all depdent packages: \code{\link{installAllPackages()}}
-#'
 #'
 "_PACKAGE"
 #> [1] "_PACKAGE"

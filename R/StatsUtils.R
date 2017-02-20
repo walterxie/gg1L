@@ -23,6 +23,7 @@
 #' @keywords statistics
 #' @export
 #' @examples
+#' data(model.test)
 #' summarySE(model.test, measurevar="performance", groupvars=c("model", "OS"))
 #' # With a data set with NA's, use na.rm=TRUE
 #' summarySE(data, measurevar="change", groupvars=c("sex", "condition"), na.rm=TRUE)
@@ -88,6 +89,7 @@ summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
 #' @keywords statistics
 #' @export
 #' @examples
+#' data(reads.phyla)
 #' cm.aggre <- cmYAcrossX(reads.phyla[,1:6])
 #' cm.aggre
 #'
