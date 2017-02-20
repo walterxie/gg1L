@@ -39,6 +39,20 @@ ggHistogram(df, x.id, fill.id = NULL, bar.pos = "stack", bins = NULL,
   y.text = TRUE, plot.margin.cm = NULL, no.panel.border = FALSE,
   verbose = TRUE)
 
+ggBoxWhiskersPlot(df, x.id, y.id, fill.id = NULL, colour.id = NULL,
+  outlier.colour = alpha("black", 0.3), dodge.width = 0.8,
+  x.facet.id = NULL, y.facet.id = NULL, facet.scales = "fixed",
+  facet.space = "fixed", facet.shrink = TRUE, facet.drop = TRUE,
+  y.trans = "identity", auto.scale.y = FALSE, x.lim.cart = NULL,
+  y.lim.cart = NULL, lwd = 1, fatten = 1, palette = NULL,
+  scale.to = "fill", scale.type = NULL, legend.title.fill = NULL,
+  legend.title.colour = NULL, no.legend = NULL, legend.col = 1,
+  legend.row = 0, legend.position = "right",
+  legend.direction = "vertical", title = "Box Whiskers Plot",
+  title.hjust = 0.5, title.size = 10, x.lab = NULL, y.lab = NULL,
+  coord.flip = FALSE, x.text.angle = 0, x.text = TRUE, y.text = TRUE,
+  no.panel.border = FALSE, verbose = TRUE)
+
 ggScatterPlot(df, x.id, y.id, colour.id = NULL, text.colour.id = NULL,
   shape.id = NULL, shapes = NULL, link.id = NULL, ellipsed.id = NULL,
   text.id = NULL, text.or.point = 2, point.size = 3, point.alpha = 1,
@@ -79,32 +93,6 @@ ggLineWithPoints(df, x.id, y.id, group.id = NULL, colour.id = NULL,
   legend.direction = "vertical", coord.flip = FALSE, x.text.angle = 0,
   x.text = TRUE, y.text = TRUE, no.panel.border = FALSE, verbose = TRUE)
 
-ggHeatmap(df.to.melt, melt.id, low = "white", high = "steelblue",
-  mid = "white", midpoint = NULL, colours = NULL, values = NULL,
-  na.value = "transparent", limits = NULL, breaks = waiver(),
-  add.label = T, label.digits = 1, auto.breaks.length = 5,
-  breaks.digits = 0, title = "Heatmap", title.hjust = 0.5,
-  title.size = 10, x.lab = "", y.lab = "", log.scale.colour = FALSE,
-  legend.title = "Counts", x.lim.cart = NULL, y.lim.cart = NULL,
-  coord.flip = FALSE, guide = "colourbar", legend.position = "right",
-  legend.direction = "vertical", x.text.angle = 90, x.text = TRUE,
-  y.text = TRUE, x.levels = c(), y.levels = c(),
-  no.panel.border = FALSE, verbose = TRUE)
-
-ggBoxWhiskersPlot(df, x.id, y.id, fill.id = NULL, colour.id = NULL,
-  outlier.colour = alpha("black", 0.3), dodge.width = 0.8,
-  x.facet.id = NULL, y.facet.id = NULL, facet.scales = "fixed",
-  facet.space = "fixed", facet.shrink = TRUE, facet.drop = TRUE,
-  y.trans = "identity", auto.scale.y = FALSE, x.lim.cart = NULL,
-  y.lim.cart = NULL, lwd = 1, fatten = 1, palette = NULL,
-  scale.to = "fill", scale.type = NULL, legend.title.fill = NULL,
-  legend.title.colour = NULL, no.legend = NULL, legend.col = 1,
-  legend.row = 0, legend.position = "right",
-  legend.direction = "vertical", title = "Box Whiskers Plot",
-  title.hjust = 0.5, title.size = 10, x.lab = NULL, y.lab = NULL,
-  coord.flip = FALSE, x.text.angle = 0, x.text = TRUE, y.text = TRUE,
-  no.panel.border = FALSE, verbose = TRUE)
-
 ggDensityEstimate(df, x.id, y.id = NULL, fill.id = NULL, colour.id = NULL,
   density.pos = "identity", density.alpha = 0.1, x.facet.id = NULL,
   y.facet.id = NULL, x.lim.cart = NULL, y.lim.cart = NULL,
@@ -116,6 +104,18 @@ ggDensityEstimate(df, x.id, y.id = NULL, fill.id = NULL, colour.id = NULL,
   title.size = 10, x.lab = NULL, y.lab = NULL, no.legend = NULL,
   legend.position = "right", legend.direction = "vertical",
   x.text.angle = 0, x.text = TRUE, y.text = TRUE,
+  no.panel.border = FALSE, verbose = TRUE)
+
+ggHeatmap(df.to.melt, melt.id, low = "white", high = "steelblue",
+  mid = "white", midpoint = NULL, colours = NULL, values = NULL,
+  na.value = "transparent", limits = NULL, breaks = waiver(),
+  add.label = T, label.digits = 1, auto.breaks.length = 5,
+  breaks.digits = 0, title = "Heatmap", title.hjust = 0.5,
+  title.size = 10, x.lab = "", y.lab = "", log.scale.colour = FALSE,
+  legend.title = "Counts", x.lim.cart = NULL, y.lim.cart = NULL,
+  coord.flip = FALSE, guide = "colourbar", legend.position = "right",
+  legend.direction = "vertical", x.text.angle = 90, x.text = TRUE,
+  y.text = TRUE, x.levels = c(), y.levels = c(),
   no.panel.border = FALSE, verbose = TRUE)
 }
 \arguments{
@@ -205,6 +205,22 @@ Refer to \code{\link{geom_histogram}}.}
 \item{colour.id, shape.id, link.id}{The column name in \code{df} to
 define how the data points are coloured, shaped, or linked according their values.}
 
+\item{outlier.colour}{The colour of outliers in box whiskers plot
+used for \code{outlier.colour} in \code{\link{geom_boxplot}}.
+Default to alpha("black", 0.3).}
+
+\item{dodge.width}{Dodging width, when different to the width of
+the individual elements in box Whiskers plot.
+This is useful when you want to align narrow geoms with wider geoms.
+Refer to \code{\link{position_dodge}}.}
+
+\item{lwd}{change the line thinkness.}
+
+\item{fatten}{make the median line thinner relative to the other lines.}
+
+\item{legend.title.fill, legend.title.colour, legend.title.shape, legend.title.group, }{legend.title.size The title of legend created by fill, colour, shape, group, or size.
+Set legend.title.*="" to remove legend.}
+
 \item{shapes}{Manually define the shapes of points. Refer to \code{\link{scale_shape_manual}},
 and \url{http://www.cookbook-r.com/Graphs/Shapes_and_line_types/}.}
 
@@ -243,10 +259,13 @@ The data to be displayed as points in \code{\link{geom_point}}, which can be
 the subset of points to draw the line.
 If NULL, the default, the data is inherited from the plot data as specified in the call.}
 
-\item{dodge.width}{Dodging width, when different to the width of
-the individual elements in box Whiskers plot.
-This is useful when you want to align narrow geoms with wider geoms.
-Refer to \code{\link{position_dodge}}.}
+\item{density.pos}{Position adjustment for \code{ggDensityEstimate}, either as a string,
+or the result of a call to a position adjustment function. Default to "identity".
+Use "stack" to produce stacked density plots,
+and "fill" to plot density estimate in percentage scale.}
+
+\item{density.alpha}{Modify colour transparency when \code{fill.id} is assigned to
+\code{ggDensityEstimate}. Default to 0.1. Refer to \code{\link{alpha}}.}
 
 \item{df.to.melt}{A data frame required to \code{\link{melt}}
 before making a \pkg{ggplot} object, such as input of \code{ggHeatmap}.
@@ -296,25 +315,6 @@ See \code{\link{scale_fill_gradient}}.}
 The deafult y.levels=c() makes y labels sorted by alphabetical order,
 but if y.levels is NA, there is no sorting applied.}
 
-\item{outlier.colour}{The colour of outliers in box whiskers plot
-used for \code{outlier.colour} in \code{\link{geom_boxplot}}.
-Default to alpha("black", 0.3).}
-
-\item{lwd}{change the line thinkness.}
-
-\item{fatten}{make the median line thinner relative to the other lines.}
-
-\item{legend.title.fill, legend.title.colour, legend.title.shape, legend.title.group, }{legend.title.size The title of legend created by fill, colour, shape, group, or size.
-Set legend.title.*="" to remove legend.}
-
-\item{density.pos}{Position adjustment for \code{ggDensityEstimate}, either as a string,
-or the result of a call to a position adjustment function. Default to "identity".
-Use "stack" to produce stacked density plots,
-and "fill" to plot density estimate in percentage scale.}
-
-\item{density.alpha}{Modify colour transparency when \code{fill.id} is assigned to
-\code{ggDensityEstimate}. Default to 0.1. Refer to \code{\link{alpha}}.}
-
 \item{x.lab.interval}{The interval to display x values in axis.
 Assume x values are discrete for each bar. Default to 0 to do nothing.}
 }
@@ -343,18 +343,14 @@ Refer to \code{\link{geom_bar}}.
 into bins and counting the number of observations in each bin.
 Refer to \code{\link{geom_histogram}}.
 
+\code{ggBoxWhiskersPlot} creates box Whiskers plot.
+Refer to \code{\link{geom_boxplot}}.
+
 \code{ggScatterPlot} uses one-line function to plot many types of scatter chart.
 Refer to \code{\link{geom_point}}.
 
 \code{ggLineWithPoints} uses one-line function to plot a line or group of lines.
 Refer to \code{\link{geom_line}}.
-
-\code{ggHeatmap} creates a heat map using ggplot. It is devried and improved
-from the code
-\url{https://learnr.wordpress.com/2010/01/26/ggplot2-quick-heatmap-plotting/}.
-
-\code{ggBoxWhiskersPlot} creates box Whiskers plot.
-Refer to \code{\link{geom_boxplot}}.
 
 \code{ggDensityEstimate} is an one-line function to plot kernel density estimate (KDE),
 useful for display the distribution of variables with underlying smoothness.
@@ -363,6 +359,10 @@ to colour the curve. Use \code{density.pos} to produce different types of densit
 Use \code{y.id="..count.."} to produce a conditional density estimate,
 which counts (density * n) variable instead of the default density.
 Refer to \code{\link{geom_density}}.
+
+\code{ggHeatmap} creates a heat map using ggplot. It is devried and improved
+from the code
+\url{https://learnr.wordpress.com/2010/01/26/ggplot2-quick-heatmap-plotting/}.
 }
 \note{
 All basic charts are designed to return a \code{\link{ggplot}}
@@ -383,10 +383,12 @@ ggBarChart(model.test.mac, x.id="test", y.id="performance", fill.id="model", x.t
 ggBarChart(model.test.mac, x.id="test", y.id="performance", fill.id="model", x.text.angle=90, bar.pos="stack")
 ggBarChart(model.test.mac, x.id="test", y.id="performance", fill.id="model", x.text.angle=90, bar.pos="fill", y.trans="per")
 
-ggHistogram(model.test[model.test$performance<3,], x.id="performance", fill.id="model", binwidth=0.1, x.text.angle=90, verbose=F)
+ggHistogram(model.test[model.test$performance<3,], x.id="performance", fill.id="model", binwidth=0.1, x.text.angle=90)
+
+ggBoxWhiskersPlot(model.test, x.id="test", y.id="performance", colour.id="OS", x.text.angle=90)
 
 # plot 2 clusters
-df.clusters <- random2Clusters()
+df.clusters <- ComMA::random2Clusters()
 df.clusters$labels <- rownames(df.clusters)
 df.clusters
 gg.plot <- ggScatterPlot(df.clusters, x.id="x", y.id="y", colour.id="group", shape.id="group",
@@ -400,9 +402,13 @@ ggScatterPlot(df.clusters, x.id="x", y.id="y", colour.id="group", ellipsed.id="g
               text.id="labels", text.data=subset(df.clusters, x > 3 & y > 6),
               xintercept=0, yintercept=0, title="Clusters", palette="Set1")
 
-mcmc.log <- readMCMCLog("data-raw/star.beast.log")
-mcmc.log$state <- as.double(rownames(mcmc.log))
+# prepare log
+data(mcmc.log)
 names(mcmc.log)
+mcmc.log$state <- as.double(rownames(mcmc.log))
+burnin <- nrow(mcmc.log) * 0.1
+b.log <- mcmc.log[burnin:nrow(mcmc.log),]
+
 gg.plot <- ggLineWithPoints(mcmc.log[,c("TreeHeight.Species", "state")], x.id="state", y.id="TreeHeight.Species")
 # turns off clipping
 g.table <- unclip.ggplot(gg.plot)
@@ -411,19 +417,8 @@ plot(g.table)
 ggLineWithPoints(mcmc.log[,c("TreeHeight.Species", "state")], x.id="state", y.id="TreeHeight.Species", line.or.point=1)
 ggLineWithPoints(mcmc.log[,c("TreeHeight.Species", "state")], x.id="state", y.id="TreeHeight.Species", line.or.point=2, point.size=1)
 
-ranks.by.group <- data.frame(plot=c("Plot03","Plot02","Plot01"), `16s`=c(3,2,1),
-                             `18s`=c(1,2,3), ITS=c(2,1,3), check.names = F)
-ranks.by.group
-gg.plot <- ggHeatmap(ranks.by.group, melt.id="plot")
-pdf.ggplot(gg.plot, fig.path="plot-prior-example-heatmap.pdf")
-
-ggHeatmap(corr.tri, melt.id="gene", title="", legend.title="Correlations", label.digits=2, breaks.digits=2)
-
-ggBoxWhiskersPlot(df, x.id="test", y.id="performance", colour.id="OS", x.text.angle=90)
-
-# prepare log
-b.log <- ComMA::readFile("data-raw/star.beast.log", row.names=NULL)
-df.melt <- melt(b.log, id="Sample")
+require(reshape2)
+df.melt <- melt(b.log, id="state")
 df.TreeHeight <- df.melt[grep("TreeHeight", df.melt[,"variable"]),]
 
 ggDensityEstimate(df.TreeHeight, x.id="value", colour.id="variable")
@@ -434,6 +429,10 @@ ggDensityEstimate(df.TreeHeight, x.id="value", fill.id="variable", density.pos="
 ggDensityEstimate(df.TreeHeight, x.id="value", y.id="..count..", fill.id="variable", density.pos="stack", density.alpha=1)
 # percentage scale
 ggDensityEstimate(df.TreeHeight, x.id="value", fill.id="variable", density.pos="fill", density.alpha=1)
+
+ranks.by.group <- data.frame(plot=c("Plot03","Plot02","Plot01"), `16s`=c(3,2,1), `18s`=c(1,2,3), ITS=c(2,1,3), check.names = FALSE)
+ranks.by.group
+ggHeatmap(ranks.by.group, melt.id="plot")
 
 }
 \references{

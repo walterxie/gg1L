@@ -26,7 +26,9 @@
 #' data(model.test)
 #' summarySE(model.test, measurevar="performance", groupvars=c("model", "OS"))
 #' # With a data set with NA's, use na.rm=TRUE
-#' summarySE(data, measurevar="change", groupvars=c("sex", "condition"), na.rm=TRUE)
+#' dataNA <- model.test
+#' dataNA$performance[11:15] <- NA
+#' summarySE(dataNA, measurevar="performance", groupvars=c("model", "OS"), na.rm=TRUE)
 #'
 #' @rdname StatsUtils
 summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,

@@ -16,6 +16,10 @@
 #' @keywords graph
 #' @export
 #' @examples
+#' data(model.test)
+#' model.test.mac <- model.test[model.test$OS=="Mac",]
+#' gg.plot <- ggBarChart(model.test.mac, x.id="test", y.id="performance", fill.id="model", x.text.angle=90)
+#'
 #' pdf.ggplot(gg.plot, fig.path="fig.pdf", width=8, height=8)
 #'
 #' @rdname pdf
@@ -31,28 +35,13 @@ pdf.ggplot <- function(gg.plot, fig.path, width=6, height=6, useDingbats=TRUE) {
 #' @keywords graph
 #' @export
 #' @examples
+#' g.table <- unclip.ggplot(gg.plot)
 #' pdf.gtable(g.table, fig.path="fig.pdf", width=8, height=8)
 #'
 #' @rdname pdf
 pdf.gtable <- function(g.table, fig.path, width=6, height=6, useDingbats=TRUE) {
   pdf(fig.path, width=width, height=height, useDingbats=useDingbats)
   plot.gtable(g.table)
-  invisible(dev.off())
-}
-
-#' @details \code{pdf.plot} creates pdf for the list returned from \code{\link{plot}}.
-#' Tip: use \code{\link{"\%<a-\%"}} in \pkg{pryr} to save plots.
-#'
-#' @param plot The list returned from \code{\link{plot}}.
-#' @keywords graph
-#' @export
-#' @examples
-#' pdf.plot(plot, fig.path="fig.pdf", width=8, height=8)
-#'
-#' @rdname pdf
-pdf.plot <- function(plot, fig.path, width=6, height=6, useDingbats=TRUE) {
-  pdf(fig.path, width=width, height=height, useDingbats=useDingbats)
-  plot
   invisible(dev.off())
 }
 
@@ -77,9 +66,6 @@ plot.gtable <- function(g.table) {
 #'
 #' @keywords graph
 #' @export
-#' @examples
-#' gt <- unclip.ggplot(gg.plot)
-#'
 #' @rdname pdf
 unclip.ggplot <- function(gg.plot) {
   gt <- ggplot_gtable(ggplot_build(gg.plot))
@@ -88,6 +74,23 @@ unclip.ggplot <- function(gg.plot) {
   return(gt)
 }
 
+#' @details \code{pdf.plot} creates pdf for the list returned from \code{\link{plot}}.
+#' Tip: use \code{\link{"\%<a-\%"}} in \pkg{pryr} to save plots.
+#'
+#' @param plot The list returned from \code{\link{plot}}.
+#' @keywords graph
+#' @export
+#' @examples
+#' library(pryr)
+#' p %<a-% plot(1:5)
+#' pdf.plot(p, fig.path="plot1-5.pdf")
+#'
+#' @rdname pdf
+pdf.plot <- function(plot, fig.path, width=6, height=6, useDingbats=TRUE) {
+  pdf(fig.path, width=width, height=height, useDingbats=useDingbats)
+  plot
+  invisible(dev.off())
+}
 
 #' \code{grid_arrange_shared_legend} shares a legend
 #' between multiple plots using \code{\link{grid.arrange}}.
@@ -107,6 +110,7 @@ unclip.ggplot <- function(gg.plot) {
 #' @keywords graph
 #' @export
 #' @examples
+#' library(ggplot2)
 #' dsamp <- diamonds[sample(nrow(diamonds), 1000), ]
 #' p1 <- qplot(carat, price, data=dsamp, colour=clarity)
 #' p2 <- qplot(cut, price, data=dsamp, colour=clarity)
@@ -114,7 +118,7 @@ unclip.ggplot <- function(gg.plot) {
 #' p4 <- qplot(depth, price, data=dsamp, colour=clarity)
 #' grid_arrange_shared_legend(p1, p2, p3, p4)
 #'
-#' grid_arrange_shared_legend(list(p1, p2, p3, p4), input.list=T)
+#' grid_arrange_shared_legend(list(p1, p2, p3, p4), input.list=TRUE)
 grid_arrange_shared_legend <- function(..., input.list=FALSE, legend.position="bottom",
                                        ncol=2, nrow=2, widths=c(1, 0.1), unclip.ggplot=TRUE) {
   plots <- list(...)
@@ -157,11 +161,13 @@ grid_arrange_shared_legend <- function(..., input.list=FALSE, legend.position="b
 #' @export
 #' @examples
 #' # starts from 1e-2
+#' library(ggplot2)
 #' scale_y_continuous(trans = mylog_trans(base=10, from=-2))
 mylog_trans <- function(base=exp(1), from=0) {
   trans <- function(x) log(x, base)-from
   inv <- function(x) base^(x+from)
-  suppressMessages(suppressWarnings(require(scales)))
+
+  require(scales)
   trans_new("mylog", trans, inv, log_breaks(base=base), domain = c(base^from, Inf))
 }
 
@@ -195,11 +201,11 @@ scientific_10 <- function(x) {
 #' @keywords utils
 #' @export
 #' @examples
-#' get_breaks_positive_values(68759)
-#' # [1] 1e-01 1e+00 1e+01 1e+02 1e+03 1e+04 1e+05
+#' get_breaks_positive_values(max(reads.phyla[,1:6]), start=c(0))
 #'
+#' library(ggplot2)
 #' scale_y_continuous(trans = "log", labels = gg1L::scientific_10,
-#' breaks = gg1L::get_breaks_positive_values(max(df, start=c(0))))
+#' breaks = gg1L::get_breaks_positive_values(max(reads.phyla[,1:6]), start=c(0)))
 get_breaks_positive_values <- function(max.v, start=c(0.1, 1)) {
   breaks=c(start, 10, 100, 1000, 10000, 100000, 1000000)
   if (max.v < 50) {

@@ -17,9 +17,9 @@
 #' @keywords add line
 #' @export
 #' @examples
+#' ranks.by.group <- data.frame(plot=c("Plot03","Plot02","Plot01"), `16s`=c(3,2,1), `18s`=c(1,2,3), ITS=c(2,1,3), check.names = FALSE)
 #' p <- ggHeatmap(ranks.by.group, melt.id="plot")
 #' p <- p + ggAddLine(linetype = 2, yintercept = 1)
-#' p <- p + ggAddLine(smooth.method = "lm")
 ggAddLine <- function(linetype=1, xintercept, yintercept, intercept, slope, smooth.method, ...) {
   if (!missing(xintercept)) {
     geom_vline(linetype=linetype, xintercept = xintercept, ...)
@@ -50,9 +50,6 @@ ggAddLine <- function(linetype=1, xintercept, yintercept, intercept, slope, smoo
 #' @param ... Other arguments passed to \code{\link{geom_text}} or \code{\link{stat_summary}}.
 #' @keywords add numbers
 #' @export
-#' @examples
-#' p <- ggBarChart(myData, x.id="model", y.id="mean", fill.id="OS", y.lab="performance")
-#' p <- p + ggAddNumbers(fun.y.lab=length, y.adj=1.02)
 ggAddNumbers <- function(label.id=NULL, hjust=0, vjust=0,
                          dodge.width=0.9, text.size=4, text.colour="black", ...) {
 #    if (! label.id %in% mapping)
@@ -83,10 +80,6 @@ ggAddNumbers <- function(label.id=NULL, hjust=0, vjust=0,
 #' @param ... Other arguments passed to \code{\link{geom_text}} or \code{\link{stat_summary}}.
 #' @keywords add numbers
 #' @export
-#' @examples
-#' bar.chart + ggAddNumbers(fun.y.lab=mean, y.adj=0.9)
-# # "total" have to exist in p$mapping
-# p <- p + ggAddNumbersFun(label.id="total", hjust=ifelse(sign(total)>0, 1, 0))
 ggAddNumbersFun <- function(fun.y.lab=mean, fun.y.pos=median, y.adj=0.98, digits=2,
                             dodge.width=0.9, text.size=4, text.colour="black", ...) {
     stat_summary(fun.data = function(y) {return( c(y = fun.y.pos(y)*y.adj, label = round(fun.y.lab(y),digits)) )},
@@ -111,17 +104,18 @@ ggAddNumbersFun <- function(fun.y.lab=mean, fun.y.pos=median, y.adj=0.98, digits
 #' @export
 #' @examples
 #' # Replicate of http://www.r-bloggers.com/building-barplots-with-error-bars/
-#' data(model.test)
-#' myData <- aggregate(model.test$performance, by = list(model = model.test$model, OS = model.test$OS),
-#'     FUN = function(x) c(mean = mean(x), sd = sd(x), n = length(x)))
+#' myData <- aggregate(model.test$performance, by = list(model = model.test$model, OS = model.test$OS), FUN = function(x) c(mean = mean(x), sd = sd(x), n = length(x)))
 #' myData <- do.call(data.frame, myData)
 #' myData$se <- myData$x.sd / sqrt(myData$x.n)
 #' colnames(myData) <- c("model", "OS", "mean", "sd", "n", "se")
-#' bar.chart <- ggBarChart(myData, x.id="model", y.id="mean", fill.id="OS", y.lab="performance")
+#' bc <- ggBarChart(myData, x.id="model", y.id="mean", fill.id="OS", y.lab="performance")
 #' lower=myData$mean - myData$se
 #' upper=myData$mean + myData$se
-#' bar.chart <- bar.chart + ggAddErrorBars(lower="mean-se", upper="mean+se")
-#' bar.chart
+#' bc + ggAddErrorBars(lower="mean-se", upper="mean+se")
+#'
+#' bc + ggAddNumbers(label.id="n", hjust=0.5, vjust=2)
+#'
+#' bc + ggAddNumbersFun(fun.y.lab=mean, y.adj=0.9)
 ggAddErrorBars <- function(lower, upper, dodge.width=0.9, err.bar.width=0.25,
                            verbose=TRUE, ...) {
   aes.string <- paste0("geom_errorbar(aes(ymin=", lower, ", ymax=", upper, "),")

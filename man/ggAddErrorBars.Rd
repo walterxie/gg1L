@@ -25,17 +25,18 @@ Refer to \code{\link{geom_errorbar}}.
 }
 \examples{
 # Replicate of http://www.r-bloggers.com/building-barplots-with-error-bars/
-data(model.test)
-myData <- aggregate(model.test$performance, by = list(model = model.test$model, OS = model.test$OS),
-    FUN = function(x) c(mean = mean(x), sd = sd(x), n = length(x)))
+myData <- aggregate(model.test$performance, by = list(model = model.test$model, OS = model.test$OS), FUN = function(x) c(mean = mean(x), sd = sd(x), n = length(x)))
 myData <- do.call(data.frame, myData)
 myData$se <- myData$x.sd / sqrt(myData$x.n)
 colnames(myData) <- c("model", "OS", "mean", "sd", "n", "se")
-bar.chart <- ggBarChart(myData, x.id="model", y.id="mean", fill.id="OS", y.lab="performance")
+bc <- ggBarChart(myData, x.id="model", y.id="mean", fill.id="OS", y.lab="performance")
 lower=myData$mean - myData$se
 upper=myData$mean + myData$se
-bar.chart <- bar.chart + ggAddErrorBars(lower="mean-se", upper="mean+se")
-bar.chart
+bc + ggAddErrorBars(lower="mean-se", upper="mean+se")
+
+bc + ggAddNumbers(label.id="n", hjust=0.5, vjust=2)
+
+bc + ggAddNumbersFun(fun.y.lab=mean, y.adj=0.9)
 }
 \keyword{add}
 \keyword{bar}

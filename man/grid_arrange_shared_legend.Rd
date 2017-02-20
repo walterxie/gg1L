@@ -29,6 +29,7 @@ Modified from
 \url{http://rpubs.com/sjackman/grid_arrange_shared_legend}.
 }
 \examples{
+library(ggplot2)
 dsamp <- diamonds[sample(nrow(diamonds), 1000), ]
 p1 <- qplot(carat, price, data=dsamp, colour=clarity)
 p2 <- qplot(cut, price, data=dsamp, colour=clarity)
@@ -36,7 +37,7 @@ p3 <- qplot(color, price, data=dsamp, colour=clarity)
 p4 <- qplot(depth, price, data=dsamp, colour=clarity)
 grid_arrange_shared_legend(p1, p2, p3, p4)
 
-grid_arrange_shared_legend(list(p1, p2, p3, p4), input.list=T)
+grid_arrange_shared_legend(list(p1, p2, p3, p4), input.list=TRUE)
 }
 \keyword{graph}
 

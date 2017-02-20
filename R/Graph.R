@@ -216,7 +216,7 @@ ggBarChart <- function(df, x.id, y.id, fill.id=NULL,
 #' @keywords histogram
 #' @export
 #' @examples
-#' ggHistogram(model.test[model.test$performance<3,], x.id="performance", fill.id="model", binwidth=0.1, x.text.angle=90, verbose=F)
+#' ggHistogram(model.test[model.test$performance<3,], x.id="performance", fill.id="model", binwidth=0.1, x.text.angle=90)
 #'
 #' @rdname ggPlot
 ggHistogram <- function(df, x.id, fill.id=NULL,
@@ -277,6 +277,85 @@ ggHistogram <- function(df, x.id, fill.id=NULL,
 }
 
 #' @details
+#' \code{ggBoxWhiskersPlot} creates box Whiskers plot.
+#' Refer to \code{\link{geom_boxplot}}.
+#'
+#' @param outlier.colour The colour of outliers in box whiskers plot
+#' used for \code{outlier.colour} in \code{\link{geom_boxplot}}.
+#' Default to alpha("black", 0.3).
+#' @param dodge.width Dodging width, when different to the width of
+#' the individual elements in box Whiskers plot.
+#' This is useful when you want to align narrow geoms with wider geoms.
+#' Refer to \code{\link{position_dodge}}.
+#' @param lwd change the line thinkness.
+#' @param fatten make the median line thinner relative to the other lines.
+#' @keywords box plot
+#' @export
+#' @examples
+#' ggBoxWhiskersPlot(model.test, x.id="test", y.id="performance", colour.id="OS", x.text.angle=90)
+#'
+#' @rdname ggPlot
+ggBoxWhiskersPlot <- function(df, x.id, y.id, fill.id=NULL, colour.id=NULL,
+                              outlier.colour=alpha("black", 0.3), dodge.width=0.8,
+                              x.facet.id=NULL, y.facet.id=NULL, facet.scales="fixed",
+                              facet.space="fixed", facet.shrink=TRUE, facet.drop = TRUE,
+                              y.trans="identity", auto.scale.y=FALSE,
+                              x.lim.cart=NULL, y.lim.cart=NULL, lwd=1, fatten=1,
+                              palette=NULL, scale.to="fill", scale.type=NULL,
+                              legend.title.fill=NULL, legend.title.colour=NULL,
+                              no.legend=NULL, legend.col=1, legend.row=0,
+                              legend.position="right", legend.direction="vertical",
+                              title="Box Whiskers Plot", title.hjust=0.5, title.size = 10,
+                              x.lab=NULL, y.lab=NULL,
+                              coord.flip=FALSE, x.text.angle=0, x.text=TRUE, y.text=TRUE,
+                              no.panel.border=FALSE, verbose=TRUE) {
+  p <- ggInit(df=df, x.id=x.id, y.id=y.id, fill.id=fill.id, colour.id=colour.id, verbose=verbose)
+  if (! is.null(fill.id))
+    p <- p + geom_boxplot(outlier.colour=outlier.colour, position=position_dodge(width=dodge.width),
+                          lwd=lwd, fatten=fatten)
+  else
+    p <- p + geom_boxplot(outlier.colour=outlier.colour, lwd=lwd, fatten=fatten)
+
+  p <- p + scale_shape(solid = FALSE) #+ geom_jitter(alpha = 0.5)
+
+  col.names <- colnames(df)
+  p <- ggOptFacetGrid(p, col.names, x.facet.id=x.facet.id, y.facet.id=y.facet.id,
+                      scales=facet.scales, space=facet.space, shrink=facet.shrink,
+                      drop=facet.drop, verbose=verbose)
+
+  if (auto.scale.y) {
+    y.max <- max(df[,y.id])
+    p <- ggOptScaleAxis(p, axis="y", scale="continuous", trans=y.trans,
+                        auto.scale.max=y.max, verbose=verbose)
+  } else {
+    p <- ggOptScaleAxis(p, axis="y", scale="continuous", trans=y.trans,
+                        verbose=verbose)
+  }
+
+  p <- ggOptCoordCartesian(p, df, x.id, y.id, x.lim.cart=x.lim.cart, y.lim.cart=y.lim.cart,
+                           coord.flip=coord.flip, verbose=verbose)
+
+  p <- ggOptPalette(p, scale.to=scale.to, scale.type=scale.type, palette=palette, verbose=verbose)
+
+  p <- ggOptLegend(p, legend.title.colour=legend.title.colour,
+                   legend.title.fill=legend.title.fill, no.legend=no.legend,
+                   legend.col=legend.col, legend.row=legend.row)
+
+  p <- ggLabTitle(p, x.id, y.id, title=title, x.lab=x.lab, y.lab=y.lab)
+  if (no.panel.border)
+    p <- ggThemeAxis(p, title.size=title.size)
+  else
+    p <- ggThemePanelBorder(p, title.size=title.size)
+
+  p <- ggThemeOthers(p, x.text.angle=x.text.angle, legend.position=legend.position,
+                     legend.direction=legend.direction, x.text=x.text, y.text=y.text,
+                     title.hjust=title.hjust, verbose=verbose)
+
+  return(p)
+}
+
+
+#' @details
 #' \code{ggScatterPlot} uses one-line function to plot many types of scatter chart.
 #' Refer to \code{\link{geom_point}}.
 #'
@@ -306,7 +385,7 @@ ggHistogram <- function(df, x.id, fill.id=NULL,
 #' @export
 #' @examples
 #' # plot 2 clusters
-#' df.clusters <- random2Clusters()
+#' df.clusters <- ComMA::random2Clusters()
 #' df.clusters$labels <- rownames(df.clusters)
 #' df.clusters
 #' gg.plot <- ggScatterPlot(df.clusters, x.id="x", y.id="y", colour.id="group", shape.id="group",
@@ -462,9 +541,13 @@ ggScatterPlot <- function(df, x.id, y.id, colour.id=NULL, text.colour.id=NULL,
 #' @keywords line points
 #' @export
 #' @examples
-#' mcmc.log <- readMCMCLog("data-raw/star.beast.log")
-#' mcmc.log$state <- as.double(rownames(mcmc.log))
+#' # prepare log
+#' data(mcmc.log)
 #' names(mcmc.log)
+#' mcmc.log$state <- as.double(rownames(mcmc.log))
+#' burnin <- nrow(mcmc.log) * 0.1
+#' b.log <- mcmc.log[burnin:nrow(mcmc.log),]
+#'
 #' gg.plot <- ggLineWithPoints(mcmc.log[,c("TreeHeight.Species", "state")], x.id="state", y.id="TreeHeight.Species")
 #' # turns off clipping
 #' g.table <- unclip.ggplot(gg.plot)
@@ -563,6 +646,102 @@ ggLineWithPoints <- function(df, x.id, y.id, group.id=NULL, colour.id=NULL,
 }
 
 #' @details
+#' \code{ggDensityEstimate} is an one-line function to plot kernel density estimate (KDE),
+#' useful for display the distribution of variables with underlying smoothness.
+#' Give a column name \code{fill.id} to colour the filled area, and \code{colour.id}
+#' to colour the curve. Use \code{density.pos} to produce different types of density.
+#' Use \code{y.id="..count.."} to produce a conditional density estimate,
+#' which counts (density * n) variable instead of the default density.
+#' Refer to \code{\link{geom_density}}.
+#'
+#' @param density.pos Position adjustment for \code{ggDensityEstimate}, either as a string,
+#' or the result of a call to a position adjustment function. Default to "identity".
+#' Use "stack" to produce stacked density plots,
+#' and "fill" to plot density estimate in percentage scale.
+#' @param density.alpha Modify colour transparency when \code{fill.id} is assigned to
+#' \code{ggDensityEstimate}. Default to 0.1. Refer to \code{\link{alpha}}.
+#' @keywords KDE
+#' @export
+#' @examples
+#' require(reshape2)
+#' df.melt <- melt(b.log, id="state")
+#' df.TreeHeight <- df.melt[grep("TreeHeight", df.melt[,"variable"]),]
+#'
+#' ggDensityEstimate(df.TreeHeight, x.id="value", colour.id="variable")
+#' ggDensityEstimate(df.TreeHeight, x.id="value", fill.id="variable", colour.id="variable")
+#' # stacked density plot to lose marginal densities
+#' ggDensityEstimate(df.TreeHeight, x.id="value", fill.id="variable", density.pos="stack", density.alpha=1)
+#' # conditional density plot to preserve marginal densities
+#' ggDensityEstimate(df.TreeHeight, x.id="value", y.id="..count..", fill.id="variable", density.pos="stack", density.alpha=1)
+#' # percentage scale
+#' ggDensityEstimate(df.TreeHeight, x.id="value", fill.id="variable", density.pos="fill", density.alpha=1)
+#'
+#' @rdname ggPlot
+ggDensityEstimate <- function(df, x.id, y.id=NULL, fill.id=NULL, colour.id=NULL,
+                              density.pos="identity", density.alpha=0.1,
+                              x.facet.id=NULL, y.facet.id=NULL,
+                              x.lim.cart=NULL, y.lim.cart=NULL,
+                              x.trans="identity", x.scale="continuous", auto.scale.x=FALSE,
+                              y.trans="identity", y.scale="continuous", auto.scale.y=FALSE,
+                              fill.palette=NULL, colour.palette=NULL, coord.flip=FALSE,
+                              legend.title.colour=NULL, legend.title.fill=NULL,
+                              legend.col=1, legend.row=0,
+                              title="Kernel Density Estimate", title.hjust=0.5, title.size=10,
+                              x.lab=NULL, y.lab=NULL, no.legend=NULL,
+                              legend.position="right", legend.direction="vertical",
+                              x.text.angle=0, x.text=TRUE, y.text=TRUE,
+                              no.panel.border=FALSE, verbose=TRUE) {
+  p <- ggInit(df=df, x.id=x.id, y.id=y.id, fill.id=fill.id, colour.id=colour.id, verbose=verbose)
+  p <- p + geom_density(position=density.pos, alpha=density.alpha)
+
+  col.names <- colnames(df)
+  p <- ggOptFacetGrid(p, col.names, x.facet.id=x.facet.id,
+                      y.facet.id=y.facet.id, verbose=verbose)
+
+  if (auto.scale.x) {
+    x.max <- max(df[,x.id])
+    p <- ggOptScaleAxis(p, axis="x", scale=x.scale, trans=x.trans,
+                        auto.scale.max=x.max, verbose=verbose)
+  } else {
+    p <- ggOptScaleAxis(p, axis="x", scale=x.scale, trans=x.trans,
+                        verbose=verbose)
+  }
+  if (auto.scale.y) {
+    y.max <- max(df[,y.id])
+    p <- ggOptScaleAxis(p, axis="y", scale=y.scale, trans=y.trans,
+                        auto.scale.max=y.max, verbose=verbose)
+  } else {
+    p <- ggOptScaleAxis(p, axis="y", scale=y.scale, trans=y.trans,
+                        verbose=verbose)
+  }
+
+  p <- ggOptCoordCartesian(p, df, x.id, y.id, x.lim.cart=x.lim.cart, y.lim.cart=y.lim.cart,
+                           coord.flip=coord.flip, verbose=verbose)
+
+  p <- ggOptPalette(p, scale.to="fill", palette=fill.palette, verbose=verbose)
+  p <- ggOptPalette(p, scale.to="colour", palette=colour.palette, verbose=verbose)
+
+  p <- ggOptLegend(p, legend.title.colour=legend.title.colour,
+                   legend.title.fill=legend.title.fill, no.legend=no.legend,
+                   legend.col=legend.col, legend.row=legend.row)
+
+  if (density.pos=="stack" && title=="Kernel Density Estimate")
+    title <- paste("Conditional", title)
+  p <- ggLabTitle(p, x.id, y.id, title=title, x.lab=x.lab, y.lab=y.lab)
+  if (no.panel.border)
+    p <- ggThemeAxis(p, title.size=title.size)
+  else
+    p <- ggThemePanelBorder(p, title.size=title.size)
+
+  p <- ggThemeOthers(p, x.text.angle=x.text.angle, legend.position=legend.position,
+                     legend.direction=legend.direction, x.text=x.text, y.text=y.text,
+                     title.hjust=title.hjust, verbose=verbose)
+
+  return(p)
+}
+
+
+#' @details
 #' \code{ggHeatmap} creates a heat map using ggplot. It is devried and improved
 #' from the code
 #' \url{https://learnr.wordpress.com/2010/01/26/ggplot2-quick-heatmap-plotting/}.
@@ -590,13 +769,9 @@ ggLineWithPoints <- function(df, x.id, y.id, group.id=NULL, colour.id=NULL,
 #' @keywords heatmap
 #' @export
 #' @examples
-#' ranks.by.group <- data.frame(plot=c("Plot03","Plot02","Plot01"), `16s`=c(3,2,1),
-#'                              `18s`=c(1,2,3), ITS=c(2,1,3), check.names = F)
+#' ranks.by.group <- data.frame(plot=c("Plot03","Plot02","Plot01"), `16s`=c(3,2,1), `18s`=c(1,2,3), ITS=c(2,1,3), check.names = FALSE)
 #' ranks.by.group
-#' gg.plot <- ggHeatmap(ranks.by.group, melt.id="plot")
-#' pdf.ggplot(gg.plot, fig.path="plot-prior-example-heatmap.pdf")
-#'
-#' ggHeatmap(corr.tri, melt.id="gene", title="", legend.title="Correlations", label.digits=2, breaks.digits=2)
+#' ggHeatmap(ranks.by.group, melt.id="plot")
 #'
 #' @rdname ggPlot
 ggHeatmap <- function(df.to.melt, melt.id, low="white", high="steelblue", mid = "white",
@@ -613,7 +788,7 @@ ggHeatmap <- function(df.to.melt, melt.id, low="white", high="steelblue", mid = 
   if (!is.element(tolower(melt.id), tolower(colnames(df.to.melt))))
     stop("Data frame column names do NOT have \"", melt.id, "\" for melt function !")
 
-  suppressMessages(require(reshape2))
+  require(reshape2)
   df.melt <- melt(df.to.melt, id=c(melt.id))
   if(anyNA(df.melt$value)) # rm all NA
     df.melt <- na.omit(df.melt)
@@ -633,7 +808,7 @@ ggHeatmap <- function(df.to.melt, melt.id, low="white", high="steelblue", mid = 
     df.melt[,melt.id] <- factor(df.melt[,melt.id], levels=sort(unique(df.melt[,melt.id]), decreasing = T))
   }
 
-  suppressMessages(require(ggplot2))
+  require(ggplot2)
   # variable is all group names, such as "16S" or "FUNGI"
   # value is ranks for each group
   p <- ggplot(df.melt, aes_string(x="variable", y=melt.id)) + geom_tile(aes(fill=value))
@@ -710,178 +885,6 @@ ggHeatmap <- function(df.to.melt, melt.id, low="white", high="steelblue", mid = 
   return(p)
 }
 
-#' @details
-#' \code{ggBoxWhiskersPlot} creates box Whiskers plot.
-#' Refer to \code{\link{geom_boxplot}}.
-#'
-#' @param outlier.colour The colour of outliers in box whiskers plot
-#' used for \code{outlier.colour} in \code{\link{geom_boxplot}}.
-#' Default to alpha("black", 0.3).
-#' @param dodge.width Dodging width, when different to the width of
-#' the individual elements in box Whiskers plot.
-#' This is useful when you want to align narrow geoms with wider geoms.
-#' Refer to \code{\link{position_dodge}}.
-#' @param lwd change the line thinkness.
-#' @param fatten make the median line thinner relative to the other lines.
-#' @keywords box plot
-#' @export
-#' @examples
-#' ggBoxWhiskersPlot(df, x.id="test", y.id="performance", colour.id="OS", x.text.angle=90)
-#'
-#' @rdname ggPlot
-ggBoxWhiskersPlot <- function(df, x.id, y.id, fill.id=NULL, colour.id=NULL,
-                              outlier.colour=alpha("black", 0.3), dodge.width=0.8,
-                              x.facet.id=NULL, y.facet.id=NULL, facet.scales="fixed",
-                              facet.space="fixed", facet.shrink=TRUE, facet.drop = TRUE,
-                              y.trans="identity", auto.scale.y=FALSE,
-                              x.lim.cart=NULL, y.lim.cart=NULL, lwd=1, fatten=1,
-                              palette=NULL, scale.to="fill", scale.type=NULL,
-                              legend.title.fill=NULL, legend.title.colour=NULL,
-                              no.legend=NULL, legend.col=1, legend.row=0,
-                              legend.position="right", legend.direction="vertical",
-                              title="Box Whiskers Plot", title.hjust=0.5, title.size = 10,
-                              x.lab=NULL, y.lab=NULL,
-                              coord.flip=FALSE, x.text.angle=0, x.text=TRUE, y.text=TRUE,
-                              no.panel.border=FALSE, verbose=TRUE) {
-  p <- ggInit(df=df, x.id=x.id, y.id=y.id, fill.id=fill.id, colour.id=colour.id, verbose=verbose)
-  if (! is.null(fill.id))
-    p <- p + geom_boxplot(outlier.colour=outlier.colour, position=position_dodge(width=dodge.width),
-                          lwd=lwd, fatten=fatten)
-  else
-    p <- p + geom_boxplot(outlier.colour=outlier.colour, lwd=lwd, fatten=fatten)
 
-  p <- p + scale_shape(solid = FALSE) #+ geom_jitter(alpha = 0.5)
-
-  col.names <- colnames(df)
-  p <- ggOptFacetGrid(p, col.names, x.facet.id=x.facet.id, y.facet.id=y.facet.id,
-                      scales=facet.scales, space=facet.space, shrink=facet.shrink,
-                      drop=facet.drop, verbose=verbose)
-
-  if (auto.scale.y) {
-    y.max <- max(df[,y.id])
-    p <- ggOptScaleAxis(p, axis="y", scale="continuous", trans=y.trans,
-                        auto.scale.max=y.max, verbose=verbose)
-  } else {
-    p <- ggOptScaleAxis(p, axis="y", scale="continuous", trans=y.trans,
-                        verbose=verbose)
-  }
-
-  p <- ggOptCoordCartesian(p, df, x.id, y.id, x.lim.cart=x.lim.cart, y.lim.cart=y.lim.cart,
-                           coord.flip=coord.flip, verbose=verbose)
-
-  p <- ggOptPalette(p, scale.to=scale.to, scale.type=scale.type, palette=palette, verbose=verbose)
-
-  p <- ggOptLegend(p, legend.title.colour=legend.title.colour,
-                   legend.title.fill=legend.title.fill, no.legend=no.legend,
-                   legend.col=legend.col, legend.row=legend.row)
-
-  p <- ggLabTitle(p, x.id, y.id, title=title, x.lab=x.lab, y.lab=y.lab)
-  if (no.panel.border)
-    p <- ggThemeAxis(p, title.size=title.size)
-  else
-    p <- ggThemePanelBorder(p, title.size=title.size)
-
-  p <- ggThemeOthers(p, x.text.angle=x.text.angle, legend.position=legend.position,
-                     legend.direction=legend.direction, x.text=x.text, y.text=y.text,
-                     title.hjust=title.hjust, verbose=verbose)
-
-  return(p)
-}
-
-#' @details
-#' \code{ggDensityEstimate} is an one-line function to plot kernel density estimate (KDE),
-#' useful for display the distribution of variables with underlying smoothness.
-#' Give a column name \code{fill.id} to colour the filled area, and \code{colour.id}
-#' to colour the curve. Use \code{density.pos} to produce different types of density.
-#' Use \code{y.id="..count.."} to produce a conditional density estimate,
-#' which counts (density * n) variable instead of the default density.
-#' Refer to \code{\link{geom_density}}.
-#'
-#' @param density.pos Position adjustment for \code{ggDensityEstimate}, either as a string,
-#' or the result of a call to a position adjustment function. Default to "identity".
-#' Use "stack" to produce stacked density plots,
-#' and "fill" to plot density estimate in percentage scale.
-#' @param density.alpha Modify colour transparency when \code{fill.id} is assigned to
-#' \code{ggDensityEstimate}. Default to 0.1. Refer to \code{\link{alpha}}.
-#' @keywords KDE
-#' @export
-#' @examples
-#' # prepare log
-#' b.log <- ComMA::readFile("data-raw/star.beast.log", row.names=NULL)
-#' df.melt <- melt(b.log, id="Sample")
-#' df.TreeHeight <- df.melt[grep("TreeHeight", df.melt[,"variable"]),]
-#'
-#' ggDensityEstimate(df.TreeHeight, x.id="value", colour.id="variable")
-#' ggDensityEstimate(df.TreeHeight, x.id="value", fill.id="variable", colour.id="variable")
-#' # stacked density plot to lose marginal densities
-#' ggDensityEstimate(df.TreeHeight, x.id="value", fill.id="variable", density.pos="stack", density.alpha=1)
-#' # conditional density plot to preserve marginal densities
-#' ggDensityEstimate(df.TreeHeight, x.id="value", y.id="..count..", fill.id="variable", density.pos="stack", density.alpha=1)
-#' # percentage scale
-#' ggDensityEstimate(df.TreeHeight, x.id="value", fill.id="variable", density.pos="fill", density.alpha=1)
-#'
-#' @rdname ggPlot
-ggDensityEstimate <- function(df, x.id, y.id=NULL, fill.id=NULL, colour.id=NULL,
-                              density.pos="identity", density.alpha=0.1,
-                              x.facet.id=NULL, y.facet.id=NULL,
-                              x.lim.cart=NULL, y.lim.cart=NULL,
-                              x.trans="identity", x.scale="continuous", auto.scale.x=FALSE,
-                              y.trans="identity", y.scale="continuous", auto.scale.y=FALSE,
-                              fill.palette=NULL, colour.palette=NULL, coord.flip=FALSE,
-                              legend.title.colour=NULL, legend.title.fill=NULL,
-                              legend.col=1, legend.row=0,
-                              title="Kernel Density Estimate", title.hjust=0.5, title.size=10,
-                              x.lab=NULL, y.lab=NULL, no.legend=NULL,
-                              legend.position="right", legend.direction="vertical",
-                              x.text.angle=0, x.text=TRUE, y.text=TRUE,
-                              no.panel.border=FALSE, verbose=TRUE) {
-  p <- ggInit(df=df, x.id=x.id, y.id=y.id, fill.id=fill.id, colour.id=colour.id, verbose=verbose)
-  p <- p + geom_density(position=density.pos, alpha=density.alpha)
-
-  col.names <- colnames(df)
-  p <- ggOptFacetGrid(p, col.names, x.facet.id=x.facet.id,
-                      y.facet.id=y.facet.id, verbose=verbose)
-
-  if (auto.scale.x) {
-    x.max <- max(df[,x.id])
-    p <- ggOptScaleAxis(p, axis="x", scale=x.scale, trans=x.trans,
-                        auto.scale.max=x.max, verbose=verbose)
-  } else {
-    p <- ggOptScaleAxis(p, axis="x", scale=x.scale, trans=x.trans,
-                        verbose=verbose)
-  }
-  if (auto.scale.y) {
-    y.max <- max(df[,y.id])
-    p <- ggOptScaleAxis(p, axis="y", scale=y.scale, trans=y.trans,
-                        auto.scale.max=y.max, verbose=verbose)
-  } else {
-    p <- ggOptScaleAxis(p, axis="y", scale=y.scale, trans=y.trans,
-                        verbose=verbose)
-  }
-
-  p <- ggOptCoordCartesian(p, df, x.id, y.id, x.lim.cart=x.lim.cart, y.lim.cart=y.lim.cart,
-                           coord.flip=coord.flip, verbose=verbose)
-
-  p <- ggOptPalette(p, scale.to="fill", palette=fill.palette, verbose=verbose)
-  p <- ggOptPalette(p, scale.to="colour", palette=colour.palette, verbose=verbose)
-
-  p <- ggOptLegend(p, legend.title.colour=legend.title.colour,
-                   legend.title.fill=legend.title.fill, no.legend=no.legend,
-                   legend.col=legend.col, legend.row=legend.row)
-
-  if (density.pos=="stack" && title=="Kernel Density Estimate")
-    title <- paste("Conditional", title)
-  p <- ggLabTitle(p, x.id, y.id, title=title, x.lab=x.lab, y.lab=y.lab)
-  if (no.panel.border)
-    p <- ggThemeAxis(p, title.size=title.size)
-  else
-    p <- ggThemePanelBorder(p, title.size=title.size)
-
-  p <- ggThemeOthers(p, x.text.angle=x.text.angle, legend.position=legend.position,
-                     legend.direction=legend.direction, x.text=x.text, y.text=y.text,
-                     title.hjust=title.hjust, verbose=verbose)
-
-  return(p)
-}
 
 

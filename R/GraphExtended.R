@@ -348,11 +348,10 @@ gtPCAPlot <- function(...) {
 #' @param ... Other arguments passed to \code{\link{gtLine}}.
 #' @keywords line points
 #' @export
-#' @examples
-#' rare.curv <- gtRarefactionCurve(df.size, attr.df, group.id="Samples", colour.id="Species",
-#'                        shape.id="GutSegment",point.size=2, x.trans="log", auto.scale.x=T)
-#' plot(rare.curv)
-#'
+# @examples
+# rare.curv <- gtRarefactionCurve(df.size, attr.df, group.id="Samples", colour.id="Species",
+#                        shape.id="GutSegment",point.size=2, x.trans="log", auto.scale.x=T)
+# plot(rare.curv)
 gtRarefactionCurve <- function(df.size, attr.df, group.id="Samples", colour.id=NULL,
                                line.type = 2, line.alpha=0.75, shape.id=NULL,
                                x.prefix="^.*?\\.", line.or.point=3, end.point.only=TRUE,

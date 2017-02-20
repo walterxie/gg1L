@@ -27,10 +27,6 @@ Default to 0.8. Refer to \code{\link{position_dodge}}.}
 Add numbers as text in a \code{\link{ggplot}} object, such as mean of box plot.
 Refer to \code{\link{stat_summary}}.
 }
-\examples{
-p <- ggBarChart(myData, x.id="model", y.id="mean", fill.id="OS", y.lab="performance")
-p <- p + ggAddNumbers(fun.y.lab=length, y.adj=1.02)
-}
 \keyword{add}
 \keyword{numbers}
 

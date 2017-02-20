@@ -88,7 +88,7 @@ bc + ggAddNumbers(label.id="N", hjust=0.5, vjust=2)
 Add the calculation result to the bars, such as the mean of y values:
 
 ```{r barnum2, warning=FALSE}
-bc + ggAddNumbersFun(fun.y.lab=performance, y.adj=0.9)
+bc + ggAddNumbersFun(fun.y.lab=mean, y.adj=0.9)
 ```
 
 ### Add lines

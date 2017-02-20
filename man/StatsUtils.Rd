@@ -57,10 +57,14 @@ the 'OTUs' is the number of OTUs simultaneously appeared only in that number of 
 and the 'reads' is the number of reads assigned to those OTUs.
 }
 \examples{
+data(model.test)
 summarySE(model.test, measurevar="performance", groupvars=c("model", "OS"))
 # With a data set with NA's, use na.rm=TRUE
-summarySE(data, measurevar="change", groupvars=c("sex", "condition"), na.rm=TRUE)
+dataNA <- model.test
+dataNA$performance[11:15] <- NA
+summarySE(dataNA, measurevar="performance", groupvars=c("model", "OS"), na.rm=TRUE)
 
+data(reads.phyla)
 cm.aggre <- cmYAcrossX(reads.phyla[,1:6])
 cm.aggre
 

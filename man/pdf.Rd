@@ -13,11 +13,11 @@ pdf.ggplot(gg.plot, fig.path, width = 6, height = 6, useDingbats = TRUE)
 
 pdf.gtable(g.table, fig.path, width = 6, height = 6, useDingbats = TRUE)
 
-pdf.plot(plot, fig.path, width = 6, height = 6, useDingbats = TRUE)
-
 \method{plot}{gtable}(g.table)
 
 unclip.ggplot(gg.plot)
+
+pdf.plot(plot, fig.path, width = 6, height = 6, useDingbats = TRUE)
 }
 \arguments{
 \item{gg.plot}{A \code{\link{ggplot}} object.}
@@ -39,9 +39,6 @@ Refer to \code{\link{pdf}}.}
 
 \code{pdf.gtable} creates pdf for gtable object.
 
-\code{pdf.plot} creates pdf for the list returned from \code{\link{plot}}.
-Tip: use \code{\link{"\%<a-\%"}} in \pkg{pryr} to save plots.
-
 \code{plot.gtable} \code{\link{require}(\link{grid})}
 and plot gtable object in console.
 
@@ -49,17 +46,25 @@ and plot gtable object in console.
 \code{\link{ggplot}} object, but returns a
 \code{\link{gtable}} object.
 Refer to \url{http://stackoverflow.com/questions/9690648/point-clipped-on-x-axis-in-ggplot}.
+
+\code{pdf.plot} creates pdf for the list returned from \code{\link{plot}}.
+Tip: use \code{\link{"\%<a-\%"}} in \pkg{pryr} to save plots.
 }
 \examples{
+data(model.test)
+model.test.mac <- model.test[model.test$OS=="Mac",]
+gg.plot <- ggBarChart(model.test.mac, x.id="test", y.id="performance", fill.id="model", x.text.angle=90)
+
 pdf.ggplot(gg.plot, fig.path="fig.pdf", width=8, height=8)
 
+g.table <- unclip.ggplot(gg.plot)
 pdf.gtable(g.table, fig.path="fig.pdf", width=8, height=8)
-
-pdf.plot(plot, fig.path="fig.pdf", width=8, height=8)
 
 plot(g.table)
 
-gt <- unclip.ggplot(gg.plot)
+library(pryr)
+p \%<a-\% plot(1:5)
+pdf.plot(p, fig.path="plot1-5.pdf")
 
 }
 \keyword{graph}

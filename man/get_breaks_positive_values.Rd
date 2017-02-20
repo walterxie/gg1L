@@ -19,11 +19,11 @@ Mostly used with \code{\link{scientific_10}} together.
 Breaks of multiples of 10 for positive values.
 }
 \examples{
-get_breaks_positive_values(68759)
-# [1] 1e-01 1e+00 1e+01 1e+02 1e+03 1e+04 1e+05
+get_breaks_positive_values(max(reads.phyla[,1:6]), start=c(0))
 
+library(ggplot2)
 scale_y_continuous(trans = "log", labels = gg1L::scientific_10,
-breaks = gg1L::get_breaks_positive_values(max(df, start=c(0))))
+breaks = gg1L::get_breaks_positive_values(max(reads.phyla[,1:6]), start=c(0)))
 }
 \keyword{utils}
 

@@ -22,9 +22,9 @@ They cannot be used at the same time.}
 Add a line \code{\link{geom_line}} to a given \code{\link{ggplot}} object.
 }
 \examples{
+ranks.by.group <- data.frame(plot=c("Plot03","Plot02","Plot01"), `16s`=c(3,2,1), `18s`=c(1,2,3), ITS=c(2,1,3), check.names = FALSE)
 p <- ggHeatmap(ranks.by.group, melt.id="plot")
 p <- p + ggAddLine(linetype = 2, yintercept = 1)
-p <- p + ggAddLine(smooth.method = "lm")
 }
 \keyword{add}
 \keyword{line}
