@@ -32,14 +32,10 @@ It can also use \code{\link{unique}} only for no sorting.
 Note: do not use \code{sort(,decreasing = T)}, it will ruin \code{factor}.
 Use \code{\link{rev}} instead.}
 
-\item{title}{Graph title}
-
-\item{x.lab, y.lab}{The label of x-axis or y-axis, such as plot names.}
+\item{title, x.lab, y.lab, y.trans, legend.row, palette, verbose, ...}{Refer to \code{\link{ggBarChart}}.}
 
 \item{autoSize}{If TRUE, then use number of bars and legend columns
 to estimate pdf width and height automatically. Default to TRUE.}
-
-\item{...}{Other arguments passed to \code{\link{ggBarChart}}.}
 }
 \description{
 Group abundance bar chart for mulit-sample or mulit-dataset and coloured by groups,

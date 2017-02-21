@@ -10,14 +10,12 @@
 #' where Phyla have to be in row.names, otherwise it will be melted into values in y-axis to cause
 #' "Error: Discrete value supplied to continuous scale".
 #' @param melt.id A column name to \code{\link{melt}} and used to assign the colours.
-#' @param title Graph title
-#' @param x.lab,y.lab The label of x-axis or y-axis, such as plot names.
-#' @param low, high Refer to \pkg{ggplot2} \code{\link{scale_fill_gradient}}.
-#' Default to low="white", high="steelblue".
 #' @param x.levels The level to order x axis.
 #' @param autoWidth If TRUE, then use number of bars and legend columns
 #' to estimate pdf width automatically. Default to TRUE.
-#' @param ... Other arguments passed to \code{\link{ggBarChart}}.
+#' #' @param title Graph title
+#' @param title,x.lab,y.lab,palette,colour.levels,x.meta.data,x.text.angle,...
+#' Refer to \code{\link{ggBarChart}}.
 #' @keywords bar chart
 #' @export
 #' @examples
@@ -120,11 +118,10 @@ ggPercentageBarChart <- function(df.to.melt, melt.id, title="Percentage Bar Char
 #' It can also use \code{\link{unique}} only for no sorting.
 #' Note: do not use \code{sort(,decreasing = T)}, it will ruin \code{factor}.
 #' Use \code{\link{rev}} instead.
-#' @param title Graph title
-#' @param x.lab,y.lab The label of x-axis or y-axis, such as plot names.
 #' @param autoSize If TRUE, then use number of bars and legend columns
 #' to estimate pdf width and height automatically. Default to TRUE.
-#' @param ... Other arguments passed to \code{\link{ggBarChart}}.
+#' @param title,x.lab,y.lab,y.trans,legend.row,palette,verbose,...
+#' Refer to \code{\link{ggBarChart}}.
 #' @keywords bar chart
 #' @export
 #' @examples
@@ -282,13 +279,8 @@ ggGroupAbundanceBar <- function(df.to.melt, melt.id, colour.id=NULL, prop.thre=0
 #' \code{\link{cmYAcrossX}}. If TRUE, then the input has to use the same
 #' format of the output of \code{\link{cmYAcrossX}}, and modify \code{terms}
 #' to identify x, y, and values.
-#' @param title Graph title
-#' @param x.lab,y.lab The label of x-axis or y-axis, such as plot names.
-#' @param low, high Refer to \pkg{ggplot2} \code{\link{scale_fill_gradient}}.
-#' Default to low="white", high="steelblue".
-#' @param autoWidth If TRUE, then use number of bars and legend columns
-#' to estimate pdf width automatically. Default to TRUE.
-#' @param ... Other arguments passed to \code{\link{ggBarChart}}.
+#' @param title,x.lab,y.lab,y.trans,auto.scale.y,x.scale,x.interval,x.text.angle,legend.title,...
+#' Refer to \code{\link{ggBarChart}}.
 #' @keywords bar chart
 #' @export
 #' @examples

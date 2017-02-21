@@ -99,6 +99,7 @@ ggAddNumbersFun <- function(fun.y.lab=mean, fun.y.pos=median, y.adj=0.98, digits
 #' @param err.bar.width The width input for \code{\link{geom_errorbar}}.
 #' @param dodge.width Dodging width, when different to the width of the individual elements.
 #' Default to 0.9. Refer to \code{\link{position_dodge}}.
+#' @param verbose More messages. Default to TRUE.
 #' @param ... Other arguments passed to \code{\link{geom_errorbar}}.
 #' @keywords add error bar
 #' @export

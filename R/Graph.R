@@ -26,7 +26,7 @@
 #' It needs to use \code{\link{pdf.ggplot}} to create pdf.
 #' It also can be concatenated using '+'.
 #'
-#' If the function returns a \code{\link{gtable}} object,
+#' If the function returns a \code{gtable} object,
 #' then its name starts with "gt".
 #' It needs to use \code{\link{pdf.gtable}} to create pdf,
 #' or \code{\link{plot.gtable}} to plot to console.
@@ -66,8 +66,10 @@
 #' and used as a \code{\link{factor}}, such as "plot" column.
 #' @param x.id,y.id,fill.id,group.id The string of column names in \code{df} or
 #' \code{df.to.melt}, which use for \code{x, y, fill, group} in \code{\link{aes}}.
-#' @param x.facet.id, y.facet.id The string of column names in \code{df},
+#' @param x.facet.id,y.facet.id The string of column names in \code{df},
 #' which creates facets (a formula) in \code{\link{facet_grid}}.
+#' @param facet.scales,facet.space,facet.shrink,facet.drop
+#' The parameters refer to \code{\link{facet_grid}}.
 #' @param x.trans,y.trans The string defines the data scale used in either x-axis or y-axis,
 #' which can be "identity" standing for normal, or "per" standing for percentage,
 #' moreover either the name of a transformation object for \code{\link{scale_x_continuous}}
@@ -75,20 +77,25 @@
 #' Built-in transformations include "asn", "atanh", "boxcox", "exp", "identity",
 #' "log", "log10", "log1p", "log2", "logit", "probability", "probit", "reciprocal",
 #' "reverse" and "sqrt". Default to "identity".
+#' @param x.scale,y.scale,auto.scale.x,auto.scale.y Which data type to scale, use either
+#' "continuous" or "discrete". If set \code{auto.scale.?} to TRUE, then try to rescale
+#' according to the maximun value. Default to FALSE to use original plot.
 #' @param x.lim.cart,y.lim.cart Setting limits on the coordinate system will zoom the plot,
 #' and will not change the underlying data like setting limits on a scale will.
 #' Refer to \code{\link{coord_cartesian}}.
 #' Set lower bound only to y-axis using y.lim.cart=c(1000,NA). Default NULL.
 #' @param title Graph title, set title="" to remove it from the plot.
+#' @param title.size Graph title font size.
 #' @param title.hjust Numeric, adjust title position, default to 0.5 (middle),
 #' 0 is left and 1 right.
 #' @param x.lab,y.lab The label of x-axis or y-axis, such as plot names.
 #' Set x.lab="" to remove x-axis label from the plot. Default to NULL to do nothing.
+#' @param x.text,y.text If FALSE, hide tick labels along x-axis or y-axis in plot.
+#' Default to TRUE.
+#' @param x.text.angle The angle to rotate tick labels along x-axis.
 #' @param coord.flip If TRUE, then flip cartesian coordinates so that horizontal
 #' becomes vertical, and vertical becomes horizontal. Default to FALSE. Refer to
 #' \code{\link{coord_flip}}.
-#' @param x.lab.interval The interval to display x values in axis.
-#' Assume x values are discrete for each bar. Default to 0 to do nothing.
 #' @param palette The colour palette for bar, box, scatter plot, etc.
 #' If length == 1, then use \code{\link{scale_colour_brewer}}
 #' (\url{http://www.datavis.ca/sasmac/brewerpal.html}), such as "Set1" (max 8 colours).
@@ -102,16 +109,20 @@
 #' such as "Row.names" column after \code{\link{merge}}.
 #' @param text.size,text.hjust,text.vjust,text.alpha
 #' The arguments to adjust text in \code{\link{geom_text}} in the line or scatter plot.
-#' @param legend.title.fill,legend.title.colour,legend.title.shape,legend.title.group,
-#' legend.title.size The title of legend created by fill, colour, shape, group, or size.
+#' @param legend.title,legend.title.fill,legend.title.colour,legend.title.shape,legend.title.group,legend.title.size,
+#' The title of legend created by fill, colour, shape, group, or size.
 #' Set legend.title.*="" to remove legend.
-#' @param no.legend Turning off some legends, such as, fill, shape, colour.
-#' Default to NULL, which is to do nothing.
+#' @param legend.position Legend position, default to "right".
+#' @param legend.direction The direction to display legend, default to "vertical".
 #' @param legend.col,legend.row Customize the number of columns or rows for legend in bar chart.
 #' They cannot be used at the same time. Default not to use them, legend.col=1, legend.row=0.
-#' @param x.text,y.text If FALSE, then hide x or y axis labels in plot.
-#' Default to TRUE.
+#' @param no.legend Turning off some legends, such as, fill, shape, colour.
+#' Default to NULL, which is to do nothing.
 #' @param no.panel.border Add panel border or not. Default to FALSE.
+#' @param plot.margin.cm margin around entire plot in a 4-element vector
+#' (the sizes of the top, right, bottom, and left margins in cm),
+#' such as \code{c(1,2,3,4)}.
+#' @param verbose More messages. Default to TRUE.
 
 #' @details
 #' \code{ggBarChart} is an one-line function to plot many types of bar chart,
@@ -126,6 +137,8 @@
 #' Default to "identity",
 #' which defines the heights of the bars to represent values in the data.
 #' Refer to \code{\link{geom_bar}}.
+#' @param x.interval The interval to display x values in axis.
+#' Assume x values are discrete for each bar. Default to 0 to do nothing.
 #' @keywords bar chart
 #' @export
 #' @examples
@@ -292,6 +305,8 @@ ggHistogram <- function(df, x.id, fill.id=NULL,
 #' Refer to \code{\link{position_dodge}}.
 #' @param lwd change the line thinkness.
 #' @param fatten make the median line thinner relative to the other lines.
+#' @param scale.to,scale.type The scale of palette, where \code{scale.to = c("colour", "fill")},
+#' \code{scale.type = c("brewer", "gradientn", "manual")}.
 #' @keywords box plot
 #' @export
 #' @examples
@@ -362,28 +377,36 @@ ggBoxWhiskersPlot <- function(df, x.id, y.id, fill.id=NULL, colour.id=NULL,
 #' \code{ggScatterPlot} uses one-line function to plot many types of scatter chart.
 #' Refer to \code{\link{geom_point}}.
 #'
-#' @param point.size,point.alpha The feature of points for \code{\link{geom_point}}.
-#' Default size to 3, alpha to 1.
-#' @param text.or.point If 1, then display the text only; if 2, the default, then only points;
-#' if 3, then both the text and points.
 #' @param colour.id,shape.id,link.id The column name in \code{df} to
 #' define how the data points are coloured, shaped, or linked according their values.
 #' @param ellipsed.id The column name in \code{df} to define
 #' how to draw ellipse over data points, which is normally same as
 #' \code{colour.id} to show clusters.
-#' @param shapes Manually define the shapes of points. Refer to \code{\link{scale_shape_manual}},
+#' @param text.colour.id The column name in \code{df} to define
+#' the group of texts and assign colours.
+#' @param shapes Manually define the shapes of points.
+#' Refer to \code{\link{scale_shape_manual}},
 #' and \url{http://www.cookbook-r.com/Graphs/Shapes_and_line_types/}.
-#' @param scale.limits.min Manually set the minimum data range of the scale
-#' given colours to \code{c(scale.limits.min, max(df[,colour.id]))}.
-#' Refer to \code{limits} in \code{\link{discrete_scale}}.
-#' @param xintercept,yintercept,linetype Add horizontal or vertical line.
-#' Refer to \code{\link{geom_hline}} or \code{\link{geom_vline}}.
+#' @param point.size,point.alpha The feature of points for
+#' \code{\link{geom_point}}. Default size to 3, alpha to 1.
+#' @param text.or.point If 1, then display the text only;
+#' if 2, the default, then only points;
+#' if 3, then both the text and points.
+#' @param text.data The data for \code{\link{geom_text}}
+#' if they are different.
 #' @param text.repel Apply \code{\link{geom_text_repel}} in \pkg{ggrepel}.
 #' It is better than \code{text.avoid.overlap},
 #' where the latter sometime removes overlapped texts.
 #' Default to FALSE.
+#' @param box.padding,point.padding,arrow,force The parameters refer to
+#' \code{\link{geom_text_repel}}.
 #' @param text.avoid.overlap If TRUE, text that overlaps previous text
 #' in the same layer will not be plotted. Not recommended. Default to FALSE.
+#' @param scale.limits.min Manually set the minimum data range of the scale
+#' given colours to \code{c(scale.limits.min, max(df[,colour.id]))}.
+#' Refer to \code{limits} in \code{\link{discrete_scale}}.
+#' @param xintercept,yintercept Add horizontal or vertical line.
+#' Refer to \code{\link{geom_hline}} or \code{\link{geom_vline}}.
 #' @keywords scatter plot
 #' @export
 #' @examples
@@ -663,6 +686,7 @@ ggLineWithPoints <- function(df, x.id, y.id, group.id=NULL, colour.id=NULL,
 #' and "fill" to plot density estimate in percentage scale.
 #' @param density.alpha Modify colour transparency when \code{fill.id} is assigned to
 #' \code{ggDensityEstimate}. Default to 0.1. Refer to \code{\link{alpha}}.
+#' @param fill.palette,colour.palette The palette for filling colours and outline colours.
 #' @keywords KDE
 #' @export
 #' @examples

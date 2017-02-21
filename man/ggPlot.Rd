@@ -134,6 +134,9 @@ Default to "identity",
 which defines the heights of the bars to represent values in the data.
 Refer to \code{\link{geom_bar}}.}
 
+\item{x.interval}{The interval to display x values in axis.
+Assume x values are discrete for each bar. Default to 0 to do nothing.}
+
 \item{x.trans, y.trans}{The string defines the data scale used in either x-axis or y-axis,
 which can be "identity" standing for normal, or "per" standing for percentage,
 moreover either the name of a transformation object for \code{\link{scale_x_continuous}}
@@ -142,10 +145,16 @@ Built-in transformations include "asn", "atanh", "boxcox", "exp", "identity",
 "log", "log10", "log1p", "log2", "logit", "probability", "probit", "reciprocal",
 "reverse" and "sqrt". Default to "identity".}
 
-\item{x.facet.id, }{y.facet.id The string of column names in \code{df},
+\item{x.scale, y.scale, auto.scale.x, auto.scale.y}{Which data type to scale, use either
+"continuous" or "discrete". If set \code{auto.scale.?} to TRUE, then try to rescale
+according to the maximun value. Default to FALSE to use original plot.}
+
+\item{x.facet.id, y.facet.id}{The string of column names in \code{df},
 which creates facets (a formula) in \code{\link{facet_grid}}.}
 
-\item{xintercept, yintercept, linetype}{Add horizontal or vertical line.
+\item{facet.scales, facet.space, facet.shrink, facet.drop}{The parameters refer to \code{\link{facet_grid}}.}
+
+\item{xintercept, yintercept}{Add horizontal or vertical line.
 Refer to \code{\link{geom_hline}} or \code{\link{geom_vline}}.}
 
 \item{line.type, line.size, line.alpha}{The feature of lines for \code{\link{geom_line}}.
@@ -166,6 +175,9 @@ Set palette=c("red","darkgreen","darkgrey",""), if \code{\link{scale_fill_manual
 has to be used when the actual length(palette) <=3.
 Default NULL to use \code{\link{ggplot}} default colours.}
 
+\item{legend.title, legend.title.fill, legend.title.colour, legend.title.shape, legend.title.group, legend.title.size, }{The title of legend created by fill, colour, shape, group, or size.
+Set legend.title.*="" to remove legend.}
+
 \item{legend.col, legend.row}{Customize the number of columns or rows for legend in bar chart.
 They cannot be used at the same time. Default not to use them, legend.col=1, legend.row=0.}
 
@@ -174,20 +186,34 @@ They cannot be used at the same time. Default not to use them, legend.col=1, leg
 \item{title.hjust}{Numeric, adjust title position, default to 0.5 (middle),
 0 is left and 1 right.}
 
+\item{title.size}{Graph title font size.}
+
 \item{x.lab, y.lab}{The label of x-axis or y-axis, such as plot names.
 Set x.lab="" to remove x-axis label from the plot. Default to NULL to do nothing.}
 
 \item{no.legend}{Turning off some legends, such as, fill, shape, colour.
 Default to NULL, which is to do nothing.}
 
+\item{legend.position}{Legend position, default to "right".}
+
+\item{legend.direction}{The direction to display legend, default to "vertical".}
+
 \item{coord.flip}{If TRUE, then flip cartesian coordinates so that horizontal
 becomes vertical, and vertical becomes horizontal. Default to FALSE. Refer to
 \code{\link{coord_flip}}.}
 
-\item{x.text, y.text}{If FALSE, then hide x or y axis labels in plot.
+\item{x.text.angle}{The angle to rotate tick labels along x-axis.}
+
+\item{x.text, y.text}{If FALSE, hide tick labels along x-axis or y-axis in plot.
 Default to TRUE.}
 
+\item{plot.margin.cm}{margin around entire plot in a 4-element vector
+(the sizes of the top, right, bottom, and left margins in cm),
+such as \code{c(1,2,3,4)}.}
+
 \item{no.panel.border}{Add panel border or not. Default to FALSE.}
+
+\item{verbose}{More messages. Default to TRUE.}
 
 \item{bins}{Number of bins for \code{ggHistogram}. Overridden by \code{binwidth}.
 Defaults to 30.
@@ -218,10 +244,14 @@ Refer to \code{\link{position_dodge}}.}
 
 \item{fatten}{make the median line thinner relative to the other lines.}
 
-\item{legend.title.fill, legend.title.colour, legend.title.shape, legend.title.group, }{legend.title.size The title of legend created by fill, colour, shape, group, or size.
-Set legend.title.*="" to remove legend.}
+\item{scale.to, scale.type}{The scale of palette, where \code{scale.to = c("colour", "fill")},
+\code{scale.type = c("brewer", "gradientn", "manual")}.}
 
-\item{shapes}{Manually define the shapes of points. Refer to \code{\link{scale_shape_manual}},
+\item{text.colour.id}{The column name in \code{df} to define
+the group of texts and assign colours.}
+
+\item{shapes}{Manually define the shapes of points.
+Refer to \code{\link{scale_shape_manual}},
 and \url{http://www.cookbook-r.com/Graphs/Shapes_and_line_types/}.}
 
 \item{ellipsed.id}{The column name in \code{df} to define
@@ -231,11 +261,15 @@ how to draw ellipse over data points, which is normally same as
 \item{text.id}{Label the data points according \code{text.id} column,
 such as "Row.names" column after \code{\link{merge}}.}
 
-\item{text.or.point}{If 1, then display the text only; if 2, the default, then only points;
+\item{text.or.point}{If 1, then display the text only;
+if 2, the default, then only points;
 if 3, then both the text and points.}
 
-\item{point.size, point.alpha}{The feature of points for \code{\link{geom_point}}.
-Default size to 3, alpha to 1.}
+\item{point.size, point.alpha}{The feature of points for
+\code{\link{geom_point}}. Default size to 3, alpha to 1.}
+
+\item{text.data}{The data for \code{\link{geom_text}}
+if they are different.}
 
 \item{text.size, text.hjust, text.vjust, text.alpha}{The arguments to adjust text in \code{\link{geom_text}} in the line or scatter plot.}
 
@@ -246,6 +280,9 @@ in the same layer will not be plotted. Not recommended. Default to FALSE.}
 It is better than \code{text.avoid.overlap},
 where the latter sometime removes overlapped texts.
 Default to FALSE.}
+
+\item{box.padding, point.padding, arrow, force}{The parameters refer to
+\code{\link{geom_text_repel}}.}
 
 \item{scale.limits.min}{Manually set the minimum data range of the scale
 given colours to \code{c(scale.limits.min, max(df[,colour.id]))}.
@@ -266,6 +303,8 @@ and "fill" to plot density estimate in percentage scale.}
 
 \item{density.alpha}{Modify colour transparency when \code{fill.id} is assigned to
 \code{ggDensityEstimate}. Default to 0.1. Refer to \code{\link{alpha}}.}
+
+\item{fill.palette, colour.palette}{The palette for filling colours and outline colours.}
 
 \item{df.to.melt}{A data frame required to \code{\link{melt}}
 before making a \pkg{ggplot} object, such as input of \code{ggHeatmap}.
@@ -313,9 +352,6 @@ See \code{\link{scale_fill_gradient}}.}
 \item{x.levels, y.levels}{The levels to order x or y.
 The deafult y.levels=c() makes y labels sorted by alphabetical order,
 but if y.levels is NA, there is no sorting applied.}
-
-\item{x.lab.interval}{The interval to display x values in axis.
-Assume x values are discrete for each bar. Default to 0 to do nothing.}
 }
 \value{
 If the function returns a \code{\link{ggplot}} object,
@@ -323,7 +359,7 @@ then its name starts with "gg".
 It needs to use \code{\link{pdf.ggplot}} to create pdf.
 It also can be concatenated using '+'.
 
-If the function returns a \code{\link{gtable}} object,
+If the function returns a \code{gtable} object,
 then its name starts with "gt".
 It needs to use \code{\link{pdf.gtable}} to create pdf,
 or \code{\link{plot.gtable}} to plot to console.

@@ -16,19 +16,13 @@ where Phyla have to be in row.names, otherwise it will be melted into values in 
 
 \item{melt.id}{A column name to \code{\link{melt}} and used to assign the colours.}
 
-\item{title}{Graph title}
-
-\item{x.lab, y.lab}{The label of x-axis or y-axis, such as plot names.}
+\item{title, x.lab, y.lab, palette, colour.levels, x.meta.data, x.text.angle, ...}{Refer to \code{\link{ggBarChart}}.}
 
 \item{x.levels}{The level to order x axis.}
 
 \item{autoWidth}{If TRUE, then use number of bars and legend columns
-to estimate pdf width automatically. Default to TRUE.}
-
-\item{...}{Other arguments passed to \code{\link{ggBarChart}}.}
-
-\item{low, }{high Refer to \pkg{ggplot2} \code{\link{scale_fill_gradient}}.
-Default to low="white", high="steelblue".}
+to estimate pdf width automatically. Default to TRUE.
+#' @param title Graph title}
 }
 \description{
 Percentage bar chart coloured by groups, which is extended from \code{\link{ggBarChart}}.

@@ -28,6 +28,9 @@ contain grouping variables.}
 \item{conf.interval}{the percent range of the confidence interval,
 such as .95 as default.}
 
+\item{.drop}{should combinations of variables that do not appear
+in the input data be preserved (FALSE) or dropped (TRUE, default).}
+
 \item{community.matrix}{\strong{Community matrix} in \pkg{ComMA} is a matrix or data.frame,
 where rows are OTUs (therefore this matrix is called \emph{OTU table}) or individual species
 and columns are sites or samples.
@@ -40,7 +43,7 @@ Matrix elements are abundance data or proportion (e.g. counts, percentage). For 
 }}
 
 \item{terms}{The terms to be used in names of the data frame,
-which will be shown in the graph if using \code{\link{ggBarYAcrossX}}.
+which will be shown in the graph if using \code{\link{ggYAcrossXBar}}.
 Default to c("OTUs", "samples", "reads").
 Please be careful of the order if any change.}
 

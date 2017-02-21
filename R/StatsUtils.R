@@ -20,6 +20,8 @@
 #' @param na.rm a boolean that indicates whether to ignore NA's.
 #' @param conf.interval the percent range of the confidence interval,
 #' such as .95 as default.
+#' @param .drop should combinations of variables that do not appear
+#' in the input data be preserved (FALSE) or dropped (TRUE, default).
 #' @import plyr
 #' @keywords statistics
 #' @export
@@ -35,7 +37,6 @@
 summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
                       conf.interval=.95, .drop=TRUE) {
   require(plyr)
-
   # New version of length which can handle NA's: if na.rm==T, don't count them
   length2 <- function (x, na.rm=FALSE) {
     if (na.rm) sum(!is.na(x))
@@ -56,7 +57,6 @@ summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
 
   # Rename the "mean" column
   datac <- rename(datac, c("mean" = measurevar))
-
   datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
 
   # Confidence interval multiplier for standard error

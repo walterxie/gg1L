@@ -11,7 +11,7 @@
 #'
 #' @param gg.plot A \code{\link{ggplot}} object.
 #' @param fig.path fig.path The full path of pdf file.
-#' @param width, height Refer to \code{\link{pdf}}. Default to width=6, height=6.
+#' @param width,height Refer to \code{\link{pdf}}. Default to width=6, height=6.
 #' @param useDingbats Defaults to TRUE, which produces smaller and better output.
 #' Setting this to FALSE can work around font display problems in broken PDF viewers.
 #' Refer to \code{\link{pdf}}.
@@ -28,15 +28,15 @@
 #' pdf.ggplot(gg.plot, fig.path="fig.pdf", width=8, height=8)
 #'
 #' @rdname pdf
-pdf.ggplot <- function(gg.plot, fig.path, width=6, height=6, useDingbats=TRUE) {
-  pdf(fig.path, width=width, height=height, useDingbats=useDingbats)
+pdf.ggplot <- function(gg.plot, fig.path, width=6, height=6, useDingbats=TRUE, ...) {
+  pdf(fig.path, width=width, height=height, useDingbats=useDingbats, ...)
   print(gg.plot)
   invisible(dev.off())
 }
 
 #' @details \code{pdf.gtable} creates pdf for gtable object.
 #'
-#' @param gtable A \code{\link{gtable}} object.
+#' @param g.table A \code{gtable} object.
 #' @keywords graph
 #' @export
 #' @examples
@@ -44,8 +44,8 @@ pdf.ggplot <- function(gg.plot, fig.path, width=6, height=6, useDingbats=TRUE) {
 #' pdf.gtable(g.table, fig.path="fig.pdf", width=8, height=8)
 #'
 #' @rdname pdf
-pdf.gtable <- function(g.table, fig.path, width=6, height=6, useDingbats=TRUE) {
-  pdf(fig.path, width=width, height=height, useDingbats=useDingbats)
+pdf.gtable <- function(g.table, fig.path, width=6, height=6, useDingbats=TRUE, ...) {
+  pdf(fig.path, width=width, height=height, useDingbats=useDingbats, ...)
   plot.gtable(g.table)
   invisible(dev.off())
 }
@@ -66,7 +66,7 @@ plot.gtable <- function(g.table) {
 
 #' @details \code{unclip.ggplot} turns off clipping for a
 #' \code{\link{ggplot}} object, but returns a
-#' \code{\link{gtable}} object.
+#' \code{gtable} object.
 #' Refer to \url{http://stackoverflow.com/questions/9690648/point-clipped-on-x-axis-in-ggplot}.
 #'
 #' @keywords graph
@@ -83,6 +83,7 @@ unclip.ggplot <- function(gg.plot) {
 #' Tip: use "\%<a-\%" in \pkg{pryr} to save plots.
 #'
 #' @param plot The list returned from \code{\link{plot}}.
+#' @param ... Other parameters pass to \code{\link{pdf}}.
 #' @keywords graph
 #' @export
 #' @examples
@@ -91,15 +92,15 @@ unclip.ggplot <- function(gg.plot) {
 #' pdf.plot(p, fig.path="plot1-5.pdf")
 #'
 #' @rdname pdf
-pdf.plot <- function(plot, fig.path, width=6, height=6, useDingbats=TRUE) {
-  pdf(fig.path, width=width, height=height, useDingbats=useDingbats)
+pdf.plot <- function(plot, fig.path, width=6, height=6, useDingbats=TRUE, ...) {
+  pdf(fig.path, width=width, height=height, useDingbats=useDingbats, ...)
   plot
   invisible(dev.off())
 }
 
 #' \code{grid_arrange_shared_legend} shares a legend
 #' between multiple plots using \code{\link{grid.arrange}}.
-#' Return a \code{\link{gtable}} object.
+#' Return a \code{gtable} object.
 #'
 #' Modified from
 #' \url{http://rpubs.com/sjackman/grid_arrange_shared_legend}.
@@ -110,8 +111,10 @@ pdf.plot <- function(plot, fig.path, width=6, height=6, useDingbats=TRUE) {
 #' @param legend.position The position of legends
 #' ("none", "left", "right", "bottom", "top", or two-element numeric vector)
 #' @param ncol,nrow Specify the grid.
-#' @param widths A unit vector giving the width of each column in \code{\link{gtable}}.
+#' @param widths A unit vector giving the width of each column in \code{gtable}.
 #' \code{length(widths) == ncol}, for example, widths=c(1, 0.1, 0.1) for 3 columns.
+#' @param unclip.ggplot If TRUE, as default, use \code{\link{unclip.ggplot}}
+#' to turn off clipping.
 #' @keywords graph
 #' @export
 #' @examples

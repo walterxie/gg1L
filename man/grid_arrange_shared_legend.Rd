@@ -4,7 +4,7 @@
 \alias{grid_arrange_shared_legend}
 \title{\code{grid_arrange_shared_legend} shares a legend
 between multiple plots using \code{\link{grid.arrange}}.
-Return a \code{\link{gtable}} object.}
+Return a \code{gtable} object.}
 \usage{
 grid_arrange_shared_legend(..., input.list = FALSE,
   legend.position = "bottom", ncol = 2, nrow = 2, widths = c(1, 0.1),
@@ -21,8 +21,11 @@ get the actual list if the input is a list of plots}
 
 \item{ncol, nrow}{Specify the grid.}
 
-\item{widths}{A unit vector giving the width of each column in \code{\link{gtable}}.
+\item{widths}{A unit vector giving the width of each column in \code{gtable}.
 \code{length(widths) == ncol}, for example, widths=c(1, 0.1, 0.1) for 3 columns.}
+
+\item{unclip.ggplot}{If TRUE, as default, use \code{\link{unclip.ggplot}}
+to turn off clipping.}
 }
 \description{
 Modified from

@@ -50,6 +50,8 @@ by PCA or MDS, so that the rows whose names are not matched are dropped.}
 \item{colour.id, shape.id, link.id}{The column name in \code{attr.df} to
 define how the data points are coloured, shaped, or linked according to values.}
 
+\item{text.id, text.size.id, text.size, title, stress.digits, text.data, colour.levels, shape.levels, verbose}{Refer to \code{\link{ggScatterPlot}}.}
+
 \item{text.or.point}{If 1, then display the text only; if 2, then only points;
 if 3, the default, then both the text and points.}
 
@@ -83,6 +85,8 @@ which is a transposed matrix of community matrix in \pkg{ComMA}.
 Use either \code{transposeDF} in \pkg{ComMA}
 or \code{\link{t}} to rotate the data frame.}
 
+\item{x.i, y.i}{PCA dimension index.}
+
 \item{scale.pca}{Logical indicating in \code{\link{prcomp}}
 whether the variables should be scaled to have unit variance
 before the analysis takes place. Default to TURE.}
@@ -93,9 +97,9 @@ then its name starts with "gg".
 It needs to use \code{\link{pdf.ggplot}} to create pdf.
 It also keeps the expandability using '+'.
 
-If the function returns a \code{\link{gtable}} object, then its name starts with "gt".
+If the function returns a \code{gtable} object, then its name starts with "gt".
 This kind of functions use \code{\link{unclip.ggplot}} to turns off clipping for a
-\code{\link{ggplot}} object, but returns a \code{\link{gtable}} object.
+\code{\link{ggplot}} object, but returns a \code{gtable} object.
 It needs to use \code{\link{pdf.gtable}} to create pdf.
 And also \code{\link{plot.gtable}}
 simplifies the code to plot gtable object in console.

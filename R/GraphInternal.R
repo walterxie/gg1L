@@ -303,6 +303,7 @@ ggLabTitle <- function(p, x.id, y.id, title, x.lab=NULL, y.lab=NULL) {
   return(p)
 }
 
+# axis.text => tick labels along axes; axis.ticks => tick marks along axes;
 ggThemeOthers <- function(p, x.text=TRUE, y.text=TRUE, x.ticks=TRUE, y.ticks=TRUE,
                           x.text.angle=0, verbose=TRUE, plot.margin.cm=NULL, title.hjust=0.5,
                           legend.position="right", legend.direction="vertical") {

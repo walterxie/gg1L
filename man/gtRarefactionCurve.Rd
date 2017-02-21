@@ -30,6 +30,8 @@ For example,
 \item{group.id}{A column name from \code{df.to.melt} to \code{\link{melt}}
 subsampled data points, which is copied from merged "row.names".}
 
+\item{colour.id, line.type, line.alpha, shape.id, title, x.lab, y.lab, verbose, ...}{The arguments refer to \code{\link{ggLineWithPoints}}.}
+
 \item{x.prefix}{The regular expression to remove prefix from column names in
 \code{df.to.melt} (e.g. size.100). Default to "^.*?\\\\.".}
 
@@ -38,8 +40,6 @@ if 3, the default, then both the line and points.}
 
 \item{end.point.only}{If TRUE, as default, then only display the points in
 the end of lines. Otherwise, display all the points.}
-
-\item{...}{Other arguments passed to \code{\link{ggLineWithPoints}}.}
 }
 \description{
 Rarefaction curves for multi-sample, which is extended from \code{\link{ggLineWithPoints}}.

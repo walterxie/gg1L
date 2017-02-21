@@ -25,9 +25,9 @@
 #' It needs to use \code{\link{pdf.ggplot}} to create pdf.
 #' It also keeps the expandability using '+'.
 #'
-#' If the function returns a \code{\link{gtable}} object, then its name starts with "gt".
+#' If the function returns a \code{gtable} object, then its name starts with "gt".
 #' This kind of functions use \code{\link{unclip.ggplot}} to turns off clipping for a
-#' \code{\link{ggplot}} object, but returns a \code{\link{gtable}} object.
+#' \code{\link{ggplot}} object, but returns a \code{gtable} object.
 #' It needs to use \code{\link{pdf.gtable}} to create pdf.
 #' And also \code{\link{plot.gtable}}
 #' simplifies the code to plot gtable object in console.
@@ -46,6 +46,8 @@
 #' if 3, the default, then both the text and points.
 #' @param k The number of dimensions in \code{\link{metaMDS}},
 #' or maximum dimension of the space in \code{\link{cmdscale}}. Default to 2.
+#' @param text.id,text.size.id,text.size,title,stress.digits,text.data,colour.levels,shape.levels,verbose
+#' Refer to \code{\link{ggScatterPlot}}.
 #' @param ... Other arguments passed to \code{\link{ggScatterPlot}}.
 #'
 #' @note
@@ -253,6 +255,7 @@ gtPCoAPlot <- function(...) {
 #' which is a transposed matrix of community matrix in \pkg{ComMA}.
 #' Use either \code{transposeDF} in \pkg{ComMA}
 #' or \code{\link{t}} to rotate the data frame.
+#' @param x.i,y.i PCA dimension index.
 #' @param scale.pca Logical indicating in \code{\link{prcomp}}
 #' whether the variables should be scaled to have unit variance
 #' before the analysis takes place. Default to TURE.
@@ -344,7 +347,8 @@ gtPCAPlot <- function(...) {
 #' the end of lines. Otherwise, display all the points.
 #' @param x.prefix The regular expression to remove prefix from column names in
 #' \code{df.to.melt} (e.g. size.100). Default to "^.*?\\\\.".
-#' @param ... Other arguments passed to \code{\link{ggLineWithPoints}}.
+#' @param colour.id,line.type,line.alpha,shape.id,title,x.lab,y.lab,verbose,...
+#' The arguments refer to \code{\link{ggLineWithPoints}}.
 #' @keywords line points
 #' @export
 # @examples

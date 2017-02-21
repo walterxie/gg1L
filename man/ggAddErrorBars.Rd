@@ -17,6 +17,8 @@ Default to 0.9. Refer to \code{\link{position_dodge}}.}
 
 \item{err.bar.width}{The width input for \code{\link{geom_errorbar}}.}
 
+\item{verbose}{More messages. Default to TRUE.}
+
 \item{...}{Other arguments passed to \code{\link{geom_errorbar}}.}
 }
 \description{

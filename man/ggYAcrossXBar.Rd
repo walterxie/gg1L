@@ -26,17 +26,7 @@ for example \code{c("OTUs", "samples", "reads")} as default.
 The 2nd element will be used as the id to \code{\link{melt}}
 the abundance matrix aggregated from community matrix.}
 
-\item{title}{Graph title}
-
-\item{x.lab, y.lab}{The label of x-axis or y-axis, such as plot names.}
-
-\item{...}{Other arguments passed to \code{\link{ggBarChart}}.}
-
-\item{low, }{high Refer to \pkg{ggplot2} \code{\link{scale_fill_gradient}}.
-Default to low="white", high="steelblue".}
-
-\item{autoWidth}{If TRUE, then use number of bars and legend columns
-to estimate pdf width automatically. Default to TRUE.}
+\item{title, x.lab, y.lab, y.trans, auto.scale.y, x.scale, x.interval, x.text.angle, legend.title, ...}{Refer to \code{\link{ggBarChart}}.}
 }
 \description{
 The bar chart shows the number of OTUs/reads in the bar,

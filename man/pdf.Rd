@@ -9,30 +9,34 @@
 \alias{unclip.ggplot}
 \title{Create pdf}
 \usage{
-pdf.ggplot(gg.plot, fig.path, width = 6, height = 6, useDingbats = TRUE)
+pdf.ggplot(gg.plot, fig.path, width = 6, height = 6, useDingbats = TRUE,
+  ...)
 
-pdf.gtable(g.table, fig.path, width = 6, height = 6, useDingbats = TRUE)
+pdf.gtable(g.table, fig.path, width = 6, height = 6, useDingbats = TRUE,
+  ...)
 
 plot.gtable(g.table)
 
 unclip.ggplot(gg.plot)
 
-pdf.plot(plot, fig.path, width = 6, height = 6, useDingbats = TRUE)
+pdf.plot(plot, fig.path, width = 6, height = 6, useDingbats = TRUE, ...)
 }
 \arguments{
 \item{gg.plot}{A \code{\link{ggplot}} object.}
 
 \item{fig.path}{fig.path The full path of pdf file.}
 
-\item{width, }{height Refer to \code{\link{pdf}}. Default to width=6, height=6.}
+\item{width, height}{Refer to \code{\link{pdf}}. Default to width=6, height=6.}
 
 \item{useDingbats}{Defaults to TRUE, which produces smaller and better output.
 Setting this to FALSE can work around font display problems in broken PDF viewers.
 Refer to \code{\link{pdf}}.}
 
-\item{plot}{The list returned from \code{\link{plot}}.}
+\item{...}{Other parameters pass to \code{\link{pdf}}.}
 
-\item{gtable}{A \code{\link{gtable}} object.}
+\item{g.table}{A \code{gtable} object.}
+
+\item{plot}{The list returned from \code{\link{plot}}.}
 }
 \description{
 The extended methods for producing PDF graphics.
@@ -47,7 +51,7 @@ and plot gtable object in console.
 
 \code{unclip.ggplot} turns off clipping for a
 \code{\link{ggplot}} object, but returns a
-\code{\link{gtable}} object.
+\code{gtable} object.
 Refer to \url{http://stackoverflow.com/questions/9690648/point-clipped-on-x-axis-in-ggplot}.
 
 \code{pdf.plot} creates pdf for the list returned from \code{\link{plot}}.
