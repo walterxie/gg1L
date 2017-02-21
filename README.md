@@ -9,7 +9,26 @@ It also includes some tips and smart code collected from the Internet
 to improve plotting, 
 and few visualisation methods derived from my previous and current works.
 
-read introduction:
+##Installation
+
+You can use the **devtools::install\_github()** function to install the latest release directly from the GitHub:
+```R
+library(devtools)
+devtools::install_github("walterxie/gg1L@*release")
+library(gg1L)
+```
+
+Or a perticular release version:
+```R
+devtools::install_github("walterxie/gg1L@v0.1.1")
+```
+
+Or the latest development version:
+```R
+devtools::install_github("walterxie/gg1L")
+```
+
+Read the package introduction:
 ```R
 package?gg1L
 ```
@@ -17,21 +36,6 @@ package?gg1L
 To see all exported functions:
 ```R
 help(package = "gg1L")
-```
-
-##Installation
-
-```R
-install.packages(gg1L)
-library(gg1L)
-```
-
-You can also use the **devtools** *install\_github()* function to install the lastest development version directly from the GitHub.
-
-```R
-library(devtools)
-devtools::install_github("walterxie/gg1L")
-library(gg1L)
 ```
 
 ##Tutorials
