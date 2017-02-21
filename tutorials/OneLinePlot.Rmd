@@ -122,7 +122,7 @@ It needs to use <code>pdf.ggplot</code>* to create pdf.
 It also can be concatenated using '+'.  
  
 If a function returns a *gtable* object, then its name starts with "gt".
-It needs to use <code>pdf.gtplot</code> to create pdf, or <code>plot.gtable</code> to plot to console.
+It needs to use <code>pdf.gtplot</code> to create pdf, or <code>plotgt</code> to plot to console.
 
 All basic charts are designed to return a *ggplot* 
 object for easy to extend, you may need to turn off clipping using  

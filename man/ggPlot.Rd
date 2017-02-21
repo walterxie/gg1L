@@ -362,7 +362,7 @@ It also can be concatenated using '+'.
 If the function returns a \code{gtable} object,
 then its name starts with "gt".
 It needs to use \code{\link{pdf.gtable}} to create pdf,
-or \code{\link{plot.gtable}} to plot to console.
+or \code{\link{plotgt}} to plot to console.
 }
 \description{
 Simplify \pkg{ggplot} graphic coding into one-line functions that provides frequently

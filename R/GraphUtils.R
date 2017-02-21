@@ -46,20 +46,20 @@ pdf.ggplot <- function(gg.plot, fig.path, width=6, height=6, useDingbats=TRUE, .
 #' @rdname pdf
 pdf.gtable <- function(g.table, fig.path, width=6, height=6, useDingbats=TRUE, ...) {
   pdf(fig.path, width=width, height=height, useDingbats=useDingbats, ...)
-  plot.gtable(g.table)
+  plotgt(g.table)
   invisible(dev.off())
 }
 
-#' @details \code{plot.gtable} \code{\link{require}(\link{grid})}
-#' and plot gtable object in console.
+#' @details \code{plotgt} uses \code{\link{grid.draw}}
+#' to plot gtable object in console.
 #'
 #' @keywords graph
 #' @export
 #' @examples
-#' plot(g.table)
+#' plotgt(g.table)
 #'
 #' @rdname pdf
-plot.gtable <- function(g.table) {
+plotgt <- function(g.table) {
   require(grid)
   grid.draw(g.table)
 }
@@ -75,7 +75,6 @@ plot.gtable <- function(g.table) {
 unclip.ggplot <- function(gg.plot) {
   gt <- ggplot_gtable(ggplot_build(gg.plot))
   gt$layout$clip[gt$layout$name == "panel"] <- "off"
-
   return(gt)
 }
 

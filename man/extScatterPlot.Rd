@@ -101,7 +101,7 @@ If the function returns a \code{gtable} object, then its name starts with "gt".
 This kind of functions use \code{\link{unclip.ggplot}} to turns off clipping for a
 \code{\link{ggplot}} object, but returns a \code{gtable} object.
 It needs to use \code{\link{pdf.gtable}} to create pdf.
-And also \code{\link{plot.gtable}}
+And also \code{\link{plotgt}}
 simplifies the code to plot gtable object in console.
 }
 \description{

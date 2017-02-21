@@ -26,14 +26,14 @@ df.clusters$labels <- rownames(df.clusters)
 df.clusters[1:3,]
 ```
 
-Scatter plots may have overlaps between data points and axises. <code>unclip.ggplot</code> can turns off clipping, but it returns a *gtable* object, so that either <code>pdf.gtplot</code> or <code>plot.gtable</code> will be used to handle the plot.
+Scatter plots may have overlaps between data points and axises. <code>unclip.ggplot</code> can turns off clipping, but it returns a *gtable* object, so that either <code>pdf.gtplot</code> or <code>plotgt</code> will be used to handle the plot.
 
 ```{r ScatterPlot, warning=FALSE}
 gg.plot <- ggScatterPlot(df.clusters, x.id="x", y.id="y", colour.id="group", shape.id="group", 
                          title="Clusters", palette="Set1", verbose=F)
 # turns off clipping
 g.table <- unclip.ggplot(gg.plot) 
-plot(g.table)
+plotgt(g.table)
 ```
 
 ### Some tricks
@@ -101,7 +101,7 @@ The following Nonmetric Multidimensional Scaling (NMDS) plot illustrates how the
 ```{r NMDS1, warning=FALSE, message=FALSE}
 nmds <- gtNMDSPlot(reads.phyla[,1:6], reads.phyla[,7, drop=F], colour.id="TaxaGroup", 
                    text.or.point=2, verbose=F)
-plot(nmds)
+plotgt(nmds)
 ```
 
 ### PCoA using *cmdscale* 
@@ -113,7 +113,7 @@ require(vegan)
 dist.cm <- vegdist(reads.phyla[,1:6], method="jaccard", binary=TRUE)
 cmds <- gtPCoAPlot(dist.cm, reads.phyla[,7, drop=F], colour.id="TaxaGroup", 
                    text.or.point=1, text.avoid.overlap=T, verbose=F)
-plot(cmds)
+plotgt(cmds)
 ```
 
 ### PCA using *prcomp* 
@@ -122,7 +122,7 @@ plot(cmds)
 
 ```{r PCA1, warning=FALSE, message=FALSE}
 pca <- gtPCAPlot(reads.phyla[,1:6], text.or.point=3, text.size=5, text.repel=T, verbose=F)
-plot(pca)
+plotgt(pca)
 ```
 
 ## Line with points

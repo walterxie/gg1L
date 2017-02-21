@@ -7,8 +7,12 @@
 \format{A data frame with 110 rows and 7 columns,
 the last column is the taxonomy group:
 \describe{
-  \item{16S}{a genetic mark}
-  ...
+  \item{16S}{16S genetic mark}
+  \item{18S}{18S genetic mark}
+  \item{ITS}{ITS genetic mark}
+  \item{trnL}{trnL genetic mark}
+  \item{COI}{COI genetic mark}
+  \item{COI-spun}{COI genetic mark and samples were spun}
   \item{TaxaGroup}{the taxonomy group of phyla}
 }}
 \source{

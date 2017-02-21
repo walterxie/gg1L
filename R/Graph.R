@@ -29,7 +29,7 @@
 #' If the function returns a \code{gtable} object,
 #' then its name starts with "gt".
 #' It needs to use \code{\link{pdf.gtable}} to create pdf,
-#' or \code{\link{plot.gtable}} to plot to console.
+#' or \code{\link{plotgt}} to plot to console.
 #' @note
 #' All basic charts are designed to return a \code{\link{ggplot}}
 #' object for easy to extend, you may need to turn off clipping using

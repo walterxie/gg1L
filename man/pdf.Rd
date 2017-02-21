@@ -5,7 +5,7 @@
 \alias{pdf.ggplot}
 \alias{pdf.gtable}
 \alias{pdf.plot}
-\alias{plot.gtable}
+\alias{plotgt}
 \alias{unclip.ggplot}
 \title{Create pdf}
 \usage{
@@ -15,7 +15,7 @@ pdf.ggplot(gg.plot, fig.path, width = 6, height = 6, useDingbats = TRUE,
 pdf.gtable(g.table, fig.path, width = 6, height = 6, useDingbats = TRUE,
   ...)
 
-plot.gtable(g.table)
+plotgt(g.table)
 
 unclip.ggplot(gg.plot)
 
@@ -46,8 +46,8 @@ The extended methods for producing PDF graphics.
 
 \code{pdf.gtable} creates pdf for gtable object.
 
-\code{plot.gtable} \code{\link{require}(\link{grid})}
-and plot gtable object in console.
+\code{plotgt} uses \code{\link{grid.draw}}
+to plot gtable object in console.
 
 \code{unclip.ggplot} turns off clipping for a
 \code{\link{ggplot}} object, but returns a
@@ -67,7 +67,7 @@ pdf.ggplot(gg.plot, fig.path="fig.pdf", width=8, height=8)
 g.table <- unclip.ggplot(gg.plot)
 pdf.gtable(g.table, fig.path="fig.pdf", width=8, height=8)
 
-plot(g.table)
+plotgt(g.table)
 
 library(pryr)
 p \%<a-\% plot(1:5)
