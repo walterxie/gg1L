@@ -38,6 +38,7 @@
 #' More details and tutorials are available at
 #' \url{https://github.com/walterxie/gg1L}
 #' @import colorspace
+#' @import methods
 #' @import ggplot2
 #' @import ggrepel
 #' @import reshape2
@@ -200,7 +201,7 @@ ggBarChart <- function(df, x.id, y.id, fill.id=NULL,
   p <- ggOptLegend(p, legend.title.fill=legend.title, no.legend=no.legend,
                    legend.col=legend.col, legend.row=legend.row)
 
-  p <- ggLabTitle(p, x.id, y.id, title=title, x.lab=x.lab, y.lab=y.lab)
+  p <- ggLabTitle(p, title=title, x.lab=x.lab, y.lab=y.lab)
   if (no.panel.border)
     p <- ggThemeAxis(p, title.size=title.size)
   else
@@ -271,15 +272,12 @@ ggHistogram <- function(df, x.id, fill.id=NULL,
   p <- ggOptScaleAxis(p, axis="y", scale="continuous", trans=y.trans, verbose=verbose)
 
 
-  p <- ggOptCoordCartesian(p, df, x.id, y.id, x.lim.cart=x.lim.cart, y.lim.cart=y.lim.cart,
-                           coord.flip=coord.flip, verbose=verbose)
-
   p <- ggOptPalette(p, scale.to="fill", palette=palette, verbose=verbose)
 
   p <- ggOptLegend(p, legend.title.fill=legend.title, no.legend=no.legend,
                    legend.col=legend.col, legend.row=legend.row)
 
-  p <- ggLabTitle(p, x.id, y.id, title=title, x.lab=x.lab, y.lab=y.lab)
+  p <- ggLabTitle(p, title=title, x.lab=x.lab, y.lab=y.lab)
   if (no.panel.border)
     p <- ggThemeAxis(p, title.size=title.size)
   else
@@ -359,7 +357,7 @@ ggBoxWhiskersPlot <- function(df, x.id, y.id, fill.id=NULL, colour.id=NULL,
                    legend.title.fill=legend.title.fill, no.legend=no.legend,
                    legend.col=legend.col, legend.row=legend.row)
 
-  p <- ggLabTitle(p, x.id, y.id, title=title, x.lab=x.lab, y.lab=y.lab)
+  p <- ggLabTitle(p, title=title, x.lab=x.lab, y.lab=y.lab)
   if (no.panel.border)
     p <- ggThemeAxis(p, title.size=title.size)
   else
@@ -540,7 +538,7 @@ ggScatterPlot <- function(df, x.id, y.id, colour.id=NULL, text.colour.id=NULL,
                    legend.title.shape=legend.title.shape, legend.title.size=legend.title.size,
                    no.legend=no.legend, legend.col=legend.col, legend.row=legend.row)
 
-  p <- ggLabTitle(p, x.id, y.id, title=title, x.lab=x.lab, y.lab=y.lab)
+  p <- ggLabTitle(p, title=title, x.lab=x.lab, y.lab=y.lab)
   if (no.panel.border)
     p <- ggThemeAxis(p, title.size=title.size)
   else
@@ -584,11 +582,10 @@ ggScatterPlot <- function(df, x.id, y.id, colour.id=NULL, text.colour.id=NULL,
 #'
 #' @rdname ggPlot
 ggLineWithPoints <- function(df, x.id, y.id, group.id=NULL, colour.id=NULL,
-                             shape.id=NULL, shapes=NULL, text.id=NULL, line.or.point=3,
-                             line.size=0.5, line.type = 1, line.alpha=1,
-                             point.size=3, point.alpha=1, point.data=NULL,
-                             dodge.width=0, text.or.point=2,
-                             text.data = NULL, text.size = 3, text.alpha = 0.5,
+                             shape.id=NULL, shapes=NULL, text.id=NULL, text.colour.id=NULL,
+                             line.or.point=3, line.size=0.5, line.type = 1, line.alpha=1,
+                             point.size=3, point.alpha=1, point.data=NULL, dodge.width=0,
+                             text.or.point=2, text.data = NULL, text.size = 3, text.alpha = 0.5,
                              text.hjust=-0.1, text.vjust = -0.2, text.avoid.overlap = FALSE,
                              text.repel = FALSE, box.padding = unit(0.25, "lines"),
                              point.padding = unit(1e-06, "lines"), arrow = NULL, force = 1,
@@ -644,6 +641,8 @@ ggLineWithPoints <- function(df, x.id, y.id, group.id=NULL, colour.id=NULL,
                       scales=facet.scales, space=facet.space, shrink=facet.shrink,
                       drop=facet.drop, verbose=verbose)
 
+  if (is.null(text.colour.id))
+    text.colour.id <- colour.id
   p <- ggOptText(p, col.names, text.id=text.id, text.data=text.data, colour.id=text.colour.id,
                  text.repel=text.repel, text.size=text.size, text.alpha=text.alpha,
                  text.hjust=text.hjust, text.vjust=text.vjust, text.avoid.overlap=text.avoid.overlap,
@@ -659,7 +658,7 @@ ggLineWithPoints <- function(df, x.id, y.id, group.id=NULL, colour.id=NULL,
                    legend.title.colour=legend.title.colour, legend.title.shape=legend.title.shape,
                    no.legend=no.legend, legend.col=legend.col, legend.row=legend.row)
 
-  p <- ggLabTitle(p, x.id, y.id, title=title, x.lab=x.lab, y.lab=y.lab)
+  p <- ggLabTitle(p, title=title, x.lab=x.lab, y.lab=y.lab)
   if (no.panel.border)
     p <- ggThemeAxis(p, title.size=title.size)
   else
@@ -754,7 +753,7 @@ ggDensityEstimate <- function(df, x.id, y.id=NULL, fill.id=NULL, colour.id=NULL,
 
   if (density.pos=="stack" && title=="Kernel Density Estimate")
     title <- paste("Conditional", title)
-  p <- ggLabTitle(p, x.id, y.id, title=title, x.lab=x.lab, y.lab=y.lab)
+  p <- ggLabTitle(p, title=title, x.lab=x.lab, y.lab=y.lab)
   if (no.panel.border)
     p <- ggThemeAxis(p, title.size=title.size)
   else
@@ -899,7 +898,7 @@ ggHeatmap <- function(df.to.melt, melt.id, low="white", high="steelblue", mid = 
                            x.lim.cart=x.lim.cart, y.lim.cart=y.lim.cart,
                            coord.flip=coord.flip, verbose=verbose)
 
-  p <- ggLabTitle(p, "", "", title=title, x.lab=x.lab, y.lab=y.lab)
+  p <- ggLabTitle(p, title=title, x.lab=x.lab, y.lab=y.lab)
   if (no.panel.border)
     p <- ggThemeAxis(p, title.size=title.size)
   else

@@ -291,7 +291,7 @@ ggOptLegend <- function(p, legend.title.fill=NULL, legend.title.colour=NULL,
   return(p)
 }
 
-ggLabTitle <- function(p, x.id, y.id, title, x.lab=NULL, y.lab=NULL) {
+ggLabTitle <- function(p, title, x.lab=NULL, y.lab=NULL) {
   p <- p + theme_bw() + ggtitle(title)
 
   if (! is.null(x.lab))

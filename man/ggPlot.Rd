@@ -74,9 +74,9 @@ ggScatterPlot(df, x.id, y.id, colour.id = NULL, text.colour.id = NULL,
   plot.margin.cm = NULL, no.panel.border = FALSE, verbose = TRUE)
 
 ggLineWithPoints(df, x.id, y.id, group.id = NULL, colour.id = NULL,
-  shape.id = NULL, shapes = NULL, text.id = NULL, line.or.point = 3,
-  line.size = 0.5, line.type = 1, line.alpha = 1, point.size = 3,
-  point.alpha = 1, point.data = NULL, dodge.width = 0,
+  shape.id = NULL, shapes = NULL, text.id = NULL, text.colour.id = NULL,
+  line.or.point = 3, line.size = 0.5, line.type = 1, line.alpha = 1,
+  point.size = 3, point.alpha = 1, point.data = NULL, dodge.width = 0,
   text.or.point = 2, text.data = NULL, text.size = 3, text.alpha = 0.5,
   text.hjust = -0.1, text.vjust = -0.2, text.avoid.overlap = FALSE,
   text.repel = FALSE, box.padding = unit(0.25, "lines"),
