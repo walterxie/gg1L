@@ -20,7 +20,7 @@ library(gg1L)
 
 Or a perticular release version:
 ```R
-devtools::install_github("walterxie/gg1L@v0.1.1")
+devtools::install_github("walterxie/gg1L@v0.1.2")
 ```
 
 Or the latest development version:

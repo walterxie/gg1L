@@ -1,7 +1,7 @@
 Package: gg1L
 Type: Package
 Title: R Plot Using One-line Function Derived From ggplot2
-Version: 0.1.1
+Version: 0.1.2
 Author: Walter Xie
 Maintainer: Walter Xie <walter@cs.auckland.ac.nz>
 Description: This package wraps ggplot2’s code into one-line functions, which
