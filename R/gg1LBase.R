@@ -9,7 +9,8 @@
 #' Start to simplify \pkg{ggplot} graphic coding into these basic functions first,
 #' and reuse them to make up other one-line plot functions.
 #'
-#' @seealso Colour palette \code{\link{ggOptPalette}}.
+#' @seealso Colour schemes \code{\link{ggOptPalette}};
+#' position scales \code{ggOptScaleAxis}.
 #'
 #'
 #' @return

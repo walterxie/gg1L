@@ -129,7 +129,8 @@ More details and tutorials are available at
 \url{https://github.com/walterxie/gg1L}
 }
 \seealso{
-Colour palette \code{\link{ggOptPalette}}.
+Colour schemes \code{\link{ggOptPalette}};
+position scales \code{ggOptScaleAxis}.
 }
 \keyword{base}
 
