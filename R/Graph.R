@@ -400,9 +400,9 @@ ggBoxWhiskersPlot <- function(df, x.id, y.id, fill.id=NULL, colour.id=NULL,
 #' \code{\link{geom_text_repel}}.
 #' @param text.avoid.overlap If TRUE, text that overlaps previous text
 #' in the same layer will not be plotted. Not recommended. Default to FALSE.
-#' @param scale.limits.min Manually set the minimum data range of the scale
-#' given colours to \code{c(scale.limits.min, max(df[,colour.id]))}.
-#' Refer to \code{limits} in \code{\link{discrete_scale}}.
+#' @param scale.limits.min Manually set the minimum data range of the colour scale,
+#' for example, in legend. The code set \code{limits} in \code{\link{discrete_scale}}
+#' to \code{c(scale.limits.min, max(df[,colour.id]))}.
 #' @param xintercept,yintercept Add horizontal or vertical line.
 #' Refer to \code{\link{geom_hline}} or \code{\link{geom_vline}}.
 #' @keywords scatter plot

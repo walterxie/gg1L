@@ -284,9 +284,9 @@ Default to FALSE.}
 \item{box.padding, point.padding, arrow, force}{The parameters refer to
 \code{\link{geom_text_repel}}.}
 
-\item{scale.limits.min}{Manually set the minimum data range of the scale
-given colours to \code{c(scale.limits.min, max(df[,colour.id]))}.
-Refer to \code{limits} in \code{\link{discrete_scale}}.}
+\item{scale.limits.min}{Manually set the minimum data range of the colour scale,
+for example, in legend. The code set \code{limits} in \code{\link{discrete_scale}}
+to \code{c(scale.limits.min, max(df[,colour.id]))}.}
 
 \item{line.or.point}{If 1, then display the line only; if 2, then only points;
 if 3, the default, then both the line and points.}
