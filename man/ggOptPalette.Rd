@@ -16,7 +16,8 @@ a full command, such as \code{\link{scale_colour_gradient}}.}
 \item{scale.type}{Choose one from "brewer", "gradientn", and "manual"
 to make up a full command, such as \code{\link{scale_fill_manual}}.}
 
-\item{palette}{The colour palette for bar, box, scatter plot, etc.}
+\item{palette}{The colour palette for bar, box, scatter plot, etc.
+Default NULL to use \code{\link{ggplot}} default colours.}
 
 \item{limits}{A numeric vector of length two providing limits of the scale.
 Use NA to refer to the existing minimum or maximum.

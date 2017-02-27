@@ -29,33 +29,6 @@
 #'
 #' @param verbose More messages. Default to TRUE.
 
-
-
-
-#' @param x.facet.id,y.facet.id The string of column names in \code{df},
-#' which creates facets (a formula) in \code{\link{facet_grid}}.
-#' @param facet.scales,facet.space,facet.shrink,facet.drop
-#' The parameters refer to \code{\link{facet_grid}}.
-
-
-
-#' Default NULL to use \code{\link{ggplot}} default colours.
-#' @param text.id Label the data points according \code{text.id} column,
-#' such as "Row.names" column after \code{\link{merge}}.
-#' @param text.size,text.hjust,text.vjust,text.alpha
-#' The arguments to adjust text in \code{\link{geom_text}} in the line or scatter plot.
-#' @param legend.title,legend.title.fill,legend.title.colour,legend.title.shape,legend.title.group,legend.title.size,
-#' The title of legend created by fill, colour, shape, group, or size.
-#' Set legend.title.*="" to remove legend.
-
-#' @param legend.col,legend.row Customize the number of columns or rows for legend in bar chart.
-#' They cannot be used at the same time. Default not to use them, legend.col=1, legend.row=0.
-#' @param no.legend Turning off some legends, such as, fill, shape, colour.
-#' Default to NULL, which is to do nothing.
-#' @param no.panel.border Add panel border or not. Default to FALSE.
-
-
-
 #' @details
 #' \code{ggInit} initialises the plot, and define the aesthetic mapping.
 #' \code{df} and \code{x.id} are compulsory.
@@ -248,7 +221,21 @@ ggThemeOthers <- function(p, x.text=TRUE, y.text=TRUE, x.ticks=TRUE, y.ticks=TRU
 }
 
 
-# reformulate(fac2,fac1) => fac1 ~ fac2
+#' Facet grid
+#'
+#' It passes arguments to \code{\link{facet_grid}}.
+#'
+#' @param x.facet.id,y.facet.id The string of column names in \code{df},
+#' @param col.names Colum names of data, which are only used to validate
+#' if *.id exsits in the data.
+#' which creates facets (a formula) in \code{\link{facet_grid}}.
+#' @param scales,space,shrink,drop
+#' The parameters refer to \code{\link{facet_grid}}.
+#' @export
+#' @examples
+#' col.names <- colnames(df)
+#' p <- ggOptFacetGrid(p, col.names, x.facet.id="gene")
+#'
 ggOptFacetGrid <- function(p, col.names, x.facet.id=NULL, y.facet.id=NULL,
                            scales = "fixed", space = "fixed", shrink = TRUE,
                            drop = TRUE, verbose=TRUE) {
@@ -269,6 +256,7 @@ ggOptFacetGrid <- function(p, col.names, x.facet.id=NULL, y.facet.id=NULL,
     if (verbose)
       cat("facet_grid(", deparse(reformulate(fac2,fac1)), ").\n")
 
+    # reformulate(fac2,fac1) => fac1 ~ fac2
     p <- p + facet_grid(reformulate(fac2,fac1), scales = scales,
                         space = space, shrink = shrink, drop = drop)
   }
@@ -374,6 +362,7 @@ ggOptEllipse <- function(p, col.names, ellipsed.id=NULL) {
 #' @param scale.type Choose one from "brewer", "gradientn", and "manual"
 #' to make up a full command, such as \code{\link{scale_fill_manual}}.
 #' @param palette The colour palette for bar, box, scatter plot, etc.
+#' Default NULL to use \code{\link{ggplot}} default colours.
 #' @param limits A numeric vector of length two providing limits of the scale.
 #' Use NA to refer to the existing minimum or maximum.
 #' Refer to \code{\link{continuous_scale}}.
@@ -479,6 +468,26 @@ ggOptScaleAxis <- function(p, axis="y", scale="continuous", trans="identity",
 }
 
 
+#' Legend title
+#'
+#' Change the legend title according to the chart type.
+#' For example, \code{legend.title.fill} is for the colour
+#' related aesthetic \code{\link{fill}} in \pkg{ggplot2},
+#' such as bars.
+#' \code{legend.title.colour} for \code{\link{colour}}, such as line or text.
+#' \code{legend.title.shape} for \code{\link{shape}}, such as shapes of points.
+#' \code{legend.title.group} for \code{\link{group}}.
+#'
+#' @param legend.title.fill,legend.title.colour,legend.title.shape,legend.title.group,
+#' The title of legend is created by fill, colour, shape, or group. Only choose one.
+#' Set legend.title.*="" to remove legend.
+#' @param legend.title.size The font size of legend title
+#' @param legend.col,legend.row Customize the number of columns or rows for legend in bar chart.
+#' They cannot be used at the same time. Default not to use them, legend.col=1, legend.row=0.
+#' @param no.legend Turning off some legends, such as, fill, shape, colour.
+#' Default to NULL, which is to do nothing.
+#' @export
+#'
 ggOptLegend <- function(p, legend.title.fill=NULL, legend.title.colour=NULL,
                         legend.title.shape=NULL, legend.title.group=NULL,
                         legend.title.size=NULL, legend.col=1, legend.row=0,

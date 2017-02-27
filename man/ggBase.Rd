@@ -69,28 +69,6 @@ such as \code{c(1,2,3,4)}.}
 \item{legend.position}{Legend position, default to "right".}
 
 \item{legend.direction}{The direction to display legend, default to "vertical".}
-
-\item{x.facet.id, y.facet.id}{The string of column names in \code{df},
-which creates facets (a formula) in \code{\link{facet_grid}}.}
-
-\item{facet.scales, facet.space, facet.shrink, facet.drop}{The parameters refer to \code{\link{facet_grid}}.
-Default NULL to use \code{\link{ggplot}} default colours.}
-
-\item{text.id}{Label the data points according \code{text.id} column,
-such as "Row.names" column after \code{\link{merge}}.}
-
-\item{text.size, text.hjust, text.vjust, text.alpha}{The arguments to adjust text in \code{\link{geom_text}} in the line or scatter plot.}
-
-\item{legend.title, legend.title.fill, legend.title.colour, legend.title.shape, legend.title.group, legend.title.size, }{The title of legend created by fill, colour, shape, group, or size.
-Set legend.title.*="" to remove legend.}
-
-\item{legend.col, legend.row}{Customize the number of columns or rows for legend in bar chart.
-They cannot be used at the same time. Default not to use them, legend.col=1, legend.row=0.}
-
-\item{no.legend}{Turning off some legends, such as, fill, shape, colour.
-Default to NULL, which is to do nothing.}
-
-\item{no.panel.border}{Add panel border or not. Default to FALSE.}
 }
 \value{
 A \code{\link{ggplot}} object, which can be concatenated using '+'.
