@@ -40,13 +40,13 @@ help(package = "gg1L")
 
 ## Tutorials
 
-1. [Bar chart](https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotBarChart.html)
+1. [Bar chart (including taxonomy abundance bar chart, adding values, lines, and error bars)](https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotBarChart.html)
 
-2. [Line with points](https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotPointsLines.html)
+2. [Line with points (NMDS, PCoA, PCA)](https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotPointsLines.html)
 
 3. [Tracer R](https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotTracerR.html)
 
-4. [The rest](https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlot.html)
+4. [The rest (Whiskers plot, heatmap, multiple plots)](https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlot.html)
 
 
 
