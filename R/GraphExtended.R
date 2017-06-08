@@ -176,12 +176,11 @@ gtNMDSPlot <- function(...) {
 #' @keywords scatter plot
 #' @export
 #' @rdname extScatterPlot
-ggPCoAPlot <- function(dist.comm, attr.df,
-                               colour.id=NULL, shape.id=NULL, link.id=NULL,
-                               text.id=NULL, text.or.point=3,
-                               text.size.id=NULL, text.size=3,
-                               eig=TRUE, k=2, add.const=FALSE,
-                               title="Classical MDS", verbose=TRUE, ...) {
+ggPCoAPlot <- function(dist.comm, attr.df, colour.id=NULL, shape.id=NULL,
+                       link.id=NULL, text.id=NULL, text.or.point=3,
+                       text.size.id=NULL, text.size=3, eig=TRUE, k=2,
+                       add.const=FALSE, title="Classical MDS",
+                       colour.levels=c(), shape.levels=c(), verbose=TRUE, ...) {
   if (! missing(attr.df)) {
     if (! all(rownames(as.matrix(dist.comm)) %in% rownames(attr.df)) )
       stop("Invalid attr.df,", paste(rownames(as.matrix(dist.comm)), collapse = ","),
@@ -226,6 +225,19 @@ ggPCoAPlot <- function(dist.comm, attr.df,
     text.size=round(df.points.merge[,text.size.id]/min.s*3.81, 2)
   }
 
+  if (length(colour.levels)>1) {
+    if (length(colour.levels) != length(unique(df.points.merge[,colour.id])))
+      warning("colour.levels length != ", colour.id, " unique values !")
+
+    df.points.merge[,colour.id] <- factor(df.points.merge[,colour.id], ordered = TRUE, levels = colour.levels)
+  }
+  if (length(shape.levels)>1) {
+    if (length(shape.levels) != length(unique(df.points.merge[,shape.id])))
+      warning("shape.levels length != ", shape.id, " unique values !")
+
+    df.points.merge[,shape.id] <- factor(df.points.merge[,shape.id], ordered = TRUE, levels = shape.levels)
+  }
+
   # Plot MDS ordination
   gg.plot <- gg1L::ggScatterPlot(df.points.merge, x.id="MDS1", y.id="MDS2",
                                   colour.id=colour.id, shape.id=shape.id, link.id=link.id,
@@ -263,10 +275,9 @@ gtPCoAPlot <- function(...) {
 #' @keywords scatter plot
 #' @export
 #' @rdname extScatterPlot
-ggPCAPlot <- function(df.comm, attr.df, x.i=1, y.i=2,
-                      colour.id=NULL, shape.id=NULL, link.id=NULL,
-                      text.id=NULL, text.or.point=3, text.data=NULL,
-                      scale.pca=TRUE, title="PCA",
+ggPCAPlot <- function(df.comm, attr.df, x.i=1, y.i=2, colour.id=NULL, shape.id=NULL,
+                      link.id=NULL, text.id=NULL, text.or.point=3, text.data=NULL,
+                      scale.pca=TRUE, title="PCA", colour.levels=c(), shape.levels=c(),
                       verbose=TRUE, ...) {
 
   if (! missing(attr.df)) {
@@ -301,6 +312,19 @@ ggPCAPlot <- function(df.comm, attr.df, x.i=1, y.i=2,
 
   if (text.or.point != 2)
     text.id="Row.names"
+
+  if (length(colour.levels)>1) {
+    if (length(colour.levels) != length(unique(df.points.merge[,colour.id])))
+      warning("colour.levels length != ", colour.id, " unique values !")
+
+    df.points.merge[,colour.id] <- factor(df.points.merge[,colour.id], ordered = TRUE, levels = colour.levels)
+  }
+  if (length(shape.levels)>1) {
+    if (length(shape.levels) != length(unique(df.points.merge[,shape.id])))
+      warning("shape.levels length != ", shape.id, " unique values !")
+
+    df.points.merge[,shape.id] <- factor(df.points.merge[,shape.id], ordered = TRUE, levels = shape.levels)
+  }
 
   x.id <- paste0("PC", x.i)
   y.id <- paste0("PC", y.i)

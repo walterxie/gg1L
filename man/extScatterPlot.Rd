@@ -21,14 +21,15 @@ gtNMDSPlot(...)
 ggPCoAPlot(dist.comm, attr.df, colour.id = NULL, shape.id = NULL,
   link.id = NULL, text.id = NULL, text.or.point = 3,
   text.size.id = NULL, text.size = 3, eig = TRUE, k = 2,
-  add.const = FALSE, title = "Classical MDS", verbose = TRUE, ...)
+  add.const = FALSE, title = "Classical MDS", colour.levels = c(),
+  shape.levels = c(), verbose = TRUE, ...)
 
 gtPCoAPlot(...)
 
 ggPCAPlot(df.comm, attr.df, x.i = 1, y.i = 2, colour.id = NULL,
   shape.id = NULL, link.id = NULL, text.id = NULL, text.or.point = 3,
-  text.data = NULL, scale.pca = TRUE, title = "PCA", verbose = TRUE,
-  ...)
+  text.data = NULL, scale.pca = TRUE, title = "PCA",
+  colour.levels = c(), shape.levels = c(), verbose = TRUE, ...)
 
 gtPCAPlot(...)
 }
