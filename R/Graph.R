@@ -380,6 +380,9 @@ ggBoxWhiskersPlot <- function(df, x.id, y.id, fill.id=NULL, colour.id=NULL,
 #' @param ellipsed.id The column name in \code{df} to define
 #' how to draw ellipse over data points, which is normally same as
 #' \code{colour.id} to show clusters.
+#' The ellipses are drawn by \code{\link{stat_ellipse}},
+#' where the method for calculating the ellipses has been modified
+#' from (Fox and Weisberg, 2011).
 #' @param text.colour.id The column name in \code{df} to define
 #' the group of texts and assign colours.
 #' @param shapes Manually define the shapes of points.

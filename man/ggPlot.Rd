@@ -256,7 +256,10 @@ and \url{http://www.cookbook-r.com/Graphs/Shapes_and_line_types/}.}
 
 \item{ellipsed.id}{The column name in \code{df} to define
 how to draw ellipse over data points, which is normally same as
-\code{colour.id} to show clusters.}
+\code{colour.id} to show clusters.
+The ellipses are drawn by \code{\link{stat_ellipse}},
+where the method for calculating the ellipses has been modified
+from (Fox and Weisberg, 2011).}
 
 \item{text.id}{Label the data points according \code{text.id} column,
 such as "Row.names" column after \code{\link{merge}}.}
