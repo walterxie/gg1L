@@ -2,14 +2,14 @@
 
 Author: [Dong Xie](https://www.cs.auckland.ac.nz/~walter/)
 
-##Use my time to save your time
+## Use my time to save your time
 
 This package wraps ggplot2’s code into one-line functions making plot easy. 
 It also includes some tips and smart code collected from the Internet 
 to improve plotting, 
 and few visualisation methods derived from my previous and current works.
 
-##Installation
+## Installation
 
 You can use the **devtools::install\_github()** function to install the latest release directly from the GitHub:
 ```R
@@ -38,15 +38,15 @@ To see all exported functions:
 help(package = "gg1L")
 ```
 
-##Tutorials
+## Tutorials
 
-1. [Bar chart] (https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotBarChart.html)
+1. [Bar chart](https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotBarChart.html)
 
-2. [Line with points] (https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotPointsLines.html)
+2. [Line with points](https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotPointsLines.html)
 
-3. [Tracer R] (https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotTracerR.html)
+3. [Tracer R](https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlotTracerR.html)
 
-4. [The rest] (https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlot.html)
+4. [The rest](https://cdn.rawgit.com/walterxie/gg1L/master/tutorials/OneLinePlot.html)
 
 
 
