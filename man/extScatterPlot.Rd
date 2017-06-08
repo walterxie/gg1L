@@ -36,6 +36,7 @@ gtPCAPlot(...)
 \item{comm}{Community data for NMDS plot.
 It can also be a \code{\link{dist}} object to show the dissimilarity
 between pairwised samples in the community data.
+If \code{\link{dist}} is given, then the \code{distance} argument is ignored.
 Detail to \code{\link{metaMDS}}.}
 
 \item{attr.df}{A data frame of meta data to define
