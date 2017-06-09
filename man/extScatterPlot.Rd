@@ -21,8 +21,9 @@ gtNMDSPlot(...)
 ggPCoAPlot(dist.comm, attr.df, colour.id = NULL, shape.id = NULL,
   link.id = NULL, text.id = NULL, text.or.point = 3,
   text.size.id = NULL, text.size = 3, eig = TRUE, k = 2,
-  add.const = FALSE, title = "Classical MDS", colour.levels = c(),
-  shape.levels = c(), verbose = TRUE, ...)
+  add.const = FALSE, title = "Classical MDS", x.id = "MDS1",
+  y.id = "MDS2", colour.levels = c(), shape.levels = c(),
+  verbose = TRUE, ...)
 
 gtPCoAPlot(...)
 
@@ -78,6 +79,9 @@ Default to TRUE.}
 \item{add.const}{Logical indicating in \code{\link{cmdscale}} if an additive
 constant c* should be computed, and added to the non-diagonal dissimilarities
 such that the modified dissimilarities are Euclidean. Default to FALSE.}
+
+\item{x.id, y.id}{The 2 axes to plot from the first few ordinations,
+such as "MDS1", "MDS2", or "MDS3". The index must be an integer between 1 and \code{k}.}
 
 \item{df.comm}{A numeric or complex matrix (or data frame),
 which provides the data for the principal components analysis

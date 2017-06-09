@@ -173,13 +173,15 @@ gtNMDSPlot <- function(...) {
 #' @param add.const Logical indicating in \code{\link{cmdscale}} if an additive
 #' constant c* should be computed, and added to the non-diagonal dissimilarities
 #' such that the modified dissimilarities are Euclidean. Default to FALSE.
+#' @param x.id,y.id The 2 axes to plot from the first few ordinations,
+#' such as "MDS1", "MDS2", or "MDS3". The index must be an integer between 1 and \code{k}.
 #' @keywords scatter plot
 #' @export
 #' @rdname extScatterPlot
 ggPCoAPlot <- function(dist.comm, attr.df, colour.id=NULL, shape.id=NULL,
                        link.id=NULL, text.id=NULL, text.or.point=3,
                        text.size.id=NULL, text.size=3, eig=TRUE, k=2,
-                       add.const=FALSE, title="Classical MDS",
+                       add.const=FALSE, title="Classical MDS", x.id="MDS1", y.id="MDS2",
                        colour.levels=c(), shape.levels=c(), verbose=TRUE, ...) {
   if (! missing(attr.df)) {
     if (! all(rownames(as.matrix(dist.comm)) %in% rownames(attr.df)) )
@@ -187,11 +189,16 @@ ggPCoAPlot <- function(dist.comm, attr.df, colour.id=NULL, shape.id=NULL,
            "should match", paste(rownames(attr.df), collapse = ","), "!\n")
   }
 
+  if (k < 2) stop("Maximum dimension of the space 'k' must >= 2 !")
+
   # Run cmdscale, get points, class(fit) == matrix
-  fit <- cmdscale(dist.comm, eig=TRUE, k=2, add = add.const)
+  fit <- cmdscale(dist.comm, eig=TRUE, k=k, add = add.const)
 
   df.points <- as.data.frame(fit$points)
-  colnames(df.points) <- c("MDS1", "MDS2")
+  colnames(df.points) <- paste0("MDS", 1:k)
+
+  if (! colnames(df.points) %in% c(x.id, y.id))
+    stop("x.id = ", x.id, "y.id = ", y.id, " are NOT found in {", paste(colnames(df.points), collapse = ", "), "} !")
 
   if (! missing(attr.df)) {
     #rownames(df.points) <- tolower(rownames(df.points))
@@ -239,7 +246,7 @@ ggPCoAPlot <- function(dist.comm, attr.df, colour.id=NULL, shape.id=NULL,
   }
 
   # Plot MDS ordination
-  gg.plot <- gg1L::ggScatterPlot(df.points.merge, x.id="MDS1", y.id="MDS2",
+  gg.plot <- gg1L::ggScatterPlot(df.points.merge, x.id=x.id, y.id=y.id,
                                   colour.id=colour.id, shape.id=shape.id, link.id=link.id,
                                   text.id=text.id, text.or.point=text.or.point,
                                   text.size=text.size, title=title,
