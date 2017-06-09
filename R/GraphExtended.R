@@ -197,8 +197,8 @@ ggPCoAPlot <- function(dist.comm, attr.df, colour.id=NULL, shape.id=NULL,
   df.points <- as.data.frame(fit$points)
   colnames(df.points) <- paste0("MDS", 1:k)
 
-  if (! colnames(df.points) %in% c(x.id, y.id))
-    stop("x.id = ", x.id, "y.id = ", y.id, " are NOT found in {", paste(colnames(df.points), collapse = ", "), "} !")
+  if (! all(c(x.id, y.id) %in% colnames(df.points)) )
+    stop("x.id = ", x.id, " or y.id = ", y.id, " are NOT found in {", paste(colnames(df.points), collapse = ", "), "} !")
 
   if (! missing(attr.df)) {
     #rownames(df.points) <- tolower(rownames(df.points))
